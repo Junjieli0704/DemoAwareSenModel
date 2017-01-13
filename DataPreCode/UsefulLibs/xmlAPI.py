@@ -26,21 +26,21 @@ def print_out_all_dat_list(all_dat_list,out_file = 'temp.xml'):
     ele_tree._setroot(root_paper_tree)
     for dat_info in all_dat_list:
         temp_review_ele = Element('REVIEW')
-        SubElement(temp_review_ele,'CommentID').text = dat_info.commentID
+        SubElement(temp_review_ele,'CommentID').text = dat_info.comment_id
         #SubElement(temp_review_ele,'UserID').text = dat_info.userID
-        SubElement(temp_review_ele,'MovieName').text = dat_info.movieName
-        SubElement(temp_review_ele,'UserInfo').text = dat_info.userInfo
-        SubElement(temp_review_ele,'SentiLabel').text = dat_info.sentiLabel
-        SubElement(temp_review_ele,'MovieType').text = dat_info.movieType
+        SubElement(temp_review_ele,'MovieName').text = dat_info.movie_name
+        SubElement(temp_review_ele,'UserInfo').text = dat_info.user_info
+        SubElement(temp_review_ele,'SentiLabel').text = dat_info.senti_label
+        SubElement(temp_review_ele,'MovieType').text = dat_info.movie_type
         temp_doc_ele = Element('CommentContentDoc')
-        SubElement(temp_doc_ele,'Content').text = dat_info.conForDoc['content']
-        SubElement(temp_doc_ele,'Segmentation').text = dat_info.conForDoc['segmentation']
-        SubElement(temp_doc_ele,'PosTag').text = dat_info.conForDoc['postag']
-        SubElement(temp_doc_ele,'Dependency').text = dat_info.conForDoc['dependency']
+        SubElement(temp_doc_ele,'Content').text = dat_info.con_for_doc_dict['content']
+        SubElement(temp_doc_ele,'Segmentation').text = dat_info.con_for_doc_dict['segmentation']
+        SubElement(temp_doc_ele,'PosTag').text = dat_info.con_for_doc_dict['postag']
+        SubElement(temp_doc_ele,'Dependency').text = dat_info.con_for_doc_dict['dependency']
         temp_review_ele._children.append(temp_doc_ele)
-        if len(dat_info.outConForSenList) != 0:
+        if len(dat_info.con_for_sen_list) != 0:
             temp_sens_ele = Element('CommentContentSens')
-            for sen_info in dat_info.outConForSenList:
+            for sen_info in dat_info.con_for_sen_list:
                 temp_sen_ele = Element('CommentContentSen')
                 SubElement(temp_sen_ele,'Content').text = sen_info['content']
                 SubElement(temp_sen_ele,'Segmentation').text = sen_info['segmentation']

@@ -1,57 +1,56 @@
 #encoding=utf-8
 
-'''
-CommentID
-UserID
-MovieName
-UserInfo
-SentiLabel
-MovieType
-MovieCommentCon_Doc
-	Content
-	Segmentation
-	PosTag
-	Dependency
-MovieCommentCon_Sen
-	Sentence_1
-		Content
-		Segmentation
-		PosTag
-		Dependency
-	Sentence_2
-		Content
-		Segmentation
-		PosTag
-		Dependency
-'''
+
+# -------------------------------------------------------------------- #
+# 将无结构数据转化成XML数据
+# XML数据结构类型：
+#    comment_id                          评论ID，
+#    user_iD                             用户ID，发布评论的用户ID
+#    movie_name                          电影名称
+#    user_info                           用户信息
+#    senti_label                         句子标签，褒贬
+#    movie_type                          电影类型
+#    con_for_doc_dict                    记录整篇文档内容
+#        content                            文档内容
+#        segmentation                       分词结果
+#        postag                             POSTag结果
+#        dependency                         依存分析结果
+#    con_for_sen_list                    记录每个句子
+#        sentence_1
+#            content
+#            segmentation
+#            postag
+#            dependency
+#        Sentence_2
+#            content
+#            segmentation
+#            postag
+#            dependency
+# -------------------------------------------------------------------- #
 
 import sys
-
-from UsefulLibs import usefulAPI, xmlAPI
-
-reload(sys)
-sys.setdefaultencoding('utf8')
+sys.path.append("../UsefulLibs")
+import usefulAPI, xmlAPI, jsonAPI
 
 def get_con_dat_dict():
-    temp_dict = {}
-    temp_dict['content'] = ''
-    temp_dict['segmentation'] = ''
-    temp_dict['postag'] = ''
-    temp_dict['dependency'] = ''
-    temp_dict['aspect'] = ''
-    return temp_dict
+    dat_dict = {}
+    dat_dict['content'] = ''
+    dat_dict['segmentation'] = ''
+    dat_dict['postag'] = ''
+    dat_dict['dependency'] = ''
+    return dat_dict
 
-
-class DataStruct:
-    def __init__(self):
-        self.commentID = ''
-        self.userID = ''
-        self.movieName = ''
-        self.sentiLabel = ''
-        self.userInfo = ''
-        self.movieType = ''
-        self.conForDoc = {}
-        self.outConForSenList = []
+def get_dat_struct_dict():
+    struct_dict = {}
+    struct_dict['comment_id'] = ''
+    struct_dict['user_id'] = ''
+    struct_dict['movie_name'] = ''
+    struct_dict['senti_label'] = ''
+    struct_dict['user_info'] = ''
+    struct_dict['movie_type'] = ''
+    struct_dict['con_for_doc_dict'] = {}
+    struct_dict['con_for_sen_list'] = []
+    return struct_dict
 
 
 
@@ -82,15 +81,15 @@ class PropressingDat:
             word_con_list = line_con.split('\t')
             if len(word_con_list) != 6: continue
             if word_con_list[0] == 'CommentID': continue
-            temp_struct = DataStruct()
-            temp_struct.commentID = word_con_list[0]
-            temp_struct.userID = word_con_list[1]
-            temp_struct.movieName = word_con_list[2]
-            temp_struct.userInfo = word_con_list[3]
-            temp_struct.sentiLabel = word_con_list[4]
-            temp_struct.movieType = self.movie_name_to_type_dict[temp_struct.movieName]
-            if self.get_user_info_no_null_times(temp_struct.userInfo) == 0: continue
-            temp_struct.conForDoc = self.get_con_dict_from_content(word_con_list[5])
+            temp_struct = get_dat_struct_dict()
+            temp_struct['comment_id'] = word_con_list[0]
+            temp_struct['user_id'] = word_con_list[1]
+            temp_struct['movie_name'] = word_con_list[2]
+            temp_struct['user_info'] = word_con_list[3]
+            temp_struct['senti_label'] = word_con_list[4]
+            temp_struct['movie_type'] = self.movie_name_to_type_dict[temp_struct['movie_name']]
+            if self.get_user_info_no_null_times(temp_struct['user_info']) == 0: continue
+            temp_struct['con_for_doc_dict'] = self.get_con_dict_from_content(word_con_list[5])
             self.all_dat_list.append(temp_struct)
         print "load_data_struct() finished......"
 
@@ -137,7 +136,7 @@ class PropressingDat:
         return ' '.join(new_str_list)
 
     def generate_sentence_for_one_dat(self,temp_dat):
-        comment_con = temp_dat.conForDoc['segmentation']
+        comment_con = temp_dat['con_for_doc_dict']['segmentation']
         split_char_list = ['。','？','?','!','！','…','～','...']
         for split_char in split_char_list:
             comment_con = comment_con.replace(split_char,'。')
@@ -163,85 +162,18 @@ class PropressingDat:
                     temp_dict['segmentation'] = t_str
                     temp_dict['postag'] = 'NULL'
                     temp_dict['dependency'] = 'NULL'
-                    temp_dat.outConForSenList.append(temp_dict)
+                    temp_dat['con_for_sen_list'].append(temp_dict)
             else:
                 temp_dict = get_con_dat_dict()
                 temp_dict['content'] = ''.join(temp_str.split(' '))
                 temp_dict['segmentation'] = temp_str
                 temp_dict['postag'] = 'NULL'
                 temp_dict['dependency'] = 'NULL'
-                temp_dat.outConForSenList.append(temp_dict)
+                temp_dat['con_for_sen_list'].append(temp_dict)
 
     def generate_sentences(self):
         for temp_dat in self.all_dat_list:
             self.generate_sentence_for_one_dat(temp_dat)
-
-
-    def load_all_sentence(self):
-        sen_number_to_comment_id_dict = {}
-        line_con_list = open(self.in_review_file,'r').readlines()
-        for i in range(0,len(line_con_list)):
-            line_con = line_con_list[i].replace('\r','').replace('\n','')
-            comment_id = line_con.split(' ')[0]
-            sen_number = i + 1
-            sen_number_to_comment_id_dict[sen_number] = comment_id
-
-        dp_line_con_list = open(self.in_review_dep_file,'r').readlines()
-        is_after_load_comment_id = False
-        is_after_load_content = False
-        is_after_load_dep_res = False
-        for line_con in dp_line_con_list:
-            line_con = line_con.replace('\r','').replace('\n','')
-            word_con_list = line_con.split(' ')
-            if is_after_load_comment_id == False:
-                if word_con_list[0] == 'Parsing':
-                    if word_con_list[1] == '[sent.':
-                        comment_id = sen_number_to_comment_id_dict[int(word_con_list[2])]
-                        is_after_load_comment_id = True
-                        sen_info = sentenceInfo()
-                        sen_info.comment_id = comment_id
-                        self.all_sentence_list.append(sen_info)
-            elif is_after_load_comment_id and is_after_load_content == False:
-                if word_con_list[0] == 'Sentence' or word_con_list[0] == 'FactoredParser:': continue
-                curr_sen_info = self.all_sentence_list[len(self.all_sentence_list) - 1]
-                for word in word_con_list:
-                    if len(word.split('/')) == 2:
-                        curr_sen_info.word_list.append(word.split('/')[0])
-                        curr_sen_info.pos_list.append(word.split('/')[1])
-                is_after_load_content = True
-                if len(curr_sen_info.word_list) == 1:
-                    is_after_load_comment_id = False
-                    is_after_load_content = False
-                    is_after_load_dep_res = False
-            elif is_after_load_comment_id and is_after_load_content and is_after_load_dep_res == False:
-                temp_con = line_con.replace('(','-').replace(', ','-').replace(')','-');
-                temp_list = temp_con.split('-')
-                curr_sen_info = self.all_sentence_list[len(self.all_sentence_list) - 1]
-                if len(temp_list) == 6:
-                    if temp_list[1] == 'ROOT': continue
-                    dep_dict = {}
-                    dep_dict['rel'] = temp_list[0]
-                    dep_dict['left'] = int(temp_list[2]) - 1
-                    dep_dict['right'] = int(temp_list[4]) - 1
-                    curr_sen_info = self.all_sentence_list[len(self.all_sentence_list) - 1]
-                    curr_sen_info.dp_list.append(dep_dict)
-                elif line_con == '' and len(curr_sen_info.dp_list) > 0:
-                    is_after_load_comment_id = False
-                    is_after_load_content = False
-                    is_after_load_dep_res = False
-
-
-    def print_temp_dat(self):
-        for temp_dat in self.all_dat_list:
-            print temp_dat.commentID
-            print temp_dat.userID
-            print temp_dat.movieName
-            print temp_dat.sentiLabel
-            print temp_dat.userInfo
-            print temp_dat.movieType
-            print temp_dat.conForDoc
-            print temp_dat.outConForSenList
-            break
 
     def change_dict_to_str(self,temp_dict,mode = 'alldat'):
         if mode == 'alldat':
@@ -262,19 +194,21 @@ class PropressingDat:
             out_con_list.append(temp_dat.userInfo)
             out_con_list.append(temp_dat.movieType)
             out_con_list.append(self.change_dict_to_str(temp_dat.conForDoc))
-            for temp_dict in temp_dat.outConForSenList:
+            for temp_dict in temp_dat['con_for_sen_list']:
                 out_con_list.append(self.change_dict_to_str(temp_dict))
         open(out_file,'w+').write('\n'.join(out_con_list))
 
     def print_out_split_sen_dat(self,out_file):
         out_con_list = []
         for temp_dat in self.all_dat_list:
-            for temp_dict in temp_dat.outConForSenList:
+            for temp_dict in temp_dat['con_for_sen_list']:
                 out_con_list.append(self.change_dict_to_str(temp_dict,mode='segmentation'))
         open(out_file,'w+').write('\n'.join(out_con_list))
 
-    def print_out_xml_file(self,dat_list,out_file):
-        xmlAPI.print_out_all_dat_list(dat_list,out_file)
+    def print_out_xml_file(self,out_file):
+        print len(self.all_dat_list)
+        #xmlAPI.print_out_all_dat_list(self.all_dat_list,out_file)
+        jsonAPI.print_out_all_dat_list(self.all_dat_list,out_file)
 
 
     def load_dependency_file(self,sen_dep_file):
@@ -318,8 +252,8 @@ class PropressingDat:
                     dep_content_list = []
         sen_number = 0
         for dat_info in self.all_dat_list:
-            if len(dat_info.outConForSenList) != 0:
-                for sen_info in dat_info.outConForSenList:
+            if len(dat_info['con_for_sen_list']) != 0:
+                for sen_info in dat_info['con_for_sen_list']:
                     if sen_number >= len(dep_info_list):
                         print 'error in sen_number >= len(dep_info_list):'
                     sen_info['dependency'] = dep_info_list[sen_number]
@@ -341,44 +275,17 @@ class PropressingDat:
             self.print_out_xml_file(dat_list,out_file)
 
 
-
-def get_user_comment_times(movie_comment_file,out_file):
-    line_con_list = open(movie_comment_file,'r').readlines()
-    user_id_dict = {}
-    for line_con in line_con_list:
-        line_con = line_con.replace('\r','').replace('\n','')
-        line_con = line_con.decode('utf-8').encode('utf-8')
-        word_con_list = line_con.split('\t')
-        if len(word_con_list) != 6: continue
-        if word_con_list[0] == 'CommentID': continue
-        user_id = word_con_list[1]
-        if user_id_dict.has_key(user_id):
-            user_id_dict[user_id] = user_id_dict[user_id] + 1
-        else:
-            user_id_dict[user_id] = 1
-    dict= sorted(user_id_dict.iteritems(), key=lambda d:d[1], reverse = True)
-    out_file_con_list = []
-    for temp_dict in dict:
-        file_con = temp_dict[0] + '\t' + str(temp_dict[1])
-        out_file_con_list.append(file_con)
-    open(out_file,'w+').write('\n'.join(out_file_con_list))
-
-
-
-
 if __name__ == '__main__':
-    '''
-    movie_comment_file = './Data/DataForDemoGroupSensitiveAspectMining.txt'
-    movie_info_file = './Data/DataForDemoGroupSensitiveAspectMining_AllMovieInfo.txt'
+
+    raw_dat_filefold = '../../../ExpData/RawData/'
+    movie_comment_file = raw_dat_filefold + 'RawTxtDataForComments.txt'
+    movie_info_file = raw_dat_filefold + 'MovieInfo.txt'
+    dep_file = raw_dat_filefold + 'DepForSenSplit.txt'
+    out_xml_file = '../../../ExpData/XMLData/xmlDatForComments.json'
+
     preDat = PropressingDat(movie_comment_file,movie_info_file)
     preDat.load_movie_dat_info()
     preDat.load_data_struct()
     preDat.generate_sentences()
-    preDat.load_dependency_file('./OutData/split_sen_dp.txt')
-    #preDat.print_out_all_dat('./OutData/all_dat.txt')
-    #preDat.print_out_split_sen_dat('./OutData/split_sen.txt')
-    preDat.print_out_xml_file(preDat.all_dat_list,'./OutData/all_dat.xml')
-    preDat.split_dat_accord_type('./TypeData/')
-    '''
-
-    get_user_comment_times('./Data/DataForDemoGroupSensitiveAspectMining.txt','tttt.txt')
+    preDat.load_dependency_file(dep_file)
+    preDat.print_out_xml_file(out_xml_file)
