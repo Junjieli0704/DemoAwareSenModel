@@ -205,11 +205,11 @@ class PropressingDat:
                 out_con_list.append(self.change_dict_to_str(temp_dict,mode='segmentation'))
         open(out_file,'w+').write('\n'.join(out_con_list))
 
-    def print_out_xml_file(self,out_file):
+    def print_out_json_file(self,out_file):
         print len(self.all_dat_list)
         #xmlAPI.print_out_all_dat_list(self.all_dat_list,out_file)
-        jsonAPI.print_out_all_dat_list(self.all_dat_list,out_file)
-
+        jsonAPI.print_out_dat_json(self.all_dat_list,out_file)
+        jsonAPI.print_out_dat_json_visual(self.all_dat_list,out_file.replace('.json','.jsonVis'))
 
     def load_dependency_file(self,sen_dep_file):
         dep_info_list = []
@@ -258,7 +258,7 @@ class PropressingDat:
                         print 'error in sen_number >= len(dep_info_list):'
                     sen_info['dependency'] = dep_info_list[sen_number]
                     sen_number = sen_number + 1
-
+    '''
     def split_dat_accord_type(self, out_file_fold):
         movie_type_to_dat_list_dict = {}
         for temp_dat in self.all_dat_list:
@@ -273,19 +273,25 @@ class PropressingDat:
         for movie_type, dat_list in movie_type_to_dat_list_dict.items():
             out_file = out_file_fold + movie_type + '.xml'
             self.print_out_xml_file(dat_list,out_file)
+    '''
 
 
 if __name__ == '__main__':
 
-    raw_dat_filefold = '../../../ExpData/RawData/'
-    movie_comment_file = raw_dat_filefold + 'RawTxtDataForComments.txt'
-    movie_info_file = raw_dat_filefold + 'MovieInfo.txt'
-    dep_file = raw_dat_filefold + 'DepForSenSplit.txt'
-    out_xml_file = '../../../ExpData/XMLData/xmlDatForComments.json'
+    in_raw_dat_filefold = '../../../ExpData/MovieData/RawData/'
+    in_movie_comment_file = in_raw_dat_filefold + 'RawTxtDataForComments.txt'
+    in_movie_info_file = in_raw_dat_filefold + 'MovieInfo.txt'
+    in_dep_file = in_raw_dat_filefold + 'DepForSenSplit.txt'
+    out_sen_file = in_raw_dat_filefold + 'SenSplitForRawTxt.txt'
+    out_json_file = '../../../ExpData/MovieData/JsonData/xmlDatForComments.json'
 
-    preDat = PropressingDat(movie_comment_file,movie_info_file)
+
+
+    preDat = PropressingDat(in_movie_comment_file,in_movie_info_file)
     preDat.load_movie_dat_info()
     preDat.load_data_struct()
     preDat.generate_sentences()
-    preDat.load_dependency_file(dep_file)
-    preDat.print_out_xml_file(out_xml_file)
+    preDat.print_out_split_sen_dat(out_sen_file)
+    # 如果没有现成的依存分析结果，可以使用依存分析器分析下 out_sen_file，得到的结果然后在load_dependency_file
+    preDat.load_dependency_file(in_dep_file)
+    preDat.print_out_json_file(out_json_file)

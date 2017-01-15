@@ -4,7 +4,7 @@ from xml.etree.ElementTree import SubElement
 from xml.etree.ElementTree import dump
 import xml.dom.minidom as minidom
 
-from DatTransXML import ChangeDatToXML
+from DatTransJson import ChangeDatToJson
 
 
 def indent(elem, level=0):
@@ -59,13 +59,13 @@ def load_xml_data(in_file):
     review_info_node_list = dom.getElementsByTagName("REVIEW")
     all_review_list = []
     for review_info_node in review_info_node_list:
-        review_info = ChangeDatToXML.DataStruct()
+        review_info = ChangeDatToJson.DataStruct()
         review_info.commentID = review_info_node.getElementsByTagName("CommentID")[0].childNodes[0].nodeValue
         review_info.movieName = review_info_node.getElementsByTagName("MovieName")[0].childNodes[0].nodeValue
         review_info.userInfo = review_info_node.getElementsByTagName("UserInfo")[0].childNodes[0].nodeValue
         review_info.sentiLabel = review_info_node.getElementsByTagName("SentiLabel")[0].childNodes[0].nodeValue
         review_info.movieType = review_info_node.getElementsByTagName("MovieType")[0].childNodes[0].nodeValue
-        review_info.conForDoc = ChangeDatToXML.get_con_dat_dict()
+        review_info.conForDoc = ChangeDatToJson.get_con_dat_dict()
         review_info.conForDoc['content'] = review_info_node.getElementsByTagName("CommentContentDoc")[0].getElementsByTagName("Content")[0].childNodes[0].nodeValue
         review_info.conForDoc['segmentation'] = review_info_node.getElementsByTagName("CommentContentDoc")[0].getElementsByTagName("Segmentation")[0].childNodes[0].nodeValue
         review_info.conForDoc['postag'] = review_info_node.getElementsByTagName("CommentContentDoc")[0].getElementsByTagName("PosTag")[0].childNodes[0].nodeValue
@@ -73,7 +73,7 @@ def load_xml_data(in_file):
         sen_info_node_list = review_info_node.getElementsByTagName("CommentContentSen")
         if len(sen_info_node_list) != 0:
             for sen_info_node in sen_info_node_list:
-                sen_info_dict = ChangeDatToXML.get_con_dat_dict()
+                sen_info_dict = ChangeDatToJson.get_con_dat_dict()
                 sen_info_dict['content'] = sen_info_node.getElementsByTagName("Content")[0].childNodes[0].nodeValue
                 sen_info_dict['segmentation'] = sen_info_node.getElementsByTagName("Segmentation")[0].childNodes[0].nodeValue
                 sen_info_dict['postag'] = sen_info_node.getElementsByTagName("PosTag")[0].childNodes[0].nodeValue
