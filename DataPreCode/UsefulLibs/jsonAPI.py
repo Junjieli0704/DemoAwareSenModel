@@ -87,29 +87,6 @@ def load_json(json_file):
     return data
 
 
-'''
-def get_con_dat_dict():
-    dat_dict = {}
-    dat_dict['content'] = ''
-    dat_dict['segmentation'] = ''
-    dat_dict['postag'] = ''
-    dat_dict['dependency'] = ''
-    return dat_dict
-
-def get_dat_struct_dict():
-    struct_dict = {}
-    struct_dict['comment_id'] = ''
-    struct_dict['user_id'] = ''
-    struct_dict['movie_name'] = ''
-    struct_dict['senti_label'] = ''
-    struct_dict['user_info'] = ''
-    struct_dict['movie_type'] = ''
-    struct_dict['con_for_doc_dict'] = {}
-    struct_dict['con_for_sen_list'] = []
-    return struct_dict
-'''
-
-
 def load_json_movie_dat(json_file):
     data = json.loads(open(json_file,'r').read())
     old_dat_list = data['data']
