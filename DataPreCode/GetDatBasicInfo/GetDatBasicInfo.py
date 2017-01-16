@@ -37,10 +37,15 @@ class GetDatBasicInfo:
         for i in range(0,len(self.all_dat_list)):
             each_dat = self.all_dat_list[i]
             key_list = []
+            # cat 为 'movie'     ：意味着每部电影的数据放一起，并一起统计
+            # cat 为 'category'  ：意味着每个类型的电影数据放一起，并一起统计
+            # cat 为 'all'       ：意味着数据集的所有数据放一起，并一起统计
             if cat == 'movie':
                 key_list.append(each_dat['movie_name'])
             elif cat == 'category':
                 key_list = each_dat['movie_type'].split('/')
+            elif cat == 'all':
+                key_list.append('all')
             else:
                 key_list.append(each_dat['movie_name'])
             for key in key_list:
@@ -155,5 +160,6 @@ if __name__ == '__main__':
     all_dat_json_file = '../../../ExpData/MovieData/JsonData/jsonDatForComments.json'
     out_file_fold = '../../../ExpData/MovieData/JsonDatInfo/BasicInfo/'
     GetDatBasicInfo = GetDatBasicInfo(all_dat_json_file,out_file_fold)
-    GetDatBasicInfo.compute_each_cat_basic_info(cat = 'category')
-    GetDatBasicInfo.compute_each_cat_basic_info(cat = 'movie')
+    #GetDatBasicInfo.compute_each_cat_basic_info(cat = 'category')
+    #GetDatBasicInfo.compute_each_cat_basic_info(cat = 'movie')
+    GetDatBasicInfo.compute_each_cat_basic_info(cat = 'all')

@@ -27,14 +27,20 @@ class GetDemoSpecWords:
         self.cat_to_dat_id_list_dict = {}       # 'Comedy' -> [0, 4, 5, 8, 10]
         self.cat_to_dat_info_list_dict = {}     # 'Comedy' -> [UserDatInfo1, UserDatInfo2]
 
+
     def get_each_cat_list(self,cat = 'movie'):
         for i in range(0,len(self.all_dat_list)):
             each_dat = self.all_dat_list[i]
             key_list = []
+            # cat 为 'movie'     ：意味着每部电影的数据放一起，并一起统计
+            # cat 为 'category'  ：意味着每个类型的电影数据放一起，并一起统计
+            # cat 为 'all'       ：意味着数据集的所有数据放一起，并一起统计
             if cat == 'movie':
                 key_list.append(each_dat['movie_name'])
             elif cat == 'category':
                 key_list = each_dat['movie_type'].split('/')
+            elif cat == 'all':
+                key_list.append('all')
             else:
                 key_list.append(each_dat['movie_name'])
             for key in key_list:
@@ -67,7 +73,6 @@ class GetDemoSpecWords:
                 self.cat_to_dat_info_list_dict[cat].append(usr_dat_info)
 
     def generate_spec_words_for_demo(self,out_file_fold,demo_input = 'gender'):
-
         for category, usr_dat_info_list in self.cat_to_dat_info_list_dict.items():
             print category
             demo_value_list = []
