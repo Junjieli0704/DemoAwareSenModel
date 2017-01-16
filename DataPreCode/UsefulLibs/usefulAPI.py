@@ -6,7 +6,7 @@ import datetime
 # A list of useful API
 
 # Make a dir
-def mkDir(path):
+def mk_dir(path):
     path = path.strip()
     path = path.rstrip("\\")
     is_exist = os.path.exists(path)

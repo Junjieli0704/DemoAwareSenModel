@@ -26,12 +26,14 @@
 #            segmentation
 #            postag
 #            dependency
+# Time: 2017-01-13
 # -------------------------------------------------------------------- #
 
 import sys
 sys.path.append("../UsefulLibs")
 import usefulAPI, xmlAPI, jsonAPI
 
+# 用dict定义我们的数据，是为了后面能很方便的转换成json
 def get_con_dat_dict():
     dat_dict = {}
     dat_dict['content'] = ''
@@ -274,7 +276,7 @@ class PropressingDat:
                     movie_type_to_dat_list_dict[movie_type] = []
                 movie_type_to_dat_list_dict[movie_type].append(temp_dat)
 
-        usefulAPI.mkDir(out_file_fold)
+        usefulAPI.mk_dir(out_file_fold)
         for movie_type, dat_list in movie_type_to_dat_list_dict.items():
             out_file = out_file_fold + movie_type + '.json'
             self.print_out_json_file(dat_list,out_file)
