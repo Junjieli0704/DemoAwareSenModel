@@ -8,7 +8,7 @@
 
 import sys
 sys.path.append("../UsefulLibs")
-import usefulAPI, xmlAPI, jsonAPI
+import usefulAPI, jsonAPI
 
 class MovieInfor:
     def __init__(self):
@@ -49,8 +49,7 @@ class GetDatBasicInfo:
                 self.cat_to_dat_list_dict[key].append(i)
 
     def compute_each_cat_basic_info(self,cat = 'movie'):
-        self.all_dat_list = jsonAPI.load_json(self.dat_json_file)['data']
-        print len(self.all_dat_list)
+        self.all_dat_list = jsonAPI.load_json_movie_dat(self.dat_json_file)
         usefulAPI.mk_dir(self.out_file_fold)
         self.get_each_cat_list(cat)
         for cat, dat_id_list in self.cat_to_dat_list_dict.items():
@@ -140,7 +139,7 @@ class GetDatBasicInfo:
 
         for key,value in attr_value_to_pos_num_dict.items():
             temp_list = []
-            temp_list.append(key.encode('utf-8'))
+            temp_list.append(key)
             temp_list.append(str(attr_value_to_pos_num_dict[key]))
             temp_list.append(str(attr_value_to_neg_num_dict[key]))
             temp_list.append(str(attr_value_to_pos_per_dict[key]))
@@ -154,7 +153,7 @@ class GetDatBasicInfo:
 if __name__ == '__main__':
 
     all_dat_json_file = '../../../ExpData/MovieData/JsonData/jsonDatForComments.json'
-    out_file_fold = '../../../ExpData/MovieData/JsonDatBasicInfo/'
+    out_file_fold = '../../../ExpData/MovieData/JsonDatInfo/BasicInfo/'
     GetDatBasicInfo = GetDatBasicInfo(all_dat_json_file,out_file_fold)
     GetDatBasicInfo.compute_each_cat_basic_info(cat = 'category')
     GetDatBasicInfo.compute_each_cat_basic_info(cat = 'movie')
