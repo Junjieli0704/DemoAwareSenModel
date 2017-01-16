@@ -26,28 +26,6 @@ class MovieInfor:
         self.attr_value_to_all_num_dict = {}
         self.attr_value_to_all_num_per_dict = {}
 
-'''
-def get_con_dat_dict():
-    dat_dict = {}
-    dat_dict['content'] = ''
-    dat_dict['segmentation'] = ''
-    dat_dict['postag'] = ''
-    dat_dict['dependency'] = ''
-    return dat_dict
-
-def get_dat_struct_dict():
-    struct_dict = {}
-    struct_dict['comment_id'] = ''
-    struct_dict['user_id'] = ''
-    struct_dict['movie_name'] = ''
-    struct_dict['senti_label'] = ''
-    struct_dict['user_info'] = ''
-    struct_dict['movie_type'] = ''
-    struct_dict['con_for_doc_dict'] = {}
-    struct_dict['con_for_sen_list'] = []
-    return struct_dict
-'''
-
 class GetDatBasicInfo:
     def __init__(self,dat_json_file,out_file_fold):
         self.dat_json_file = dat_json_file
