@@ -122,8 +122,6 @@ class PropressingDat:
             if temp_str.split('/')[1] != 'NULL':
                 if temp_str.split('/')[0] != 'Label':
                     no_null_times = no_null_times + 1
-
-
         return no_null_times
 
 
@@ -205,11 +203,13 @@ class PropressingDat:
                 out_con_list.append(self.change_dict_to_str(temp_dict,mode='segmentation'))
         open(out_file,'w+').write('\n'.join(out_con_list))
 
-    def print_out_json_file(self,out_file):
-        print len(self.all_dat_list)
-        #xmlAPI.print_out_all_dat_list(self.all_dat_list,out_file)
-        jsonAPI.print_out_dat_json(self.all_dat_list,out_file)
-        jsonAPI.print_out_dat_json_visual(self.all_dat_list,out_file.replace('.json','.jsonVis'))
+
+
+    def print_out_json_file(self,dat_list = [], out_file = 'out.txt'):
+        if len(dat_list) == 0:
+            dat_list = self.all_dat_list
+        jsonAPI.print_out_dat_json(dat_list,out_file)
+        jsonAPI.print_out_dat_json_visual(dat_list,out_file.replace('.json','.jsonVis'))
 
     def load_dependency_file(self,sen_dep_file):
         dep_info_list = []
@@ -258,22 +258,26 @@ class PropressingDat:
                         print 'error in sen_number >= len(dep_info_list):'
                     sen_info['dependency'] = dep_info_list[sen_number]
                     sen_number = sen_number + 1
-    '''
+
+
+    # -------------------------------------------------------------------- #
+    # Fun: Generate movie data for each category (Love, Comedy and so on).
+    #      从所有数据中，生成每个类别的数据
+    # Time: 2017-01-16
+    # -------------------------------------------------------------------- #
     def split_dat_accord_type(self, out_file_fold):
         movie_type_to_dat_list_dict = {}
         for temp_dat in self.all_dat_list:
-            movie_type_list = temp_dat.movieType.split('/')
+            movie_type_list = temp_dat['movie_type'].split('/')
             for movie_type in movie_type_list:
                 if movie_type_to_dat_list_dict.has_key(movie_type) == False:
                     movie_type_to_dat_list_dict[movie_type] = []
                 movie_type_to_dat_list_dict[movie_type].append(temp_dat)
 
         usefulAPI.mkDir(out_file_fold)
-
         for movie_type, dat_list in movie_type_to_dat_list_dict.items():
-            out_file = out_file_fold + movie_type + '.xml'
-            self.print_out_xml_file(dat_list,out_file)
-    '''
+            out_file = out_file_fold + movie_type + '.json'
+            self.print_out_json_file(dat_list,out_file)
 
 
 if __name__ == '__main__':
@@ -283,7 +287,7 @@ if __name__ == '__main__':
     in_movie_info_file = in_raw_dat_filefold + 'MovieInfo.txt'
     in_dep_file = in_raw_dat_filefold + 'DepForSenSplit.txt'
     out_sen_file = in_raw_dat_filefold + 'SenSplitForRawTxt.txt'
-    out_json_file = '../../../ExpData/MovieData/JsonData/xmlDatForComments.json'
+    out_json_file = '../../../ExpData/MovieData/JsonData/jsonDatForComments.json'
 
 
 
@@ -294,4 +298,7 @@ if __name__ == '__main__':
     preDat.print_out_split_sen_dat(out_sen_file)
     # 如果没有现成的依存分析结果，可以使用依存分析器分析下 out_sen_file，得到的结果然后在load_dependency_file
     preDat.load_dependency_file(in_dep_file)
-    preDat.print_out_json_file(out_json_file)
+    preDat.print_out_json_file(out_file=out_json_file)
+
+    out_each_category_dat_filefold = '../../../ExpData/MovieData/JsonDatForEachCat/'
+    preDat.split_dat_accord_type(out_each_category_dat_filefold)
