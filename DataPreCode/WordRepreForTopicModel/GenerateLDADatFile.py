@@ -151,17 +151,18 @@ def generage_lda_dat_file_list(mode_list = ['Doc','Sen'],
 
 
 if __name__ == '__main__':
-
-    in_json_dat_file = '../../../ExpData/MovieData/JsonData/jsonDatForComments.json'
-    out_lda_dat_file = 'test_doc.txt'
-    out_lda_demo_file = 'test_demo.txt'
+    movie_type = 'Comedy'
+    in_json_dat_file = '../../../ExpData/MovieData/JsonDatForEachCat/' + movie_type + '.json'
+    out_lda_dat_file = '../../../ExpData/MovieData/LDAData/LDA_Style_Dat/' + movie_type + '_doc.txt'
+    out_lda_demo_file = '../../../ExpData/MovieData/LDAData/LDA_Style_Dat/' + movie_type + '_demo.txt'
     generLDADat = GenerateClassicLDABasedDat(in_json_dat_file)
     generLDADat.load_json_file()
     generLDADat.generate_out_dat_lda_file(mode='Doc',
                                           rare_value=5,
                                           is_need_pruncation = False,
-                                          common_value = 1.0,
-                                          is_need_processing= True)
+                                          common_value = 0.3,
+                                          is_need_processing= True,
+                                          out_dat_file = out_lda_dat_file)
     generLDADat.generate_out_demo_lda_file(out_demo_file=out_lda_demo_file)
 
     # generage_lda_dat_file_list()

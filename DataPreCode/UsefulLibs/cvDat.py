@@ -1,9 +1,14 @@
 #encoding=utf-8
-#对数据进行交叉验证的划分
+
+
+# -------------------------------------------------------------------- #
+# 对数据进行交叉验证的划分
+# Revise Time: 2017-01-16 16:13
+# -------------------------------------------------------------------- #
+
+
 import random
-
-from UsefulLibs import usefulAPI
-
+import usefulAPI
 
 class CvDat:
     def __init__(self,movie_content_file,movie_demo_file,out_file_fold):
@@ -17,7 +22,7 @@ class CvDat:
     def load_content_data(self):
         line_con_list = open(self.movie_content_file,'r').readlines()
         for line_con in line_con_list:
-            line_con = line_con.replace('\r','').replace('\n','')
+            line_con = line_con.strip()
             word_con_list = line_con.split(' ')
             comment_id = word_con_list[0]
             movie_content = ' '.join(word_con_list).replace(comment_id + ' ','')
@@ -29,15 +34,12 @@ class CvDat:
             line_con = line_con.replace('\r','').replace('\n','')
             word_con_list = line_con.split(' ')
             temp_comment_id = word_con_list[0]
-            comment_id = temp_comment_id.replace('_demo','')
+            comment_id = temp_comment_id.replace('demo','')
             movie_demo_content = ' '.join(word_con_list).replace(temp_comment_id + ' ','')
             self.comment_id_to_demo[comment_id] = movie_demo_content
 
-
     def split_cross_vali_dat(self,split_num,out_file):
-        #pos_list, neg_list = self.get_pos_neg_list(all_dat_list)
         comment_id_list = self.comment_id_list
-        random.shuffle(comment_id_list)
         random.shuffle(comment_id_list)
         train_list = []
         test_list = []
@@ -75,8 +77,7 @@ class CvDat:
                 else:
                     train_list[i].append(comment_id)
 
-        usefulAPI.mkDir(self.out_file_fold)
-
+        usefulAPI.mk_dir(self.out_file_fold)
         self.print_train_test_list_to_file(self.out_file_fold + out_file,train_list,test_list)
 
     def print_train_test_list_to_file(self,out_file,train_list,test_list):
@@ -118,7 +119,7 @@ class CvDat:
     def print_out_cv_data(self,movie_type,out_cv_file_fold):
         self.load_content_data()
         train_list,test_list = self.load_cross_vali_dat(movie_type)
-        usefulAPI.mkDir(out_cv_file_fold)
+        usefulAPI.mk_dir(out_cv_file_fold)
         for i in range(0,len(train_list)):
             movie_content_file = self.movie_content_file.split('/')[-1]
             movie_demo_file = self.movie_demo_file.split('/')[-1]
@@ -152,31 +153,23 @@ class CvDat:
             out_file = out_cv_file_fold + out_file
             open(out_file,'w+').write('\n'.join(out_con_list))
 
-def get_movie_con_file(movie_type):
-    movie_con_file = './DocData/Doc_' + movie_type + '_DataForLDAAspectMining.txt'
-    movie_demo_file = './DocData/Demo_Doc_' + movie_type + '_DataForLDAAspectMining.txt'
+def get_movie_con_file(movie_type = 'Comedy'):
+    movie_con_file = '../../../ExpData/MovieData/LDAData/LDA_Style_Dat/' + movie_type + '_doc.txt'
+    movie_demo_file = '../../../ExpData/MovieData/LDAData/LDA_Style_Dat/' + movie_type + '_demo.txt'
     return movie_con_file,movie_demo_file
-
 
 def cv_doc_data(movie_type_list):
     for movie_type in movie_type_list:
+        out_file_fold = '../../../ExpData/MovieData/LDAData/LDA_Style_Dat/CvDat/' + movie_type + '/'
         movie_content_file,movie_demo_file = get_movie_con_file(movie_type)
-        out_file_fold = './DocData/CvDat/'
+        usefulAPI.mk_dir(out_file_fold)
         cvDat = CvDat(movie_content_file,movie_demo_file,out_file_fold)
         cvDat.load_content_data()
         out_file = 'cvID_' + movie_type + '.txt'
         cvDat.split_cross_vali_dat(split_num=10,out_file=out_file)
-
-def cv_doc_data_to_file(movie_type_list):
-    for movie_type in movie_type_list:
-        movie_content_file,movie_demo_file = get_movie_con_file(movie_type)
-        out_file_fold = './DocData/CvDat/'
-        cvDat = CvDat(movie_content_file,movie_demo_file,out_file_fold)
-        out_cv_file_fold = './DocData/' + movie_type + '/'
-        cvDat.print_out_cv_data(movie_type,out_cv_file_fold)
+        cvDat.print_out_cv_data(movie_type,out_file_fold)
 
 if __name__ == '__main__':
-    movie_type_list = ['Action','Adventure','Comedy','Love','Suspense']
-    #movie_type_list = ['Action']
+    # movie_type_list = ['Action','Adventure','Comedy','Love','Suspense']
+    movie_type_list = ['Comedy']
     cv_doc_data(movie_type_list)
-    cv_doc_data_to_file(movie_type_list)

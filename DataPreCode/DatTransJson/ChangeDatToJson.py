@@ -268,16 +268,21 @@ class PropressingDat:
     # Time: 2017-01-16
     # -------------------------------------------------------------------- #
     def split_dat_accord_type(self, out_file_fold):
-        movie_type_to_dat_list_dict = {}
-        for temp_dat in self.all_dat_list:
+        movie_type_to_id_list_dict = {}
+        for i in range(0,len(self.all_dat_list)):
+            temp_dat = self.all_dat_list[i]
             movie_type_list = temp_dat['movie_type'].split('/')
             for movie_type in movie_type_list:
-                if movie_type_to_dat_list_dict.has_key(movie_type) == False:
-                    movie_type_to_dat_list_dict[movie_type] = []
-                movie_type_to_dat_list_dict[movie_type].append(temp_dat)
+                if movie_type_to_id_list_dict.has_key(movie_type) == False:
+                    movie_type_to_id_list_dict[movie_type] = []
+                movie_type_to_id_list_dict[movie_type].append(i)
 
         usefulAPI.mk_dir(out_file_fold)
-        for movie_type, dat_list in movie_type_to_dat_list_dict.items():
+        for movie_type, id_list in movie_type_to_id_list_dict.items():
+            id_list = list(set(id_list))
+            dat_list = []
+            for i in id_list:
+                dat_list.append(self.all_dat_list[i])
             out_file = out_file_fold + movie_type + '.json'
             self.print_out_json_file(dat_list,out_file)
 
@@ -290,8 +295,6 @@ if __name__ == '__main__':
     in_dep_file = in_raw_dat_filefold + 'DepForSenSplit.txt'
     out_sen_file = in_raw_dat_filefold + 'SenSplitForRawTxt.txt'
     out_json_file = '../../../ExpData/MovieData/JsonData/jsonDatForComments.json'
-
-
 
     preDat = PropressingDat(in_movie_comment_file,in_movie_info_file)
     preDat.load_movie_dat_info()
