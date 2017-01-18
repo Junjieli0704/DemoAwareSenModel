@@ -212,7 +212,6 @@ class AspectExtractBasedOnARM:
             out_file_list.append(word_pair[0] + '\t' + str(word_pair[1]))
         open('aspect_sorted.txt','w+').write('\n'.join(out_file_list))
 
-
     def get_sen_aspect(self):
         word_to_all_times_dict = {}
         word_to_n_times_dict = {}
