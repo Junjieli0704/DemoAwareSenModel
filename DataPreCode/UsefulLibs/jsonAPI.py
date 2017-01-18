@@ -81,36 +81,39 @@ def print_out_json(dat_dict,json_file):
     json_str = json.dumps(dat_dict)
     open(json_file,'w+').write(json_str)
 
-def load_json(json_file):
-    data = json.loads(open(json_file,'r').read())
-    # data is encoded by unicode
-    return data
 
 
-def load_json_movie_dat(json_file):
-    data = json.loads(open(json_file,'r').read())
-    old_dat_list = data['data']
-    new_dat_list = []
-    for old_dat in old_dat_list:
-        new_dat = {}
-        for key,value in old_dat.items():
-            if key == 'con_for_doc_dict':
-                doc_dict = {}
-                for doc_key,doc_value in old_dat['con_for_doc_dict'].items():
-                    doc_dict[doc_key] = doc_value.encode('utf-8')
-                new_dat['con_for_doc_dict'] = doc_dict
-            elif key == 'con_for_sen_list':
-                sen_list = []
-                for sen_info in old_dat['con_for_sen_list']:
-                    sen_dict = {}
-                    for sen_key,sen_value in sen_info.items():
-                        sen_dict[sen_key] = sen_value.encode('utf-8')
-                    sen_list.append(sen_dict)
-                new_dat['con_for_sen_list'] = sen_list
-            else:
-                new_dat[key] = value.encode('utf-8')
-        new_dat_list.append(new_dat)
-    return new_dat_list
+
+# 从json格式的数据文件中读入数据：
+#   @json_file: 数据文件名
+#   @encoding:  数据存放 utf-8 或者是 unicode
+def load_json_movie_dat(json_file,encoding = 'utf-8'):
+    if encoding == 'unicode':
+        return json.loads(open(json_file,'r').read())['data']
+    elif encoding == 'utf-8':
+        data = json.loads(open(json_file,'r').read())
+        old_dat_list = data['data']
+        new_dat_list = []
+        for old_dat in old_dat_list:
+            new_dat = {}
+            for key,value in old_dat.items():
+                if key == 'con_for_doc_dict':
+                    doc_dict = {}
+                    for doc_key,doc_value in old_dat['con_for_doc_dict'].items():
+                        doc_dict[doc_key] = doc_value.encode('utf-8')
+                    new_dat['con_for_doc_dict'] = doc_dict
+                elif key == 'con_for_sen_list':
+                    sen_list = []
+                    for sen_info in old_dat['con_for_sen_list']:
+                        sen_dict = {}
+                        for sen_key,sen_value in sen_info.items():
+                            sen_dict[sen_key] = sen_value.encode('utf-8')
+                        sen_list.append(sen_dict)
+                    new_dat['con_for_sen_list'] = sen_list
+                else:
+                    new_dat[key] = value.encode('utf-8')
+            new_dat_list.append(new_dat)
+        return new_dat_list
 
 if __name__ == '__main__':
     out_json_file = '../../../ExpData/MovieData/JsonData/xmlDatForComments.json'

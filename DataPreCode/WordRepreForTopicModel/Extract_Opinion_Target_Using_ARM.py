@@ -5,20 +5,7 @@ import os
 from UsefulLibs import xmlAPI
 
 
-def is_chinese(uchar):
-    if uchar >= u'\u4e00' and uchar <= u'\u9fa5':
-        return True
-    else:
-        return False
 
-def detect_chinese_uchar(in_uchar):
-    is_chinese_uchar = True
-    for uchar in in_uchar:
-        if is_chinese(uchar): continue
-        else:
-            is_chinese_uchar = False
-            break
-    return is_chinese_uchar
 
 
 class sentenceInfo:

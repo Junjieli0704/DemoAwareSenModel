@@ -90,22 +90,27 @@ def get_diff_date(left_date_str,right_date_str):
         print temp_str
         return 'NULL'
 
-def is_chinese(uchar):
+
+
+# Detect is an unicode char is chinese or not
+def is_chinese_uchar(uchar):
     if uchar >= u'\u4e00' and uchar <= u'\u9fa5':
         return True
     else:
         return False
 
-def detect_chinese_uchar(in_uchar):
-    is_chinese_uchar = True
-    for uchar in in_uchar:
-        if is_chinese(uchar): continue
+# Detect is an unicode str is chinese or not
+def is_chinese_ustr(ustr):
+    is_chinese_ustr = True
+    for uchar in ustr:
+        if is_chinese_uchar(uchar): continue
         else:
-            is_chinese_uchar = False
+            is_chinese_ustr = False
             break
-    return is_chinese_uchar
-
-
+    return is_chinese_ustr
 
 if __name__ == '__main__':
-    pass
+    print is_chinese_ustr(u'中国人是好样的')
+    for uchar in u'中国人e是好样的':
+        print uchar
+        print is_chinese_ustr(uchar)
