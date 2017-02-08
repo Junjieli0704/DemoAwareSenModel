@@ -20,6 +20,7 @@ class DocInfo:
         self.aspect_place_list = []
         self.aspect_context_list = []
         self.senti_word_list = []
+        self.adj_vv_word_list = []
 
 class AspectExtractBasedOnPOSDis:
     def __init__(self,in_json_dat_file):
@@ -159,6 +160,7 @@ class AspectExtractBasedOnPOSDis:
 
     def get_aspect_context(self,aspect_place,word_list,pos_list,context_value = 3,is_need_detect_pu = True):
         context_str_list = []
+        pos_str_list = []
         left_pu_place = aspect_place - context_value
         right_pu_place = aspect_place + context_value + 1
         if is_need_detect_pu:
@@ -173,28 +175,39 @@ class AspectExtractBasedOnPOSDis:
             for i in range(left_pu_place+1,right_pu_place):
                 if i >= 0 and i < len(word_list):
                     context_str_list.append(word_list[i])
+                    pos_str_list.append(pos_list[i])
         else:
             for i in range(left_pu_place,right_pu_place+1):
                 if i >= 0 and i < len(word_list):
                     context_str_list.append(word_list[i])
-        return context_str_list
+                    pos_str_list.append(pos_list[i])
+        return context_str_list,pos_str_list
 
-    def get_doc_aspect_context(self):
+    def get_doc_aspect_context(self,context_value = 5):
         for doc_info in self.doc_info_list:
             for i in range(0,len(doc_info.word_list)):
                 if (doc_info.pos_list[i] == 'NN' or doc_info.pos_list[i] == 'NR') and self.aspect_dict.has_key(doc_info.word_list[i]):
                     doc_info.aspect_list.append(doc_info.word_list[i])
                     doc_info.aspect_place_list.append(i)
-                    context_str_list = self.get_aspect_context(i,doc_info.word_list,doc_info.pos_list,context_value=5)
+                    context_str_list,pos_str_list = self.get_aspect_context(i,doc_info.word_list,doc_info.pos_list,context_value)
                     doc_info.aspect_context_list.append('-*-'.join(context_str_list))
                     senti_word_list = []
-                    for word in context_str_list:
+                    adj_vv_word_list = []
+                    for k in range(0,len(context_str_list)):
+                        word = context_str_list[k]
+                        pos = pos_str_list[k]
                         if self.senti_word_dict.has_key(word):
                             senti_word_list.append(word)
-                    if len(senti_word_list) != 0:
-                        doc_info.senti_word_list.append('-*-'.join(senti_word_list))
-                    else:
-                        doc_info.senti_word_list.append('')
+                        if pos == 'VV' or pos == 'VE' or pos == 'VA' or pos == 'JJ':
+                            adj_vv_word_list.append(word)
+                    doc_info.senti_word_list.append('-*-'.join(senti_word_list))
+                    doc_info.adj_vv_word_list.append('-*-'.join(adj_vv_word_list))
+
+    def get_word_pos_str(self,word_list,pos_list):
+        temp_list = []
+        for i in range(0,len(word_list)):
+            temp_list.append(word_list[i] + '/' + pos_list[i])
+        return ' '.join(temp_list)
 
     def print_doc_aspect_context(self,out_file):
         out_file_list = []
@@ -202,7 +215,8 @@ class AspectExtractBasedOnPOSDis:
             doc_info = self.doc_info_list[i]
             out_file_list.append('DocID: ' + str(i+1) + ' / ' + str(len(self.doc_info_list)))
             out_file_list.append('WordStr: ' + ' '.join(doc_info.word_list))
-            out_file_list.append('POSStr: ' + ' '.join(doc_info.pos_list))
+            #out_file_list.append('POSStr: ' + ' '.join(doc_info.pos_list))
+            out_file_list.append('WordPOSStr: ' + self.get_word_pos_str(doc_info.word_list,doc_info.pos_list))
             if len(doc_info.aspect_list) == 0: continue
             out_file_list.append('Aspect and Context List:')
             for k in range(0,len(doc_info.aspect_list)):
@@ -211,6 +225,7 @@ class AspectExtractBasedOnPOSDis:
                 temp_str_list.append(str(doc_info.aspect_place_list[k]))
                 temp_str_list.append(doc_info.aspect_context_list[k])
                 temp_str_list.append(doc_info.senti_word_list[k])
+                temp_str_list.append(doc_info.adj_vv_word_list[k])
                 out_file_list.append('||'.join(temp_str_list))
         out_file_list_new = []
         for out_file_con in out_file_list:
@@ -219,6 +234,7 @@ class AspectExtractBasedOnPOSDis:
 
 
 if __name__ == '__main__':
+
     movie_type = 'Comedy'
     in_json_dat_file = '../../../ExpData/MovieData/JsonDatForEachCat/' + movie_type + '.json'
     senti_word_file = '../../../ExpData/SentiWordDat/ReviseSentiWord/revise_sentiment_word_list.txt'
@@ -227,6 +243,7 @@ if __name__ == '__main__':
     aspect_extract.load_sentiment_word(senti_word_file)
     aspect_extract.get_aspect(aspect_number=150)
     #aspect_extract.print_aspect_dict('aspect_dict.txt')
-    aspect_extract.get_doc_aspect_context()
+    aspect_extract.get_doc_aspect_context(context_value=10)
     aspect_extract.print_doc_aspect_context('aspect_context.txt')
+
 
