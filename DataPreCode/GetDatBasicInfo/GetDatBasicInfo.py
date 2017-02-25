@@ -54,7 +54,7 @@ class GetDatBasicInfo:
                 self.cat_to_dat_list_dict[key].append(i)
 
     def compute_each_cat_basic_info(self,cat = 'movie'):
-        self.all_dat_list = jsonAPI.load_json_movie_dat(self.dat_json_file)
+        self.all_dat_list = jsonAPI.load_json_dat(self.dat_json_file)
         usefulAPI.mk_dir(self.out_file_fold)
         self.get_each_cat_list(cat)
         for cat, dat_id_list in self.cat_to_dat_list_dict.items():
@@ -74,7 +74,12 @@ class GetDatBasicInfo:
                 movie_info.pos_num = movie_info.pos_num + 1
             else:
                 movie_info.neg_num = movie_info.neg_num + 1
-            user_con_list = temp_dat['con_for_doc_dict']['segmentation'].split(' ')
+
+            user_con_list = []
+
+            for sen_dat in temp_dat['doc_dict']['sen_list']:
+                user_con_list = user_con_list + sen_dat['seg'].split(' ')
+
             len_list.append(len(user_con_list))
             for word in user_con_list:
                 if voca_dict.has_key(word) == False: voca_dict[word] = 1
@@ -143,8 +148,9 @@ class GetDatBasicInfo:
         attr_value_to_all_num_per_dict = movie_info.attr_value_to_all_num_per_dict
 
         for key,value in attr_value_to_pos_num_dict.items():
+            key_str = key.encode('utf-8')
             temp_list = []
-            temp_list.append(key)
+            temp_list.append(key_str)
             temp_list.append(str(attr_value_to_pos_num_dict[key]))
             temp_list.append(str(attr_value_to_neg_num_dict[key]))
             temp_list.append(str(attr_value_to_pos_per_dict[key]))
@@ -157,9 +163,9 @@ class GetDatBasicInfo:
 
 if __name__ == '__main__':
 
-    all_dat_json_file = '../../../ExpData/MovieData/JsonData/jsonDatForComments.json'
-    out_file_fold = '../../../ExpData/MovieData/JsonDatInfo/BasicInfo/'
+    all_dat_json_file = '../../../ExpData/MovieData/JsonDat/JsonData/MovieStructDataForComments_DSEE.json'
+    out_file_fold = '../../../ExpData/MovieData/JsonDat/BasicInfo/'
     GetDatBasicInfo = GetDatBasicInfo(all_dat_json_file,out_file_fold)
-    #GetDatBasicInfo.compute_each_cat_basic_info(cat = 'category')
-    #GetDatBasicInfo.compute_each_cat_basic_info(cat = 'movie')
+    GetDatBasicInfo.compute_each_cat_basic_info(cat = 'category')
+    GetDatBasicInfo.compute_each_cat_basic_info(cat = 'movie')
     GetDatBasicInfo.compute_each_cat_basic_info(cat = 'all')

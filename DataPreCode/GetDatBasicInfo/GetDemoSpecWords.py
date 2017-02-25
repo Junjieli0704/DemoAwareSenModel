@@ -49,9 +49,8 @@ class GetDemoSpecWords:
                     self.cat_to_dat_info_list_dict[key] = []
                 self.cat_to_dat_id_list_dict[key].append(i)
 
-
     def load_all_dat(self,cat = 'movie'):
-        self.all_dat_list = jsonAPI.load_json_movie_dat(self.dat_json_file)
+        self.all_dat_list = jsonAPI.load_json_dat(self.dat_json_file)
         self.get_each_cat_list(cat)
         for cat, dat_id_list in self.cat_to_dat_id_list_dict.items():
             for i in dat_id_list:
@@ -67,14 +66,21 @@ class GetDemoSpecWords:
                         usr_dat_info.location = value
                     elif attribute == 'Age':
                         usr_dat_info.age = value
-                usr_dat_info.content = each_dat['con_for_doc_dict']['segmentation']
+
+
+                user_con_list = []
+                for sen_dat in each_dat['doc_dict']['sen_list']:
+                    for word in sen_dat['seg'].split(' '):
+                        user_con_list.append(word)
+
+                usr_dat_info.content = ' '.join(user_con_list)
+
                 if self.cat_to_dat_info_list_dict.has_key(cat) == False:
                     self.cat_to_dat_info_list_dict[cat] = []
                 self.cat_to_dat_info_list_dict[cat].append(usr_dat_info)
 
     def generate_spec_words_for_demo(self,out_file_fold,demo_input = 'gender'):
         for category, usr_dat_info_list in self.cat_to_dat_info_list_dict.items():
-            print category
             demo_value_list = []
             demo2conlist = {}
             for usr_dat in usr_dat_info_list:
@@ -115,15 +121,16 @@ class GetDemoSpecWords:
             basic_info_line_con_list = ['All']
             for demo in demo_value_list:
                 times = demo_to_times[demo]
-                intro_line_con_list.append(demo)
+                intro_line_con_list.append(demo.encode('utf-8'))
                 basic_info_line_con_list.append(str(times))
             out_file_con_list.append('\t'.join(intro_line_con_list))
             out_file_con_list.append('\t'.join(basic_info_line_con_list))
 
+
             for word_demo , times in word_demo_to_times.items():
                 word = word_demo.split('$')[0]
                 con_list = []
-                con_list.append(word)
+                con_list.append(word.encode('utf-8'))
                 for demo in demo_value_list:
                     word_demo_new = word + '$' + demo
                     if word_demo_to_times.has_key(word_demo_new) == True:
@@ -131,16 +138,23 @@ class GetDemoSpecWords:
                     else:
                         con_list.append('0')
                 out_file_con_list.append('\t'.join(con_list))
+
             usefulAPI.mk_dir(out_file_fold)
             out_file = out_file_fold + demo_input + '_' + category + '.txt'
             open(out_file,'w+').write('\n'.join(out_file_con_list))
 
+
 if __name__ == '__main__':
-    dat_json_file = '../../../ExpData/MovieData/JsonData/jsonDatForComments.json'
-    out_file_fold = '../../../ExpData/MovieData/JsonDatInfo/DemoSpecWordInfo/'
-    get_demo_sprc_words = GetDemoSpecWords(dat_json_file)
-    get_demo_sprc_words.load_all_dat(cat = 'category')
-    get_demo_sprc_words.generate_spec_words_for_demo(out_file_fold,demo_input='age')
+
+    all_dat_json_file = '../../../ExpData/MovieData/JsonDat/JsonData/MovieStructDataForComments_DSEE.json'
+    out_file_fold = '../../../ExpData/MovieData/JsonDat/DemoSpecWordInfo/'
+
+    for cat in ['movie','category','all']:
+        for demo_input in ['age','gender','location']:
+            print 'cat : ' + cat + '   demo: ' + demo_input
+            get_demo_sprc_words = GetDemoSpecWords(all_dat_json_file)
+            get_demo_sprc_words.load_all_dat(cat = cat)
+            get_demo_sprc_words.generate_spec_words_for_demo(out_file_fold,demo_input = demo_input)
 
 
 

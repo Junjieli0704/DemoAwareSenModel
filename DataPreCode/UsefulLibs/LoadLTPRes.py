@@ -127,4 +127,3 @@ if __name__=="__main__":
     root = tree.getroot()
     doc_node_list = root.findall("doc")
     all_review_list = []
-    for doc_node in doc_node_list:

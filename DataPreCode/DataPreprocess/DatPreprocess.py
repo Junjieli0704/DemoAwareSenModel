@@ -13,7 +13,7 @@
 
 import sys
 sys.path.append("../UsefulLibs")
-import usefulAPI, xmlAPI, jsonAPI
+import jsonAPI
 
 
 
@@ -483,7 +483,7 @@ def load_all_doc_res(short_sen_to_dep_file = '',sen_to_short_sen_list_file = '',
     for sen_con in all_sen_order_list:
         short_sen_list = sen_to_short_sen_list_dict[sen_con]
         doc = get_doc_dict()
-        doc['raw_con'] = sen_con
+        doc['raw_con'] = sen_con.replace(' ','')
         for short_sen in short_sen_list:
             sen_dict = get_sen_dict()
             sen_dict['dep'] = short_sen_to_dep_dict[short_sen]
@@ -494,6 +494,7 @@ def load_all_doc_res(short_sen_to_dep_file = '',sen_to_short_sen_list_file = '',
         all_doc_list.append(doc)
 
     jsonAPI.print_out_dat_json(all_doc_list,out_json_file)
+    jsonAPI.print_out_comment_dat_json_visual(all_doc_list,out_json_file.replace('json','jsonVis'))
 
 if __name__ == '__main__':
     # get_raw_word_content_to_urheen()
