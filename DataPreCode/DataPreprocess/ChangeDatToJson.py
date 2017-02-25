@@ -287,15 +287,174 @@ class PropressingDat:
             self.print_out_json_file(dat_list,out_file)
 
 
+def get_raw_txt_dat(in_movie_comment_file,out_movie_comment_file):
+    line_con_list = open(in_movie_comment_file,'r').readlines()
+    out_line_con_list = []
+    for line_con in line_con_list:
+        word_con_list = line_con.split('\t')
+        if len(word_con_list) != 6: continue
+        if word_con_list[5] == 'MovieComment_POS': continue
+        new_word_list = []
+        for word in word_con_list[5].split(' '):
+            if word.find('/') == -1: continue
+            if len(word.split('/')) == 2:
+                new_word_list.append(word.split('/')[0])
+            elif len(word.split('/')) == 3:
+                new_word_list.append('/')
+        word_con_list.pop()
+        word_con_list.append(''.join(new_word_list))
+        out_line_con_list.append('\t'.join(word_con_list))
+    open(out_movie_comment_file,'w+').write('\n'.join(out_line_con_list))
+
+def get_raw_txt(in_movie_comment_file,out_movie_comment_file):
+    line_con_list = open(in_movie_comment_file,'r').readlines()
+    out_line_con_list = []
+    for line_con in line_con_list:
+        word_con_list = line_con.split('\t')
+        if len(word_con_list) != 6: continue
+        if word_con_list[0] == 'CommentID': continue
+        out_line_con_list.append(''.join(word_con_list[5].strip()))
+    open(out_movie_comment_file,'w+').write('\n'.join(out_line_con_list))
+
+def get_movie_name(in_movie_comment_file,out_movie_comment_file):
+    line_con_list = open(in_movie_comment_file,'r').readlines()
+    out_line_con_list = []
+    for line_con in line_con_list:
+        word_con_list = line_con.split('\t')
+        if len(word_con_list) != 6: continue
+        if word_con_list[0] == 'CommentID': continue
+        out_line_con_list.append(''.join(word_con_list[2].strip()))
+    open(out_movie_comment_file,'w+').write('\n'.join(out_line_con_list))
+
+def check_user_dict(in_file,out_file):
+    in_line_con_list = open(in_file,'r').readlines()
+    con_dict = {}
+    out_line_con_list = []
+    for line_con in in_line_con_list:
+        line_con = line_con.strip()
+        if con_dict.has_key(line_con): continue
+        con_dict[line_con] = 1
+        out_line_con_list.append(line_con)
+    open(out_file,'w+').write('\n'.join(out_line_con_list))
+
+def check_senti_word_in_src_dat(senti_word_file = '../../../ExpData/SentiWordDat/ReviseSentiWord/revise_sentiment_word_list.txt',
+                                txt_dat_file = '../../../ExpData/MovieData/RawData/RawSenDataForComments.txt'):
+    senti_line_con_list = open(senti_word_file,'r').readlines()
+    txt_dat_con_list = open(txt_dat_file,'r').readlines()
+    senti_dict = {}
+    senti_list = []
+    for con in senti_line_con_list:
+        con = con.strip()
+        senti_word = con.split('\t')[0]
+        if senti_dict.has_key(senti_word):continue
+        senti_dict[senti_word] = 0
+        senti_list.append(senti_word)
+
+    for i in range(0,len(txt_dat_con_list)):
+        if i % 100 == 0:
+            print str(i) + ' / ' + str(len(txt_dat_con_list))
+        dat_con = txt_dat_con_list[i].strip()
+        for senti_word in senti_list:
+            if dat_con.find(senti_word) == -1: continue
+            #print dat_con.count(senti_word)
+            senti_dict[senti_word] = dat_con.count(senti_word) + senti_dict[senti_word]
+        #if i > 100 : break
+
+    out_line_con_list = []
+
+    for key,value in senti_dict.items():
+        if value < 10: continue
+        out_line_con_list.append(key + '\t' + str(value))
+
+    open('test.txt','w+').write('\n'.join(out_line_con_list))
+    senti_list = sorted(senti_dict, cmp=lambda x,y:cmp(x[1],y[1]),reverse=True)
+
+    '''
+    #print senti_dict
+
+    senti_list = sorted(senti_dict, cmp=lambda x,y:cmp(x[1],y[1]),reverse=True)
+
+    print senti_list[0].decode('utf-8')
+    print senti_list[1].decode('utf-8')
+
+
+    #out_line_con_list = [couple[0] + '\t' + str(couple[1]) for couple in senti_list]
+    out_line_con_list = [str(couple[1]) for couple in senti_list]
+    open('test.txt','w+').write('\n'.join(out_line_con_list))
+    '''
+
+def check_senti_word_in_segpos_dat(senti_word_file = '../../../ExpData/SentiWordDat/ReviseSentiWord/revise_sentiment_word_list.txt',
+                                   senti_to_num_in_src_file = './test.txt',
+                                   seg_file = '../../../ExpData/MovieData/RawData/Urheen_Res/RawSenDataForComments_Urheen_seg.txt',
+                                   out_file = 'out.txt'):
+    senti_to_num_in_src_dict = {}
+    senti_to_polarity_dict = {}
+    senti_to_num_in_seg_dict = {}
+    out_line_con_list = []
+    out_line_con_list.append('senti\tnum_in_src\tnum_in_postag\tpolarity')
+    for con in open(senti_word_file,'r').readlines():
+        con = con.strip()
+        senti_word = con.split('\t')[0]
+        senti_to_polarity_dict[senti_word] = con.split('\t')[1]
+        senti_to_num_in_seg_dict[senti_word] = 0
+        senti_to_num_in_src_dict[senti_word] = 0
+
+    for con in open(senti_to_num_in_src_file,'r').readlines():
+        con = con.strip()
+        senti_word = con.split('\t')[0]
+        senti_to_num_in_src_dict[senti_word] = int(con.split('\t')[1])
+
+    for con in open(seg_file,'r').readlines():
+        con = con.strip()
+        word_list = con.split(' ')
+        for word in word_list:
+            if senti_to_num_in_seg_dict.has_key(word):
+                senti_to_num_in_seg_dict[word] = senti_to_num_in_seg_dict[word] + 1
+
+    for senti_word, polarity in senti_to_polarity_dict.items():
+        if senti_to_num_in_src_dict[senti_word] == 0: continue
+        if len(senti_word) <= 4: continue
+        temp_list = []
+        temp_list.append(senti_word)
+        temp_list.append(str(senti_to_num_in_src_dict[senti_word]))
+        temp_list.append(str(senti_to_num_in_seg_dict[senti_word]))
+        temp_list.append(senti_to_polarity_dict[senti_word])
+        out_line_con_list.append('\t'.join(temp_list))
+    open(out_file,'w+').write('\n'.join(out_line_con_list))
+
+
+
+
+
+
+
 if __name__ == '__main__':
 
-    in_raw_dat_filefold = '../../../ExpData/MovieData/RawData/'
-    in_movie_comment_file = in_raw_dat_filefold + 'RawTxtDataForComments.txt'
-    in_movie_info_file = in_raw_dat_filefold + 'MovieInfo.txt'
-    in_dep_file = in_raw_dat_filefold + 'DepForSenSplit.txt'
-    out_sen_file = in_raw_dat_filefold + 'SenSplitForRawTxt.txt'
-    out_json_file = '../../../ExpData/MovieData/JsonData/jsonDatForComments.json'
+    #check_user_dict('../../../ExpData/UserDat/user_dict.txt','../../../ExpData/UserDat/user_dict.txt')
+    #check_senti_word_in_src_dat()
 
+
+    check_senti_word_in_segpos_dat()
+    '''
+    in_raw_dat_filefold = '../../../ExpData/MovieData/RawData/'
+    in_movie_struct_file = in_raw_dat_filefold + 'MovieStructDataForComments.txt'
+    in_raw_movie_comment_file = in_raw_dat_filefold + 'RawSenDataForComments.txt'
+
+    in_movie_info_file = in_raw_dat_filefold + 'MovieInfo.txt'
+    #in_dep_file = in_raw_dat_filefold + 'DepForSenSplit.txt'
+    #out_sen_file = in_raw_dat_filefold + 'SenSplitForRawTxt.txt'
+    out_json_file = '../../../ExpData/MovieData/JsonData/jsonDatForComments.json'
+    out_movie_comment_file = in_raw_dat_filefold + 'RawSenDataForComments.txt'
+    out_movie_comment_con_file = in_raw_dat_filefold + 'SenDataForComments.txt'
+    get_raw_txt(in_movie_struct_file,in_raw_movie_comment_file)
+    '''
+    in_raw_dat_filefold = '../../../ExpData/MovieData/RawData/'
+    in_movie_struct_file = in_raw_dat_filefold + 'MovieStructDataForComments.txt'
+    in_movie_name_file = in_raw_dat_filefold + 'RawMovieNameForComments.txt'
+    get_movie_name(in_movie_struct_file,in_movie_name_file)
+
+
+    '''
     preDat = PropressingDat(in_movie_comment_file,in_movie_info_file)
     preDat.load_movie_dat_info()
     preDat.load_data_struct()
@@ -307,3 +466,4 @@ if __name__ == '__main__':
 
     out_each_category_dat_filefold = '../../../ExpData/MovieData/JsonDatForEachCat/'
     preDat.split_dat_accord_type(out_each_category_dat_filefold)
+    '''
