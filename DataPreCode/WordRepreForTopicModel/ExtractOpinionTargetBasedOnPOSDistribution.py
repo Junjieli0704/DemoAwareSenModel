@@ -33,12 +33,16 @@ class AspectExtractBasedOnPOSDis:
 
     def load_json_file(self):
         print 'before load_json_file ......'
-        all_review_list = jsonAPI.load_json_movie_dat(self.in_json_dat_file,encoding = 'unicode')
+        all_review_list = jsonAPI.load_json_dat(self.in_json_dat_file)
         print 'after load_json_file ......'
         for review in all_review_list:
             doc_info = DocInfo()
-            doc_info.word_list = review['con_for_doc_dict']['segmentation'].split(' ')
-            doc_info.pos_list = review['con_for_doc_dict']['postag'].split(' ')
+            doc_info.word_list = []
+            doc_info.pos_list = []
+            for sen_dat in review['doc_dict']['sen_list']:
+                for (word,pos) in zip(sen_dat['seg'].split(' '),sen_dat['pos'].split(' ')):
+                    doc_info.word_list.append(word)
+                    doc_info.pos_list.append(pos)
             self.doc_info_list.append(doc_info)
 
     def load_sentiment_word(self,senti_word_file):
@@ -54,6 +58,7 @@ class AspectExtractBasedOnPOSDis:
         else:
             print "Error! Can't load senti_word_file...."
             return -1
+
     '''
     def load_stop_word(self,stop_word_file):
         if os.path.exists(stop_word_file):
@@ -236,7 +241,7 @@ class AspectExtractBasedOnPOSDis:
 if __name__ == '__main__':
 
     movie_type = 'Comedy'
-    in_json_dat_file = '../../../ExpData/MovieData/JsonDatForEachCat/' + movie_type + '.json'
+    in_json_dat_file = '../../../ExpData/MovieData/JsonDat/JsonData/' + movie_type + '.json'
     senti_word_file = '../../../ExpData/SentiWordDat/ReviseSentiWord/revise_sentiment_word_list.txt'
     aspect_extract = AspectExtractBasedOnPOSDis(in_json_dat_file = in_json_dat_file)
     aspect_extract.load_json_file()

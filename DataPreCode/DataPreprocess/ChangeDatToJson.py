@@ -18,7 +18,7 @@
 #        struct_dict['doc_dict']['sen_list'][0]['seg']  第一个小句的 seg 信息
 #        struct_dict['doc_dict']['sen_list'][0]['pos']  第一个小句的 pos 信息
 #        struct_dict['doc_dict']['sen_list'][0]['dep']  第一个小句的 dep 信息
-# Time: 2017-01-13
+# Time: 2017-02-25
 # -------------------------------------------------------------------- #
 
 import sys
@@ -112,6 +112,7 @@ class ChangeDatToJson:
 
 
 if __name__ == '__main__':
+
     in_raw_dat_filefold = '../../../ExpData/MovieData/RawData/'
     in_movie_struct_file = in_raw_dat_filefold + 'Raw/MovieStructDataForComments_DeleteSameEncodeError.txt'
     in_movie_info_file = in_raw_dat_filefold + 'Raw/MovieInfo.txt'
@@ -126,4 +127,3 @@ if __name__ == '__main__':
     change_dat_to_json.load_comment_json_file()
     change_dat_to_json.generate_all_dat_to_json(out_json_file)
     change_dat_to_json.split_dat_accord_type('../../../ExpData/MovieData/JsonDat/JsonData/')
-

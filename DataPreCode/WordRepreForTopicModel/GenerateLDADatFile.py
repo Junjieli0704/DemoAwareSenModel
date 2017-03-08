@@ -32,7 +32,7 @@ class GenerateClassicLDABasedDat:
 
     def load_json_file(self):
         print 'before load_json_file ......'
-        self.all_dat_list = jsonAPI.load_json_movie_dat(self.in_json_dat_file)
+        self.all_dat_list = jsonAPI.load_json_dat(self.in_json_dat_file)
         print 'after  load_json_file ......'
 
     def load_senti_file(self,senti_file):
@@ -52,8 +52,9 @@ class GenerateClassicLDABasedDat:
     def generate_delete_word_dict(self,common_value = 0.3,rare_value = 2,is_need_pruncation = True):
         word_to_times_dict = {}
         for temp_dat in self.all_dat_list:
-            word_list = temp_dat['con_for_doc_dict']['segmentation'].split(' ')
-            pos_list = temp_dat['con_for_doc_dict']['postag'].split(' ')
+            word_list = temp_dat['doc_dict']['seg_con'].split(' ')
+            pos_list =  temp_dat['doc_dict']['pos_con'].split(' ')
+
             for i in range(0,len(word_list)):
                 word = word_list[i]
                 if is_need_pruncation and pos_list[i] == 'PU':
@@ -88,33 +89,32 @@ class GenerateClassicLDABasedDat:
         if mode == 'Doc':
             out_line_con_list = []
             for temp_dat in self.all_dat_list:
-                temp_str = temp_dat['comment_id'] + ' '
                 temp_word_list = []
-                for word in temp_dat['con_for_doc_dict']['segmentation'].split(' '):
+                temp_word_list.append(temp_dat['comment_id'].encode('utf-8'))
+                for word in temp_dat['doc_dict']['seg_con'].split(' '):
                     if self.delete_word_dict.has_key(word): continue
-                    else: temp_word_list.append(word)
-                temp_str = temp_str + ' '.join(temp_word_list)
-                out_line_con_list.append(temp_str)
+                    else: temp_word_list.append(word.encode('utf-8'))
+                out_line_con_list.append(' '.join(temp_word_list))
             open(out_dat_file,'w+').write('\n'.join(out_line_con_list))
 
         elif mode == 'Sen':
             out_line_con_list = []
             for temp_dat in self.all_dat_list:
-                commment_id = temp_dat['comment_id']
-                for i in range(0,len(temp_dat['con_for_sen_list'])):
+                commment_id = temp_dat['comment_id'].encode('utf-8')
+                for i in range(0,len(temp_dat['doc_dict']['sen_list'])):
                     temp_word_list = []
                     temp_word_list.append(commment_id + '_s' + str(i+1))
-                    for word in temp_dat['con_for_sen_list'][i]['segmentation'].split(' '):
+                    for word in temp_dat['doc_dict']['sen_list'][i]['seg'].split(' '):
                         if self.delete_word_dict.has_key(word): continue
-                        else: temp_word_list.append(word)
+                        else: temp_word_list.append(word.encode('utf-8'))
+                    if len(temp_word_list) == 1: continue
                     out_line_con_list.append(' '.join(temp_word_list))
             open(out_dat_file,'w+').write('\n'.join(out_line_con_list))
-
 
     def generate_out_demo_lda_file(self,out_demo_file = 'dat.txt'):
         out_dem_line_con_list = []
         for temp_dat in self.all_dat_list:
-            temp_str = temp_dat['comment_id'] + 'demo '
+            temp_str = temp_dat['comment_id'].encode('utf-8') + 'demo '
             temp_word_list = []
             for temp_info in temp_dat['user_info'].split('_'):
                 if len(temp_info.split('/')) == 2:
@@ -122,7 +122,7 @@ class GenerateClassicLDABasedDat:
                    value = temp_info.split('/')[1]
                    if attribute == 'Sex' or attribute == 'Loc' or attribute == 'Age':
                        if value != 'NULL':
-                           temp_word_list.append(temp_info)
+                           temp_word_list.append(temp_info.encode('utf-8'))
             temp_str = temp_str + ' '.join(temp_word_list)
             out_dem_line_con_list.append(temp_str)
         open(out_demo_file,'w+').write('\n'.join(out_dem_line_con_list))
@@ -152,12 +152,14 @@ def generage_lda_dat_file_list(mode_list = ['Doc','Sen'],
 
 if __name__ == '__main__':
     movie_type = 'Comedy'
-    in_json_dat_file = '../../../ExpData/MovieData/JsonDatForEachCat/' + movie_type + '.json'
+    in_json_dat_file = '../../../ExpData/MovieData/JsonDat/JsonData/' + movie_type + '.json'
+    in_senti_word_file = '../../../ExpData/SentiWordDat/ReviseSentiWord/revise_sentiment_word_list.txt'
     out_lda_dat_file = '../../../ExpData/MovieData/LDAData/LDA_Style_Dat/' + movie_type + '_doc.txt'
     out_lda_demo_file = '../../../ExpData/MovieData/LDAData/LDA_Style_Dat/' + movie_type + '_demo.txt'
     generLDADat = GenerateClassicLDABasedDat(in_json_dat_file)
     generLDADat.load_json_file()
     generLDADat.generate_out_dat_lda_file(mode='Doc',
+                                          sentiment_word_file = in_senti_word_file,
                                           rare_value=5,
                                           is_need_pruncation = False,
                                           common_value = 0.3,
@@ -165,4 +167,3 @@ if __name__ == '__main__':
                                           out_dat_file = out_lda_dat_file)
     generLDADat.generate_out_demo_lda_file(out_demo_file=out_lda_demo_file)
 
-    # generage_lda_dat_file_list()

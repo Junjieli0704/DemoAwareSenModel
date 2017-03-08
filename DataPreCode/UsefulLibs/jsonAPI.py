@@ -28,31 +28,35 @@ def print_out_struct_dat_json_visual(dat_list,json_con_visual_file):
     # 由于json里面的文件的汉字都是unicode编码的，人工阅读不变，于是顺便生成一个适合人阅读的文件
     out_con_list = []
     for each_dat in dat_list:
-        temp_str = 'comment_id\t' + each_dat['comment_id']
+        temp_str = "each_dat['comment_id']\t" + each_dat['comment_id']
         out_con_list.append(temp_str)
-        temp_str = 'user_id\t' + each_dat['user_id']
+        temp_str = "each_dat['user_id']\t" + each_dat['user_id']
         out_con_list.append(temp_str)
-        temp_str = 'movie_name\t' + each_dat['movie_name']
+        temp_str = "each_dat['movie_name']\t" + each_dat['movie_name']
         out_con_list.append(temp_str)
-        temp_str = 'senti_label\t' + each_dat['senti_label']
+        temp_str = "each_dat['senti_label']\t" + each_dat['senti_label']
         out_con_list.append(temp_str)
-        temp_str = 'movie_type\t' + each_dat['movie_type']
+        temp_str = "each_dat['movie_type']\t" + each_dat['movie_type']
         out_con_list.append(temp_str)
-        temp_str = 'user_info\t' + each_dat['user_info']
+        temp_str = "each_dat['user_info']\t" + each_dat['user_info']
         out_con_list.append(temp_str)
-        temp_str = 'raw_con\t' + each_dat['doc_dict']['raw_con'].encode('utf-8')
+        temp_str = "each_dat['doc_dict']['raw_con']\t"  + each_dat['doc_dict']['raw_con'].encode('utf-8')
         out_con_list.append(temp_str)
-        out_con_list.append('con_for_sen_list:')
+        temp_str = "each_dat['doc_dict']['seg_con']\t"  + each_dat['doc_dict']['seg_con'].encode('utf-8')
+        out_con_list.append(temp_str)
+        temp_str = "each_dat['doc_dict']['pos_con']\t"  + each_dat['doc_dict']['pos_con'].encode('utf-8')
+        out_con_list.append(temp_str)
+        out_con_list.append("each_dat['doc_dict']['sen_list']:")
         for i in range(0,len(each_dat['doc_dict']['sen_list'])):
             temp_dict = each_dat['doc_dict']['sen_list'][i]
-            out_con_list.append('Sen ' + str(i+1) + ' :')
-            temp_str = '\traw\t' + temp_dict['raw'].encode('utf-8')
+            out_con_list.append('Sen ' + str(i) + ' :')
+            temp_str = "\teach_dat['doc_dict']['sen_list'][" + str(i) + "]['raw']" + "\t" + temp_dict['raw'].encode('utf-8')
             out_con_list.append(temp_str)
-            temp_str = '\tseg\t' + temp_dict['seg'].encode('utf-8')
+            temp_str = "\teach_dat['doc_dict']['sen_list'][" + str(i) + "]['seg']" + "\t" + temp_dict['seg'].encode('utf-8')
             out_con_list.append(temp_str)
-            temp_str = '\tpos\t' + temp_dict['pos'].encode('utf-8')
+            temp_str = "\teach_dat['doc_dict']['sen_list'][" + str(i) + "]['pos']" + "\t" + temp_dict['pos'].encode('utf-8')
             out_con_list.append(temp_str)
-            temp_str = '\tdep\t' + temp_dict['dep'].encode('utf-8')
+            temp_str = "\teach_dat['doc_dict']['sen_list'][" + str(i) + "]['dep']" + "\t" + temp_dict['dep'].encode('utf-8')
             out_con_list.append(temp_str)
         out_con_list.append('-----------------------------------')
     open(json_con_visual_file,'w+').write('\n'.join(out_con_list))
@@ -74,6 +78,10 @@ def print_out_comment_dat_json_visual(dat_list,json_con_visual_file):
     out_con_list = []
     for doc_dict in dat_list:
         temp_str = 'raw_con\t' + doc_dict['raw_con']
+        out_con_list.append(temp_str)
+        temp_str = 'seg_con\t' + doc_dict['seg_con']
+        out_con_list.append(temp_str)
+        temp_str = 'pos_con\t' + doc_dict['pos_con']
         out_con_list.append(temp_str)
         out_con_list.append('con_for_sen_list:')
         for i in range(0,len(doc_dict['sen_list'])):

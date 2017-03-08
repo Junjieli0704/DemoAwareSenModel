@@ -110,8 +110,30 @@ def fileter_senti_word(src_sen_file,problem_senti_file,out_sen_file,lda_senti_fi
     open(lda_senti_file,'w+').write('\n'.join(out_lda_senti_list))
 
 
+def change_senti_file_to_LDA_style(src_senti_file = '',lda_senti_file = ''):
+    if src_senti_file == '':
+        src_senti_file = '../../../ExpData/SentiWordDat/ReviseSentiWord/revise_sentiment_word_list.txt'
+    if lda_senti_file == '':
+        lda_senti_file = '../../../ExpData/SentiWordDat/ReviseSentiWord/revise_sentiment_word_list_LDA.txt'
+    if src_senti_file != '' and lda_senti_file != '':
+        in_line_con_list = open(src_senti_file,'r').readlines()
+        out_line_con_list = []
+        for line_con in in_line_con_list:
+            line_con = line_con.strip()
+            word_con_list = line_con.split('\t')
+            if len(word_con_list) != 2 : continue
+            if word_con_list[1] == '1':
+                line_new_con = word_con_list[0] + '\t0.05\t0.9\t0.05'
+                out_line_con_list.append(line_new_con)
+            elif word_con_list[1] == '-1':
+                line_new_con = word_con_list[0] + '\t0.05\t0.05\t0.9'
+                out_line_con_list.append(line_new_con)
+        open(lda_senti_file,'w+').write('\n'.join(out_line_con_list))
+
+
 if __name__ == '__main__':
 
+    '''
     in_json_dat_file = '../../../ExpData/MovieData/JsonData/jsonDatForComments.json'
     sentiment_word_file = '../../../ExpData/SentiWordDat/OriginSentiWord/sentiment_word_list.txt'
     filter_senti_word_file = '../../../ExpData/SentiWordDat/ReviseSentiWord/filter_senti_word.txt'
@@ -129,6 +151,7 @@ if __name__ == '__main__':
     revise_senti_file = '../../../ExpData/SentiWordDat/ReviseSentiWord/revise_sentiment_word_list.txt'
     lda_senti_file = '../../../ExpData/SentiWordDat/ReviseSentiWord/revise_sentiment_word_list_LDA.txt'
     fileter_senti_word(sentiment_word_file,filter_senti_word_file,revise_senti_file,lda_senti_file)
+    '''
 
-
+    change_senti_file_to_LDA_style()
 

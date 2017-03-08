@@ -42,6 +42,8 @@ def get_sen_dict():
 def get_doc_dict():
     doc_dict = {}
     doc_dict['raw_con'] = ''
+    doc_dict['seg_con'] = ''
+    doc_dict['pos_con'] = ''
     doc_dict['sen_list'] = []
     return doc_dict
 
@@ -484,13 +486,18 @@ def load_all_doc_res(short_sen_to_dep_file = '',sen_to_short_sen_list_file = '',
         short_sen_list = sen_to_short_sen_list_dict[sen_con]
         doc = get_doc_dict()
         doc['raw_con'] = sen_con.replace(' ','')
+        doc['seg_con'] = sen_con
+        pos_list = []
         for short_sen in short_sen_list:
             sen_dict = get_sen_dict()
             sen_dict['dep'] = short_sen_to_dep_dict[short_sen]
             sen_dict['seg'] = short_sen
             sen_dict['raw'] = short_sen.replace(' ','')
             sen_dict['pos'] = short_sen_to_pos_tag_dict[short_sen]
+            for pos in sen_dict['pos'].split(' '):
+                pos_list.append(pos)
             doc['sen_list'].append(sen_dict)
+        doc['pos_con'] = ' '.join(pos_list)
         all_doc_list.append(doc)
 
     jsonAPI.print_out_dat_json(all_doc_list,out_json_file)
