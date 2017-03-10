@@ -151,6 +151,7 @@ def generage_lda_dat_file_list(mode_list = ['Doc','Sen'],
 
 
 if __name__ == '__main__':
+
     movie_type = 'Comedy'
     in_json_dat_file = '../../../ExpData/MovieData/JsonDat/JsonData/' + movie_type + '.json'
     in_senti_word_file = '../../../ExpData/SentiWordDat/ReviseSentiWord/revise_sentiment_word_list.txt'
@@ -166,4 +167,3 @@ if __name__ == '__main__':
                                           is_need_processing= True,
                                           out_dat_file = out_lda_dat_file)
     generLDADat.generate_out_demo_lda_file(out_demo_file=out_lda_demo_file)
-

@@ -1,0 +1,321 @@
+# depslib dependency file v1.0
+1470795792 source:d:\my c++ codes\lda based\topicmodelbased\lda\commandparser.cpp
+	"CommandParser.h"
+
+1465960056 d:\my c++ codes\lda based\topicmodelbased\lda\commandparser.h
+	<string>
+	<iostream>
+	<stdlib.h>
+	"constants.h"
+
+1466565362 d:\my c++ codes\lda based\topicmodelbased\lda\constants.h
+	<string>
+
+1489110870 source:d:\my c++ codes\lda based\topicmodelbased\lda\dataset.cpp
+	<stdio.h>
+	<stdlib.h>
+	"constants.h"
+	"strtokenizer.h"
+	"dataset.h"
+
+1466412607 d:\my c++ codes\lda based\topicmodelbased\lda\strtokenizer.h
+	<string>
+	<vector>
+
+1489110870 d:\my c++ codes\lda based\topicmodelbased\lda\dataset.h
+	<string>
+	<vector>
+	<map>
+	<fstream>
+	"map_type.h"
+
+1463643933 d:\my c++ codes\lda based\topicmodelbased\lda\map_type.h
+	<map>
+	<iostream>
+	<vector>
+
+1489110883 source:d:\my c++ codes\lda based\topicmodelbased\lda\lda.cpp
+	"LDA.h"
+
+1489044356 d:\my c++ codes\lda based\topicmodelbased\lda\lda.h
+	"constants.h"
+	"dataset.h"
+	"utils.h"
+	"log.h"
+	<ctime>
+	<stdio.h>
+	<stdlib.h>
+	"strtokenizer.h"
+	"utils.h"
+	<math.h>
+
+1465984287 d:\my c++ codes\lda based\topicmodelbased\lda\utils.h
+	"dataset.h"
+	"constants.h"
+	<string>
+	<algorithm>
+
+1465439437 d:\my c++ codes\lda based\topicmodelbased\lda\log.h
+	<iostream>
+	<fstream>
+	<sstream>
+	<string>
+
+1471228569 source:d:\my c++ codes\lda based\topicmodelbased\lda\main.cpp
+	<iostream>
+	"utils.h"
+	"math.h"
+	"log.h"
+	"CommandParser.h"
+	"LDA.h"
+
+1466565361 d:\my c++ codes\lda based\topicmodelbased\lda\model.h
+	"constants.h"
+	"LDA.h"
+	"USTM_FT_W.h"
+	"D_PLDA.h"
+	"JST_model.h"
+	"JST_inference.h"
+	"SenLDA_model.h"
+	"ASUM_model.h"
+	"log.h"
+	<iostream>
+
+1466478354 d:\my c++ codes\lda based\topicmodelbased\lda\ustm_ft_w.h
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<sys/stat.h>
+	<math.h>
+	<fstream>
+	<sstream>
+	<iostream>
+	<vector>
+	"dataset.h"
+	"map_type.h"
+	"utils.h"
+	"strtokenizer.h"
+	"constants.h"
+	"sentiLex.h"
+	"log.h"
+
+1463194340 d:\my c++ codes\lda based\topicmodelbased\lda\sentilex.h
+	"map_type.h"
+	"constants.h"
+	<fstream>
+	"strtokenizer.h"
+	<stdlib.h>
+
+1466736791 d:\my c++ codes\lda based\topicmodelbased\lda\d_plda.h
+	"constants.h"
+	"dataset_phrase.h"
+	"utils.h"
+	"log.h"
+	<ctime>
+	<stdio.h>
+	<stdlib.h>
+	"strtokenizer.h"
+	"utils.h"
+	<math.h>
+
+1466736874 d:\my c++ codes\lda based\topicmodelbased\lda\dataset_phrase.h
+	<string>
+	<vector>
+	<stdio.h>
+	<stdlib.h>
+	<map>
+	<fstream>
+	"map_type.h"
+	"constants.h"
+	"strtokenizer.h"
+	"dataset.h"
+
+1466427621 d:\my c++ codes\lda based\topicmodelbased\lda\jst_model.h
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<sys/stat.h>
+	<math.h>
+	<fstream>
+	<sstream>
+	<iostream>
+	<vector>
+	"dataset.h"
+	"map_type.h"
+	"utils.h"
+	"strtokenizer.h"
+	"constants.h"
+	"sentiLex.h"
+	"log.h"
+
+1466041076 d:\my c++ codes\lda based\topicmodelbased\lda\jst_inference.h
+	<sys/stat.h>
+	<math.h>
+	<iostream>
+	<fstream>
+	"constants.h"
+	"dataset.h"
+	"utils.h"
+	"strtokenizer.h"
+	"sentiLex.h"
+	"log.h"
+
+1463734973 d:\my c++ codes\lda based\topicmodelbased\lda\senlda_model.h
+	"constants.h"
+	"dataset_sen.h"
+	"utils.h"
+	"log.h"
+	<ctime>
+
+1463729773 d:\my c++ codes\lda based\topicmodelbased\lda\dataset_sen.h
+	<string>
+	<vector>
+	<map>
+	<fstream>
+	"map_type.h"
+	"utils.h"
+
+1463968481 d:\my c++ codes\lda based\topicmodelbased\lda\asum_model.h
+	"constants.h"
+	"dataset_sen.h"
+	"utils.h"
+	"log.h"
+	"sentiLex.h"
+	<ctime>
+
+1463819062 source:d:\my c++ codes\lda based\topicmodelbased\lda\senlda_model.cpp
+	"SenLDA_model.h"
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	"constants.h"
+	"strtokenizer.h"
+	"utils.h"
+	"dataset.h"
+	<math.h>
+
+1463194353 source:d:\my c++ codes\lda based\topicmodelbased\lda\sentilex.cpp
+	"sentiLex.h"
+
+1466412607 source:d:\my c++ codes\lda based\topicmodelbased\lda\strtokenizer.cpp
+	<string>
+	<vector>
+	"iostream"
+	"strtokenizer.h"
+
+1465959574 source:d:\my c++ codes\lda based\topicmodelbased\lda\utils.cpp
+	<stdio.h>
+	<string>
+	<map>
+	<iostream>
+	<sstream>
+	"strtokenizer.h"
+	"utils.h"
+	"dataset.h"
+	<sys/types.h>
+	<sys/stat.h>
+	<direct.h>
+	<io.h>
+	<unistd.h>
+
+1489115873 source:d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\lda\dataset.cpp
+	<stdio.h>
+	<stdlib.h>
+	"constants.h"
+	"strtokenizer.h"
+	"dataset.h"
+
+1489111774 d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\lda\constants.h
+	<string>
+
+1489129726 d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\lda\strtokenizer.h
+	<string>
+	<vector>
+
+1489115892 d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\lda\dataset.h
+	<string>
+	<vector>
+	<map>
+	<fstream>
+	"map_type.h"
+
+1463643933 d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\lda\map_type.h
+	<map>
+	<iostream>
+	<vector>
+
+1489130019 source:d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\lda\lda.cpp
+	"LDA.h"
+
+1489114180 d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\lda\lda.h
+	"constants.h"
+	"dataset.h"
+	"utils.h"
+	"log.h"
+	<ctime>
+	<stdio.h>
+	<stdlib.h>
+	"strtokenizer.h"
+	"utils.h"
+	<math.h>
+	"FileOut.h"
+
+1465984287 d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\lda\utils.h
+	"dataset.h"
+	"constants.h"
+	<string>
+	<algorithm>
+
+1465439437 d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\lda\log.h
+	<iostream>
+	<fstream>
+	<sstream>
+	<string>
+
+1471228569 source:d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\lda\main.cpp
+	<iostream>
+	"utils.h"
+	"math.h"
+	"log.h"
+	"CommandParser.h"
+	"LDA.h"
+
+1465960056 d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\lda\commandparser.h
+	<string>
+	<iostream>
+	<stdlib.h>
+	"constants.h"
+
+1489129726 source:d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\lda\strtokenizer.cpp
+	<string>
+	<vector>
+	"iostream"
+	"strtokenizer.h"
+
+1465959574 source:d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\lda\utils.cpp
+	<stdio.h>
+	<string>
+	<map>
+	<iostream>
+	<sstream>
+	"strtokenizer.h"
+	"utils.h"
+	"dataset.h"
+	<sys/types.h>
+	<sys/stat.h>
+	<direct.h>
+	<io.h>
+	<unistd.h>
+
+1489112674 source:d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\lda\commandparser.cpp
+	"CommandParser.h"
+
+1489114528 d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\lda\fileout.h
+	<string>
+	<fstream>
+	<sstream>
+	<vector>
+
+1489114528 source:d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\lda\fileout.cpp
+	"FileOut.h"
+
