@@ -65,10 +65,16 @@ class GetWordInfo:
         out_line_con_list.append('len 40+:\t' + str(self.len_distri_dict['40+']))
         open(self.out_file,'w+').write('\n'.join(out_line_con_list))
 
+def ana_dat(in_file):
+    out_file = in_file.replace('.txt','--Ana.txt')
+    get_word_info = GetWordInfo(in_file,out_file)
+    get_word_info.analysis_dat()
+    get_word_info.print_out_res()
+
 if __name__ == '__main__':
 
-    lda_dat_file = '../../../ExpData/MovieData/LDAData/LDA_Style_Dat/Comedy_doc.txt'
-    out_file = '../../../ExpData/MovieData/LDAData/LDA_Style_Dat/Comedy_doc_ana.txt'
+    lda_dat_file = '../../../ExpData/MovieData/LDAData/LDA_Style_Dat/Comedy_Doc_5_0.3_True/Comedy_Doc_5_0.3_True.txt'
+    out_file = '../../../ExpData/MovieData/LDAData/LDA_Style_Dat/Comedy_Doc_5_0.3_True/Comedy_Doc_5_0.3_True--Ana.txt'
     get_word_info = GetWordInfo(lda_dat_file,out_file)
     get_word_info.analysis_dat()
     get_word_info.print_out_res()

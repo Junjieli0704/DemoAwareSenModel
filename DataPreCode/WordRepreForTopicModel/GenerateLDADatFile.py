@@ -22,6 +22,8 @@ import os
 import sys
 sys.path.append("../UsefulLibs")
 import usefulAPI, jsonAPI
+sys.path.append("../GetDatBasicInfo")
+import GetWordInfoForLDAFiles
 
 class GenerateClassicLDABasedDat:
     def __init__(self,in_json_dat_file):
@@ -71,7 +73,6 @@ class GenerateClassicLDABasedDat:
                 self.delete_word_dict[word] = 1
             elif times > len(self.all_dat_list) * common_value:
                 self.delete_word_dict[word] = 1
-
 
     def generate_out_dat_lda_file(self,
                               mode = 'Doc',
@@ -150,20 +151,59 @@ def generage_lda_dat_file_list(mode_list = ['Doc','Sen'],
                                                           common_value = common_value)
 
 
+
+def make_dat_file_based_on_para(mode='Doc',
+                                rare_value = 5,
+                                is_need_dele_pruncation = True,
+                                common_value = 0.3,
+                                movie_type = 'Comedy',
+                                out_file_fold = ''):
+    dat_file = ''
+    dat_file = dat_file + movie_type + '_'
+    dat_file = dat_file + mode + '_'
+    dat_file = dat_file + str(rare_value) + '_'
+    dat_file = dat_file + str(common_value) + '_'
+    dat_file = dat_file + str(is_need_dele_pruncation)
+    file_fold = out_file_fold + dat_file + '/'
+    usefulAPI.mk_dir(file_fold)
+    dat_file = file_fold + dat_file + '.txt'
+    demo_file = file_fold + movie_type + '_demo.txt'
+
+    return dat_file,demo_file
+
 if __name__ == '__main__':
 
     movie_type = 'Comedy'
     in_json_dat_file = '../../../ExpData/MovieData/JsonDat/JsonData/' + movie_type + '.json'
     in_senti_word_file = '../../../ExpData/SentiWordDat/ReviseSentiWord/revise_sentiment_word_list.txt'
-    out_lda_dat_file = '../../../ExpData/MovieData/LDAData/LDA_Style_Dat/' + movie_type + '_doc.txt'
-    out_lda_demo_file = '../../../ExpData/MovieData/LDAData/LDA_Style_Dat/' + movie_type + '_demo.txt'
+    out_lda_dat_file_fold = '../../../ExpData/MovieData/LDAData/LDA_Style_Dat/'
+    #out_lda_dat_file = '../../../ExpData/MovieData/LDAData/LDA_Style_Dat/' + movie_type + '_doc.txt'
+    #out_lda_demo_file = '../../../ExpData/MovieData/LDAData/LDA_Style_Dat/' + movie_type + '_demo.txt'
     generLDADat = GenerateClassicLDABasedDat(in_json_dat_file)
     generLDADat.load_json_file()
-    generLDADat.generate_out_dat_lda_file(mode='Doc',
+
+    mode = 'Doc'
+    rare_value = 5
+    is_need_dele_pruncation = True
+    common_value = 0.3
+
+    out_lda_dat_file,out_lda_demo_file = make_dat_file_based_on_para(mode=mode,
+                                                                     rare_value = rare_value,
+                                                                     is_need_dele_pruncation = is_need_dele_pruncation,
+                                                                     common_value = common_value,
+                                                                     movie_type = movie_type,
+                                                                     out_file_fold = out_lda_dat_file_fold)
+
+    generLDADat.generate_out_dat_lda_file(mode=mode,
                                           sentiment_word_file = in_senti_word_file,
-                                          rare_value = 5,
-                                          is_need_dele_pruncation = True,
-                                          common_value = 0.3,
+                                          rare_value = rare_value,
+                                          is_need_dele_pruncation = is_need_dele_pruncation,
+                                          common_value = common_value,
                                           is_need_processing= True,
                                           out_dat_file = out_lda_dat_file)
+
+    GetWordInfoForLDAFiles.ana_dat(out_lda_dat_file)
+
     generLDADat.generate_out_demo_lda_file(out_demo_file=out_lda_demo_file)
+
+

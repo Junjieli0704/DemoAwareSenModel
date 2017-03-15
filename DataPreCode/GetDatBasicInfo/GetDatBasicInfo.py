@@ -21,11 +21,13 @@ class MovieInfor:
         self.min_len = 0
         self.voca_len = 0.0
         self.len_dis_dict = {}
+        self.each_movie_dis_dict = {}
         self.attr_value_to_pos_num_dict = {}
         self.attr_value_to_neg_num_dict = {}
         self.attr_value_to_pos_per_dict = {}
         self.attr_value_to_all_num_dict = {}
         self.attr_value_to_all_num_per_dict = {}
+
 
 class GetDatBasicInfo:
     def __init__(self,dat_json_file,out_file_fold):
@@ -92,6 +94,10 @@ class GetDatBasicInfo:
         len_list = []
         for i in dat_id_list:
             temp_dat = self.all_dat_list[i]
+            movie_name = temp_dat['movie_name']
+            if movie_info.each_movie_dis_dict.has_key(movie_name) == False:
+                movie_info.each_movie_dis_dict[movie_name] = 0
+            movie_info.each_movie_dis_dict[movie_name] = movie_info.each_movie_dis_dict[movie_name] + 1
             movie_info.all_num = movie_info.all_num + 1
             if temp_dat['senti_label'] == 'POS':
                 movie_info.pos_num = movie_info.pos_num + 1
@@ -164,6 +170,11 @@ class GetDatBasicInfo:
         con_list.append('--------------------------------------------------')
         con_list.append('voca_len\t' +str(movie_info.voca_len))
         con_list.append('--------------------------------------------------')
+        con_list.append('each_movie_numbers:')
+        for movie_name, number in movie_info.each_movie_dis_dict.items():
+            temp_str = movie_name.encode('utf-8') + ': ' + str(number)
+            con_list.append(temp_str)
+        con_list.append('--------------------------------------------------')
         con_list.append('AttributeValueToProb_Info:        ')
         con_list.append('AttributeValue\tPosNum\tNegNum\tPOSPer\tAllNum\tAllPer')
 
@@ -186,12 +197,11 @@ class GetDatBasicInfo:
 
         open(out_file,'w+').write('\n'.join(con_list))
 
-
 if __name__ == '__main__':
 
     all_dat_json_file = '../../../ExpData/MovieData/JsonDat/JsonData/MovieStructDataForComments_DSEE.json'
     out_file_fold = '../../../ExpData/MovieData/JsonDat/BasicInfo/'
     GetDatBasicInfo = GetDatBasicInfo(all_dat_json_file,out_file_fold)
     GetDatBasicInfo.compute_each_cat_basic_info(cat = 'category')
-    #GetDatBasicInfo.compute_each_cat_basic_info(cat = 'movie')
-    #GetDatBasicInfo.compute_each_cat_basic_info(cat = 'all')
+    GetDatBasicInfo.compute_each_cat_basic_info(cat = 'movie')
+    GetDatBasicInfo.compute_each_cat_basic_info(cat = 'all')
