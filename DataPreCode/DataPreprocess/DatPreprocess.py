@@ -439,8 +439,12 @@ def load_stanford_dep_file(sen_file = '',dep_file =  '',sen_con_to_dep_dict = {}
         sen_con_to_dep_dict[sen_con] = dep_str
 
 
-def load_all_doc_res(short_sen_to_dep_file = '',sen_to_short_sen_list_file = '',
-                     short_sen_to_pos_tag_file = '',out_json_file = '',split_str = '-*-*-'):
+def load_all_doc_res(short_sen_to_dep_file = '',
+                     sen_to_short_sen_list_file = '',
+                     short_sen_to_pos_tag_file = '',
+                     sen_to_pos_tag_file = '',
+                     out_json_file = '',
+                     split_str = '-*-*-'):
 
     file_fold = '../../../ExpData/MovieData/RawData/'
 
@@ -448,6 +452,8 @@ def load_all_doc_res(short_sen_to_dep_file = '',sen_to_short_sen_list_file = '',
         short_sen_to_dep_file = file_fold + 'Stanford_Parser_Res/parser_out_dict.txt'
     if sen_to_short_sen_list_file == '':
         sen_to_short_sen_list_file = file_fold + 'Urheen_Res/RawDSEEUrheenSeg_SenSplit_SrcToTgt.txt'
+    if sen_to_pos_tag_file == '':
+        sen_to_pos_tag_file = file_fold + 'Urheen_Res/RawSenDataForComments_DSEE_Urheen_pos.txt'
     if short_sen_to_pos_tag_file == '':
         short_sen_to_pos_tag_file = file_fold + 'Urheen_Res/RawDSEEUrheenSeg_SplitSenToPOS.txt'
     if out_json_file == '':
@@ -475,29 +481,47 @@ def load_all_doc_res(short_sen_to_dep_file = '',sen_to_short_sen_list_file = '',
         for k in range(1,len(con_list)):
              sen_to_short_sen_list_dict[sen].append(con_list[k])
 
+    sen_to_pos_tag_dict = {}
+    line_con_list = open(sen_to_pos_tag_file,'r').readlines()
+    for line_con in line_con_list:
+        line_con = line_con.strip()
+        word_list = []
+        pos_tag_list = []
+        for word_pos_tag in line_con.split(' '):
+            temp_list = word_pos_tag.split('/')
+            if len(temp_list) == 2:
+                word_list.append(temp_list[0])
+                pos_tag_list.append(temp_list[1])
+            elif len(temp_list) == 3:
+                word_list.append(temp_list[0] + '/' + temp_list[1])
+                pos_tag_list.append(temp_list[2])
+
+        sen = ' '.join(word_list)
+        pos_tag = ' '.join(pos_tag_list)
+        sen_to_pos_tag_dict[sen] = pos_tag
+    #print sen_to_pos_tag_dict
+
     short_sen_to_pos_tag_dict = {}
     line_con_list = open(short_sen_to_pos_tag_file,'r').readlines()
     for line_con in line_con_list:
         line_con = line_con.strip()
-        short_sen,pos_tag = line_con.split('\t')
-        short_sen_to_pos_tag_dict[short_sen] = pos_tag
+        sen,pos_tag = line_con.split('\t')
+        short_sen_to_pos_tag_dict[sen] = pos_tag
 
     for sen_con in all_sen_order_list:
         short_sen_list = sen_to_short_sen_list_dict[sen_con]
         doc = get_doc_dict()
+        print sen_con.decode('utf-8')
         doc['raw_con'] = sen_con.replace(' ','')
         doc['seg_con'] = sen_con
-        pos_list = []
+        doc['pos_con'] = sen_to_pos_tag_dict[sen_con]
         for short_sen in short_sen_list:
             sen_dict = get_sen_dict()
             sen_dict['dep'] = short_sen_to_dep_dict[short_sen]
             sen_dict['seg'] = short_sen
             sen_dict['raw'] = short_sen.replace(' ','')
             sen_dict['pos'] = short_sen_to_pos_tag_dict[short_sen]
-            for pos in sen_dict['pos'].split(' '):
-                pos_list.append(pos)
             doc['sen_list'].append(sen_dict)
-        doc['pos_con'] = ' '.join(pos_list)
         all_doc_list.append(doc)
 
     jsonAPI.print_out_dat_json(all_doc_list,out_json_file)

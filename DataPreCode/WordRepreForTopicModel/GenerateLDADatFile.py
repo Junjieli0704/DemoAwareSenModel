@@ -49,15 +49,15 @@ class GenerateClassicLDABasedDat:
             print 'Error! Sentiment word file is not exist.'
             return -1
 
-    def generate_delete_word_dict(self,common_value = 0.3,rare_value = 2,is_need_pruncation = True):
+    def generate_delete_word_dict(self,common_value = 0.3,rare_value = 2,is_need_dele_pruncation = True):
         word_to_times_dict = {}
         for temp_dat in self.all_dat_list:
             word_list = temp_dat['doc_dict']['seg_con'].split(' ')
-            pos_list =  temp_dat['doc_dict']['pos_con'].split(' ')
+            pos_list = temp_dat['doc_dict']['pos_con'].split(' ')
 
             for i in range(0,len(word_list)):
                 word = word_list[i]
-                if is_need_pruncation and pos_list[i] == 'PU':
+                if is_need_dele_pruncation and pos_list[i] == 'PU':
                     self.delete_word_dict[word] = 1
                     continue
                 if word_to_times_dict.has_key(word) == False:
@@ -78,12 +78,12 @@ class GenerateClassicLDABasedDat:
                               sentiment_word_file = '',
                               common_value = 1.0,
                               rare_value = 5,
-                              is_need_pruncation = False,
+                              is_need_dele_pruncation = False,
                               is_need_processing = True,
                               out_dat_file = 'dat.txt'):
         self.load_senti_file(sentiment_word_file)
         self.delete_word_dict = {}
-        self.generate_delete_word_dict(common_value,rare_value,is_need_pruncation)
+        self.generate_delete_word_dict(common_value,rare_value,is_need_dele_pruncation)
         if is_need_processing == False:
             self.delete_word_dict = {}
         if mode == 'Doc':
@@ -130,7 +130,7 @@ class GenerateClassicLDABasedDat:
 
 def generage_lda_dat_file_list(mode_list = ['Doc','Sen'],
                                common_value_list = [0.2,0.25,0.3,0.35,0.4,0.45,0.5],
-                               is_need_prun_list = [True,False],
+                               is_need_dele_prun_list = [True,False],
                                rare_value_list = [1,2,3,4,5,10]):
     movie_type = 'Comedy'
     in_json_dat_file = '../../../ExpData/MovieData/JsonDatForEachCat/' + movie_type + '.json'
@@ -138,7 +138,7 @@ def generage_lda_dat_file_list(mode_list = ['Doc','Sen'],
     generLDADat.load_json_file()
     for mode in mode_list:
         for common_value in common_value_list:
-            for is_need_prun in is_need_prun_list:
+            for is_need_dele_prun in is_need_dele_prun_list:
                 for rare_value in rare_value_list:
                     out_file_fold = '../../../ExpData/MovieData/LDAData/TempDocSenDat/'
                     usefulAPI.mk_dir(out_file_fold)
@@ -146,7 +146,7 @@ def generage_lda_dat_file_list(mode_list = ['Doc','Sen'],
                     generLDADat.generate_out_dat_lda_file(mode = mode,
                                                           out_dat_file = out_lda_dat_file,
                                                           rare_value = rare_value,
-                                                          is_need_pruncation = is_need_prun,
+                                                          is_need_dele_pruncation = is_need_dele_prun,
                                                           common_value = common_value)
 
 
@@ -161,8 +161,8 @@ if __name__ == '__main__':
     generLDADat.load_json_file()
     generLDADat.generate_out_dat_lda_file(mode='Doc',
                                           sentiment_word_file = in_senti_word_file,
-                                          rare_value=5,
-                                          is_need_pruncation = False,
+                                          rare_value = 5,
+                                          is_need_dele_pruncation = True,
                                           common_value = 0.3,
                                           is_need_processing= True,
                                           out_dat_file = out_lda_dat_file)

@@ -20,6 +20,7 @@ class MovieInfor:
         self.aver_len = 0.0
         self.min_len = 0
         self.voca_len = 0.0
+        self.len_dis_dict = {}
         self.attr_value_to_pos_num_dict = {}
         self.attr_value_to_neg_num_dict = {}
         self.attr_value_to_pos_per_dict = {}
@@ -62,9 +63,31 @@ class GetDatBasicInfo:
             out_file = self.out_file_fold + 'DatBasicInfo_' + cat + '.txt'
             self.print_all_dat_to_file(movie_info,out_file)
 
+
+    def init_len_distri_dict(self,movie_info):
+        movie_info.len_dis_dict['0-9'] = 0
+        movie_info.len_dis_dict['10-19'] = 0
+        movie_info.len_dis_dict['20-29'] = 0
+        movie_info.len_dis_dict['30-39'] = 0
+        movie_info.len_dis_dict['40+'] = 0
+
+
+    def add_len_distri_dict(self,movie_info,len_num):
+        if len_num < 10:
+            movie_info.len_dis_dict['0-9'] = movie_info.len_dis_dict['0-9'] + 1
+        elif len_num < 20:
+            movie_info.len_dis_dict['10-19'] = movie_info.len_dis_dict['10-19'] + 1
+        elif len_num < 30:
+            movie_info.len_dis_dict['20-29'] = movie_info.len_dis_dict['20-29'] + 1
+        elif len_num < 40:
+            movie_info.len_dis_dict['30-39'] = movie_info.len_dis_dict['30-39'] + 1
+        else:
+            movie_info.len_dis_dict['40+'] = movie_info.len_dis_dict['40+'] + 1
+
     def compute_basic_info(self,cat,dat_id_list):
         movie_info = MovieInfor()
         movie_info.category = cat
+        self.init_len_distri_dict(movie_info)
         voca_dict = {}
         len_list = []
         for i in dat_id_list:
@@ -74,12 +97,8 @@ class GetDatBasicInfo:
                 movie_info.pos_num = movie_info.pos_num + 1
             else:
                 movie_info.neg_num = movie_info.neg_num + 1
-
-            user_con_list = []
-
-            for sen_dat in temp_dat['doc_dict']['sen_list']:
-                user_con_list = user_con_list + sen_dat['seg'].split(' ')
-
+            user_con_list = temp_dat['doc_dict']['seg_con'].split(' ')
+            self.add_len_distri_dict(movie_info,len(user_con_list))
             len_list.append(len(user_con_list))
             for word in user_con_list:
                 if voca_dict.has_key(word) == False: voca_dict[word] = 1
@@ -132,12 +151,19 @@ class GetDatBasicInfo:
         con_list.append('all_num\t' +str(movie_info.all_num))
         con_list.append('pos_num\t' +str(movie_info.pos_num))
         con_list.append('neg_num\t' +str(movie_info.neg_num))
+        con_list.append('--------------------------------------------------')
         con_list.append('max_len\t' +str(movie_info.max_len))
         con_list.append('aver_len\t' +str(movie_info.aver_len))
         con_list.append('min_len\t' +str(movie_info.min_len))
+        con_list.append('--------------------------------------------------')
+        con_list.append('len 0-9:\t' + str(movie_info.len_dis_dict['0-9']))
+        con_list.append('len 10-19:\t' + str(movie_info.len_dis_dict['10-19']))
+        con_list.append('len 20-29:\t' + str(movie_info.len_dis_dict['20-29']))
+        con_list.append('len 30-39:\t' + str(movie_info.len_dis_dict['30-39']))
+        con_list.append('len 40+:\t' + str(movie_info.len_dis_dict['40+']))
+        con_list.append('--------------------------------------------------')
         con_list.append('voca_len\t' +str(movie_info.voca_len))
-        con_list.append('\n')
-
+        con_list.append('--------------------------------------------------')
         con_list.append('AttributeValueToProb_Info:        ')
         con_list.append('AttributeValue\tPosNum\tNegNum\tPOSPer\tAllNum\tAllPer')
 
@@ -167,5 +193,5 @@ if __name__ == '__main__':
     out_file_fold = '../../../ExpData/MovieData/JsonDat/BasicInfo/'
     GetDatBasicInfo = GetDatBasicInfo(all_dat_json_file,out_file_fold)
     GetDatBasicInfo.compute_each_cat_basic_info(cat = 'category')
-    GetDatBasicInfo.compute_each_cat_basic_info(cat = 'movie')
-    GetDatBasicInfo.compute_each_cat_basic_info(cat = 'all')
+    #GetDatBasicInfo.compute_each_cat_basic_info(cat = 'movie')
+    #GetDatBasicInfo.compute_each_cat_basic_info(cat = 'all')

@@ -1,0 +1,81 @@
+LDA::init_est() begin......
+LDA::init_est() end......
+LDA::est_inf() begin......
+************** Model_Para for LDA Training***************
+model_type      --> LDA
+model_task      --> est
+save_model_name --> model
+dir             --> ./Out/
+data_file       --> Comedy_doc_train.txt
+alpha           --> 0.05
+beta            --> 0.05
+numTopics       --> 30
+niters          --> 50
+wordmapfile     --> wordmap.txt
+*********************************************************
+
+
+************** Data_Para ********************************
+numDocs         --> 8500
+vocabSize       --> 4564
+corpusSize      --> 229992
+*********************************************************
+
+
+Sampling 50 iterations!
+Initial perplexity 1172.22
+Iteration: 1 --> perplexity: 1106.68
+Iteration: 2 --> perplexity: 1048.24
+Iteration: 3 --> perplexity: 1005.01
+Iteration: 4 --> perplexity: 971.845
+Iteration: 5 --> perplexity: 944.61
+Iteration: 6 --> perplexity: 918.167
+Iteration: 7 --> perplexity: 895.027
+Iteration: 8 --> perplexity: 874.21
+Iteration: 9 --> perplexity: 854.545
+Iteration: 10 --> perplexity: 836.028
+Iteration: 11 --> perplexity: 819.758
+Iteration: 12 --> perplexity: 804.173
+Iteration: 13 --> perplexity: 790.355
+Iteration: 14 --> perplexity: 778.746
+Iteration: 15 --> perplexity: 767.403
+Iteration: 16 --> perplexity: 757.104
+Iteration: 17 --> perplexity: 747.88
+Iteration: 18 --> perplexity: 739.712
+Iteration: 19 --> perplexity: 731.972
+Iteration: 20 --> perplexity: 724.663
+Iteration: 21 --> perplexity: 717.967
+Iteration: 22 --> perplexity: 712.133
+Iteration: 23 --> perplexity: 705.531
+Iteration: 24 --> perplexity: 700.739
+Iteration: 25 --> perplexity: 695.231
+Iteration: 26 --> perplexity: 690.713
+Iteration: 27 --> perplexity: 686.427
+Iteration: 28 --> perplexity: 682.279
+Iteration: 29 --> perplexity: 678.954
+Iteration: 30 --> perplexity: 674.68
+Iteration: 31 --> perplexity: 670.488
+Iteration: 32 --> perplexity: 666.597
+Iteration: 33 --> perplexity: 663.51
+Iteration: 34 --> perplexity: 660.508
+Iteration: 35 --> perplexity: 658.345
+Iteration: 36 --> perplexity: 654.852
+Iteration: 37 --> perplexity: 652.606
+Iteration: 38 --> perplexity: 650.454
+Iteration: 39 --> perplexity: 647.427
+Iteration: 40 --> perplexity: 645.478
+Iteration: 41 --> perplexity: 643.221
+Iteration: 42 --> perplexity: 640.917
+Iteration: 43 --> perplexity: 638.548
+Iteration: 44 --> perplexity: 636.803
+Iteration: 45 --> perplexity: 635.359
+Iteration: 46 --> perplexity: 634.539
+Iteration: 47 --> perplexity: 632.679
+Iteration: 48 --> perplexity: 630.937
+Iteration: 49 --> perplexity: 630.326
+Iteration: 50 --> perplexity: 628.925
+Gibbs sampling completed!
+Saving the final model!
+LDA::save_model() begin......
+LDA::save_model() end......
+LDA::est_inf() end......
