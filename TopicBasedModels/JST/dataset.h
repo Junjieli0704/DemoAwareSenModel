@@ -85,6 +85,7 @@ public:
             delete words;
         if (phrases)
             delete phrases;
+
 	}
 
     ~document() {
@@ -100,6 +101,7 @@ public:
 
 
     mapword2id word2id_train;
+    mapid2word id2word_train;
     mapword2id demo2id_train;
 
     map<int, int> _id2id;   // also used only for inference (wordid in testdata -> wordid in traindata)
@@ -181,11 +183,26 @@ public:
     int changeid2_id(int w){
         return id2_id.find(w)->second;}
 
+    string get_str_from_id(int word_id){
+        mapid2word::iterator it = id2word_train.find(word_id);
+        if (it != id2word_train.end())
+            return it->second;
+        else
+            return "ERROR NULL";
+    }
+
+    int get_id_from_str(string str){
+        mapword2id::iterator it = word2id_train.find(str);
+        if (it != word2id_train.end())
+            return it->second;
+        else
+            return -1;
+    }
+
+
 private:
     int analyze_train_corpus(string wordmapfile);
     int analyze_test_corpus(string wordmapfile);
-    int analyze_phrase_train_corpus(string wordmapfile);
-    int analyze_phrase_test_corpus(string wordmapfile);
 };
 
 

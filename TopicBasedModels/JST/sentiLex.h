@@ -50,7 +50,11 @@ class sentiLex
 
         int read_senti_lexicon(string senti_lex_file);
 
+        int load_non_senti_word_prior(mapword2id* word2id);
+
         int get_wordid2senLabelDis(mapword2id* word2id);
+
+        //int print_out_word2senLabelDis_res(string out_file);
 
         int get_word_senlabel(int wordid){
 
@@ -64,6 +68,7 @@ class sentiLex
                 return -1;
 
         }
+
 
 
 

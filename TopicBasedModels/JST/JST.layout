@@ -2,24 +2,29 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Release" />
-	<File name="sentiLex.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1429" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="constants.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1314" topLine="18" />
-		</Cursor>
-	</File>
-	<File name="CommandParser.cpp" open="1" top="1" tabpos="2" split="0" active="1" splitpos="0" zoom_1="9" zoom_2="0">
+	<File name="CommandParser.cpp" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="9" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="1057" topLine="33" />
 		</Cursor>
 	</File>
-	<File name="CommandParser.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="map_type.h" open="1" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="584" topLine="0" />
+			<Cursor1 position="1665" topLine="28" />
+		</Cursor>
+	</File>
+	<File name="sentiLex.cpp" open="1" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="9" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2522" topLine="56" />
+		</Cursor>
+	</File>
+	<File name="JST_inference.h" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="4" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="4233" topLine="108" />
+		</Cursor>
+	</File>
+	<File name="main.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="5" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="337" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="log.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -27,19 +32,38 @@
 			<Cursor1 position="672" topLine="15" />
 		</Cursor>
 	</File>
-	<File name="main.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="5" zoom_2="0">
+	<File name="JST_model.cpp" open="1" top="1" tabpos="3" split="0" active="1" splitpos="0" zoom_1="7" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="311" topLine="0" />
+			<Cursor1 position="11441" topLine="396" />
 		</Cursor>
 	</File>
-	<File name="JST_model.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="CommandParser.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="18471" topLine="632" />
+			<Cursor1 position="584" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="JST_inference.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="6" zoom_2="0">
+	<File name="JST_inference.cpp" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="6" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="2571" topLine="78" />
+			<Cursor1 position="25975" topLine="900" />
+		</Cursor>
+	</File>
+	<File name="dataset.cpp" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="5" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2934" topLine="26" />
+		</Cursor>
+		<Folding>
+			<Collapse line="31" />
+			<Collapse line="47" />
+		</Folding>
+	</File>
+	<File name="JST_model.h" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="4" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1870" topLine="60" />
+		</Cursor>
+	</File>
+	<File name="dataset.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="4" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2576" topLine="12" />
 		</Cursor>
 	</File>
 	<File name="strtokenizer.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -47,9 +71,19 @@
 			<Cursor1 position="1497" topLine="27" />
 		</Cursor>
 	</File>
-	<File name="dataset.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="constants.h" open="1" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="879" topLine="0" />
+			<Cursor1 position="1316" topLine="15" />
+		</Cursor>
+	</File>
+	<File name="sentiLex.h" open="1" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="5" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1731" topLine="35" />
+		</Cursor>
+	</File>
+	<File name="document.h" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

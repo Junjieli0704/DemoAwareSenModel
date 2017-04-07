@@ -34,7 +34,7 @@ class GenerateClassicLDABasedDat:
 
     def load_json_file(self):
         print 'before load_json_file ......'
-        self.all_dat_list = jsonAPI.load_json_dat(self.in_json_dat_file)
+        self.all_dat_list = jsonAPI.load_json_dat(self.in_json_dat_file,encoding = 'utf-8')
         print 'after  load_json_file ......'
 
     def load_senti_file(self,senti_file):
@@ -45,7 +45,10 @@ class GenerateClassicLDABasedDat:
                 if len(word_list) == 2:
                     word = word_list[0]
                     score = int(word_list[1])
-                    self.senti_word_dict[word] = score
+                    if self.senti_word_dict.has_key(word):
+                        print word.decode('utf-8')
+                    else:
+                        self.senti_word_dict[word] = score
             return 1
         else:
             print 'Error! Sentiment word file is not exist.'
@@ -60,7 +63,7 @@ class GenerateClassicLDABasedDat:
             for i in range(0,len(word_list)):
                 word = word_list[i]
                 if is_need_dele_pruncation and pos_list[i] == 'PU':
-                    self.delete_word_dict[word] = 1
+                    self.delete_word_dict[word] = 'PU'
                     continue
                 if word_to_times_dict.has_key(word) == False:
                     word_to_times_dict[word] = 1
@@ -70,9 +73,33 @@ class GenerateClassicLDABasedDat:
         for word, times in word_to_times_dict.items():
             if self.senti_word_dict.has_key(word): continue
             elif times < rare_value:
-                self.delete_word_dict[word] = 1
+                self.delete_word_dict[word] = 'Rare'
             elif times > len(self.all_dat_list) * common_value:
-                self.delete_word_dict[word] = 1
+                self.delete_word_dict[word] = 'Common'
+
+    def print_out_delete_dict(self,delete_dict_file):
+        print len(self.senti_word_dict)
+        type_to_num_dict = {}
+        if len(self.delete_word_dict) != 0:
+            for word,type in self.delete_word_dict.items():
+                if type_to_num_dict.has_key(type) == False:
+                    type_to_num_dict[type] = 1
+                else:
+                    type_to_num_dict[type] = type_to_num_dict[type] + 1
+        out_line_con_list = []
+        for type,num in type_to_num_dict.items():
+            line_con = type + '\t' + str(num)
+            out_line_con_list.append(line_con)
+        out_line_con_list.append('-------------------------------------')
+        for type1,num in type_to_num_dict.items():
+            for word,type2 in self.delete_word_dict.items():
+                if type1 == type2:
+                    line_con = type1 + '\t' + word
+                    out_line_con_list.append(line_con)
+            out_line_con_list.append('-------------------------------------')
+        open(delete_dict_file,'w+').write('\n'.join(out_line_con_list))
+
+
 
     def generate_out_dat_lda_file(self,
                               mode = 'Doc',
@@ -81,33 +108,35 @@ class GenerateClassicLDABasedDat:
                               rare_value = 5,
                               is_need_dele_pruncation = False,
                               is_need_processing = True,
-                              out_dat_file = 'dat.txt'):
+                              out_dat_file = 'dat.txt',
+                              delete_dict_file = 'delete_dict.txt'):
         self.load_senti_file(sentiment_word_file)
         self.delete_word_dict = {}
         self.generate_delete_word_dict(common_value,rare_value,is_need_dele_pruncation)
+        self.print_out_delete_dict(delete_dict_file)
         if is_need_processing == False:
             self.delete_word_dict = {}
         if mode == 'Doc':
             out_line_con_list = []
             for temp_dat in self.all_dat_list:
                 temp_word_list = []
-                temp_word_list.append(temp_dat['comment_id'].encode('utf-8'))
+                temp_word_list.append(temp_dat['comment_id'])
                 for word in temp_dat['doc_dict']['seg_con'].split(' '):
                     if self.delete_word_dict.has_key(word): continue
-                    else: temp_word_list.append(word.encode('utf-8'))
+                    else: temp_word_list.append(word)
                 out_line_con_list.append(' '.join(temp_word_list))
             open(out_dat_file,'w+').write('\n'.join(out_line_con_list))
 
         elif mode == 'Sen':
             out_line_con_list = []
             for temp_dat in self.all_dat_list:
-                commment_id = temp_dat['comment_id'].encode('utf-8')
+                commment_id = temp_dat['comment_id']
                 for i in range(0,len(temp_dat['doc_dict']['sen_list'])):
                     temp_word_list = []
                     temp_word_list.append(commment_id + '_s' + str(i+1))
                     for word in temp_dat['doc_dict']['sen_list'][i]['seg'].split(' '):
                         if self.delete_word_dict.has_key(word): continue
-                        else: temp_word_list.append(word.encode('utf-8'))
+                        else: temp_word_list.append(word)
                     if len(temp_word_list) == 1: continue
                     out_line_con_list.append(' '.join(temp_word_list))
             open(out_dat_file,'w+').write('\n'.join(out_line_con_list))
@@ -115,7 +144,7 @@ class GenerateClassicLDABasedDat:
     def generate_out_demo_lda_file(self,out_demo_file = 'dat.txt'):
         out_dem_line_con_list = []
         for temp_dat in self.all_dat_list:
-            temp_str = temp_dat['comment_id'].encode('utf-8') + 'demo '
+            temp_str = temp_dat['comment_id'] + 'demo '
             temp_word_list = []
             for temp_info in temp_dat['user_info'].split('_'):
                 if len(temp_info.split('/')) == 2:
@@ -123,7 +152,7 @@ class GenerateClassicLDABasedDat:
                    value = temp_info.split('/')[1]
                    if attribute == 'Sex' or attribute == 'Loc' or attribute == 'Age':
                        if value != 'NULL':
-                           temp_word_list.append(temp_info.encode('utf-8'))
+                           temp_word_list.append(temp_info)
             temp_str = temp_str + ' '.join(temp_word_list)
             out_dem_line_con_list.append(temp_str)
         open(out_demo_file,'w+').write('\n'.join(out_dem_line_con_list))
@@ -185,7 +214,7 @@ if __name__ == '__main__':
     mode = 'Doc'
     rare_value = 5
     is_need_dele_pruncation = True
-    common_value = 0.3
+    common_value = 0.25
 
     out_lda_dat_file,out_lda_demo_file = make_dat_file_based_on_para(mode=mode,
                                                                      rare_value = rare_value,

@@ -73,6 +73,7 @@ int sentiLex::read_senti_lexicon(string senti_lex_file) {
 				}
 				wordPrior.push_back(val);
 			}
+			// labID: the maximum place in wordPrior.
 			Word_Prior_Attr temp = {labID, wordPrior};  // sentiment label ID, sentiment label distribution
 			word2senLabelDis.insert(pair<string, Word_Prior_Attr >(strtok.token(0), temp));
 		}
@@ -86,6 +87,37 @@ int sentiLex::read_senti_lexicon(string senti_lex_file) {
     fclose(fin);
     return 0;
 }
+
+int sentiLex::load_non_senti_word_prior(mapword2id* word2id){
+
+    int labID = 0;
+    vector<double> wordPrior;
+    wordPrior.push_back(0.9);
+    wordPrior.push_back(0.05);
+    wordPrior.push_back(0.05);
+    Word_Prior_Attr temp = {labID, wordPrior};  // sentiment label ID, sentiment label distribution
+
+    mapword2id::iterator word2id_iter;
+
+
+    //cout<<word2senLabelDis.size()<<endl;
+
+    for(word2id_iter=word2id->begin(); word2id_iter!=word2id->end(); word2id_iter++){
+        string word_str = word2id_iter->first;
+        if (word2senLabelDis.find(word_str) == word2senLabelDis.end()){
+            word2senLabelDis.insert(pair<string, Word_Prior_Attr >(word_str, temp));
+            //cout<<word_str<<endl;
+        }
+    }
+
+    //cout<<word2senLabelDis.size()<<endl;
+
+
+
+    return 0;
+
+}
+
 
 int sentiLex::get_wordid2senLabelDis(mapword2id* word2id){
 

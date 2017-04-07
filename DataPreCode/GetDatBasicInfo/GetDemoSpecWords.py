@@ -152,9 +152,11 @@ if __name__ == '__main__':
     for cat in ['movie','category','all']:
         for demo_input in ['age','gender','location']:
             print 'cat : ' + cat + '   demo: ' + demo_input
-            get_demo_sprc_words = GetDemoSpecWords(all_dat_json_file)
-            get_demo_sprc_words.load_all_dat(cat = cat)
-            get_demo_sprc_words.generate_spec_words_for_demo(out_file_fold,demo_input = demo_input)
+            get_demo_spec_words = GetDemoSpecWords(all_dat_json_file)
+            get_demo_spec_words.load_all_dat(cat = cat)
+            get_demo_spec_words.generate_spec_words_for_demo(out_file_fold,demo_input = demo_input)
+
+
 
 
 

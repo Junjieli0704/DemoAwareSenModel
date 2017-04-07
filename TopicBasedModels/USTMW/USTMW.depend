@@ -1,0 +1,221 @@
+# depslib dependency file v1.0
+1471243446 source:d:\my c++ codes\lda based\topicmodelbased\ustmw\commandparser.cpp
+	"CommandParser.h"
+
+1465960056 d:\my c++ codes\lda based\topicmodelbased\ustmw\commandparser.h
+	<string>
+	<iostream>
+	<stdlib.h>
+	"constants.h"
+
+1466565362 d:\my c++ codes\lda based\topicmodelbased\ustmw\constants.h
+	<string>
+
+1466564980 source:d:\my c++ codes\lda based\topicmodelbased\ustmw\dataset.cpp
+	<stdio.h>
+	<stdlib.h>
+	"constants.h"
+	"strtokenizer.h"
+	"dataset.h"
+
+1466412607 d:\my c++ codes\lda based\topicmodelbased\ustmw\strtokenizer.h
+	<string>
+	<vector>
+
+1466564980 d:\my c++ codes\lda based\topicmodelbased\ustmw\dataset.h
+	<string>
+	<vector>
+	<map>
+	<fstream>
+	"map_type.h"
+
+1463643933 d:\my c++ codes\lda based\topicmodelbased\ustmw\map_type.h
+	<map>
+	<iostream>
+	<vector>
+
+1471243458 source:d:\my c++ codes\lda based\topicmodelbased\ustmw\log.cpp
+	"log.h"
+
+1465439437 d:\my c++ codes\lda based\topicmodelbased\ustmw\log.h
+	<iostream>
+	<fstream>
+	<sstream>
+	<string>
+
+1471243173 source:d:\my c++ codes\lda based\topicmodelbased\ustmw\main.cpp
+	<iostream>
+	"USTM_FT_W.h"
+	"utils.h"
+	"math.h"
+	"log.h"
+	"CommandParser.h"
+
+1466478354 d:\my c++ codes\lda based\topicmodelbased\ustmw\ustm_ft_w.h
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<sys/stat.h>
+	<math.h>
+	<fstream>
+	<sstream>
+	<iostream>
+	<vector>
+	"dataset.h"
+	"map_type.h"
+	"utils.h"
+	"strtokenizer.h"
+	"constants.h"
+	"sentiLex.h"
+	"log.h"
+
+1465984287 d:\my c++ codes\lda based\topicmodelbased\ustmw\utils.h
+	"dataset.h"
+	"constants.h"
+	<string>
+	<algorithm>
+
+1463194340 d:\my c++ codes\lda based\topicmodelbased\ustmw\sentilex.h
+	"map_type.h"
+	"constants.h"
+	<fstream>
+	"strtokenizer.h"
+	<stdlib.h>
+
+1463194353 source:d:\my c++ codes\lda based\topicmodelbased\ustmw\sentilex.cpp
+	"sentiLex.h"
+
+1466412607 source:d:\my c++ codes\lda based\topicmodelbased\ustmw\strtokenizer.cpp
+	<string>
+	<vector>
+	"iostream"
+	"strtokenizer.h"
+
+1466565111 source:d:\my c++ codes\lda based\topicmodelbased\ustmw\ustm_ft_w.cpp
+	"USTM_FT_W.h"
+
+1465959574 source:d:\my c++ codes\lda based\topicmodelbased\ustmw\utils.cpp
+	<stdio.h>
+	<string>
+	<map>
+	<iostream>
+	<sstream>
+	"strtokenizer.h"
+	"utils.h"
+	"dataset.h"
+	<sys/types.h>
+	<sys/stat.h>
+	<direct.h>
+	<io.h>
+	<unistd.h>
+
+1471243446 source:d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\ustmw\commandparser.cpp
+	"CommandParser.h"
+
+1465960056 d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\ustmw\commandparser.h
+	<string>
+	<iostream>
+	<stdlib.h>
+	"constants.h"
+
+1466565362 d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\ustmw\constants.h
+	<string>
+
+1491549778 source:d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\ustmw\dataset.cpp
+	<stdio.h>
+	<stdlib.h>
+	"constants.h"
+	"strtokenizer.h"
+	"dataset.h"
+
+1466412607 d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\ustmw\strtokenizer.h
+	<string>
+	<vector>
+
+1491549821 d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\ustmw\dataset.h
+	<string>
+	<vector>
+	<map>
+	<fstream>
+	"map_type.h"
+
+1463643933 d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\ustmw\map_type.h
+	<map>
+	<iostream>
+	<vector>
+
+1471243458 source:d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\ustmw\log.cpp
+	"log.h"
+
+1465439437 d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\ustmw\log.h
+	<iostream>
+	<fstream>
+	<sstream>
+	<string>
+
+1491547992 source:d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\ustmw\main.cpp
+	<iostream>
+	"USTM_FT_W.h"
+	"utils.h"
+	"math.h"
+	"log.h"
+	"CommandParser.h"
+
+1466478354 d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\ustmw\ustm_ft_w.h
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<sys/stat.h>
+	<math.h>
+	<fstream>
+	<sstream>
+	<iostream>
+	<vector>
+	"dataset.h"
+	"map_type.h"
+	"utils.h"
+	"strtokenizer.h"
+	"constants.h"
+	"sentiLex.h"
+	"log.h"
+
+1465984287 d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\ustmw\utils.h
+	"dataset.h"
+	"constants.h"
+	<string>
+	<algorithm>
+
+1463194340 d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\ustmw\sentilex.h
+	"map_type.h"
+	"constants.h"
+	<fstream>
+	"strtokenizer.h"
+	<stdlib.h>
+
+1463194353 source:d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\ustmw\sentilex.cpp
+	"sentiLex.h"
+
+1466412607 source:d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\ustmw\strtokenizer.cpp
+	<string>
+	<vector>
+	"iostream"
+	"strtokenizer.h"
+
+1491550129 source:d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\ustmw\ustm_ft_w.cpp
+	"USTM_FT_W.h"
+
+1465959574 source:d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\ustmw\utils.cpp
+	<stdio.h>
+	<string>
+	<map>
+	<iostream>
+	<sstream>
+	"strtokenizer.h"
+	"utils.h"
+	"dataset.h"
+	<sys/types.h>
+	<sys/stat.h>
+	<direct.h>
+	<io.h>
+	<unistd.h>
+

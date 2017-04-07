@@ -1,0 +1,18 @@
+************** Model_Para for JST Training***************
+model_type      --> JST
+model_task      --> est
+save_model_name --> model
+dir             --> Out/
+data_file       --> Comedy_Doc_5_0.3_True.txt
+senti_lex_file  --> revise_sentiment_word_list_LDA.txt
+alpha           --> 0.05
+beta            --> 0.05
+gamma           --> 0.05
+numTopics       --> 20
+numSentiLabs    --> 3
+niters          --> 50
+wordmapfile     --> wordmap.txt
+*********************************************************
+
+
+************** Data_Para ********************************

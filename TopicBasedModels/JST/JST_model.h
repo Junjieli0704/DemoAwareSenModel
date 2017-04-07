@@ -67,6 +67,7 @@ public:
 	string wordmapfile;
 
 	string tassign_suffix;
+	string tassign_vis_suffix;
 	string pi_suffix;
 	string theta_suffix;
 	string phi_suffix;
@@ -166,6 +167,7 @@ private:
 	// save model parameter funtions
 	int save_model(string model_name);
 	int save_model_tassign(string filename);
+	int save_model_tassign_vis(string filename);
 	int save_model_pi_dl(string filename);
 	int save_model_theta_dlz(string filename);
 	int save_model_phi_lzw(string filename);

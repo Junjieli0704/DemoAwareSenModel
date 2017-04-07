@@ -131,10 +131,7 @@ int dataset::read_traindata(string dfile, string wordmapfile, string mode = "wor
 	}
 
 	if (numDocs > 0) {
-        if (mode == "word")
-            this->analyze_train_corpus(wordmapfile);
-        else if (mode == "phrase")
-            this->analyze_phrase_train_corpus(wordmapfile);
+        this->analyze_train_corpus(wordmapfile);
 	}
 
 	filestring.close();
@@ -179,6 +176,7 @@ int dataset::analyze_train_corpus(string wordmapfile) {
             if (it == word2id_train.end()) {
                 // word not found, i.e., new word
                 pdoc->words[j] = word2id_train.size();
+                id2word_train.insert(pair<int, string>( word2id_train.size(),token_word));
                 word2id_train.insert(pair<string, int>(token_word, word2id_train.size()));
             }
             else pdoc->words[j] = it->second;
@@ -197,75 +195,6 @@ int dataset::analyze_train_corpus(string wordmapfile) {
     aveDocLength = corpusSize/numDocs;
     return 0;
 }
-
-int dataset::analyze_phrase_train_corpus(string wordmapfile) {
-
-
-    if (docs) {
-		release_space();
-		docs = new document*[numDocs];
-    }
-	else {
-		docs = new document*[numDocs];
-	}
-
-    mapword2id::iterator it;
-
-    for (int i = 0; i < (int)bdocs.size(); ++i) {
-		string line = bdocs.at(i);
-		strtokenizer strtok(line, " \t\r\n");    // \t\r\n are the separators
-		int length = strtok.count_tokens();
-
-		if (length <= 0) {
-			printf("Invalid (empty) document!\n");
-			release_space();
-			numDocs = vocabSize = 0;
-			return 1;
-		}
-
-		int docLength = length - 1;  // the first word is document name/id
-        corpusSize += docLength;
-        // allocate memory for the new document_i
-        document * pdoc = new document(docLength);
-        pdoc->docID = strtok.token(0);
-
-        // generate ID for the tokens in the corpus, and assign each word token with the corresponding vocabulary ID.
-        for (int j = 0; j < docLength; j++) {
-            string phrase_token_str = strtok.token(j+1);
-            strtokenizer phrase_token(phrase_token_str, "-*-");
-            int length = phrase_token.count_tokens();
-            if (length == 2){
-                string head_word = phrase_token.token(0);
-                string modify_word = phrase_token.token(1);
-                it = word2id_train.find(head_word);
-                if (it == word2id_train.end()) {
-                    pdoc->phrases[j].head_word = word2id_train.size();
-                    word2id_train.insert(pair<string, int>(head_word, word2id_train.size()));
-                }
-                else pdoc->phrases[j].head_word = it->second;
-                it = word2id_train.find(modify_word);
-                if (it == word2id_train.end()) {
-                    pdoc->phrases[j].modify_word = word2id_train.size();
-                    word2id_train.insert(pair<string, int>(modify_word, word2id_train.size()));
-                }
-                else pdoc->phrases[j].modify_word = it->second;
-            }
-        }
-        add_doc(pdoc, i);
-    }
-
-
-    // write word map to file
-    if (write_wordmap(wordmapfile, &word2id_train)) {
-        return 1;
-    }
-
-    // update number of words
-    vocabSize = word2id_train.size();
-    aveDocLength = corpusSize/numDocs;
-    return 0;
-}
-
 
 int dataset::read_testdata(string dfile, string wordmapfile) {
 
@@ -291,8 +220,6 @@ int dataset::read_testdata(string dfile, string wordmapfile) {
 	filestring.close();
 	return 0;
 }
-
-
 
 int dataset::analyze_test_corpus(string wordmapfile) {
 

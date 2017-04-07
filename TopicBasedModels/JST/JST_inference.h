@@ -77,6 +77,7 @@ public:
 	string betaFile;
 
 	string tassign_suffix;
+	string tassign_vis_suffix;
     string pi_suffix;
     string theta_suffix;
     string phi_suffix;
@@ -144,6 +145,7 @@ private:
     int save_model_newphi_lzw(string filename);
     int save_model_newtwords(string filename);
     int save_model_newtassign(string filename);
+    int save_model_newtassign_vis(string filename);
 
     int inference();
     int read_model_setting(string filename);

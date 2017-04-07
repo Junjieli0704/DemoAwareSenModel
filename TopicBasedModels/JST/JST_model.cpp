@@ -40,6 +40,7 @@ JST_model::JST_model(void) {
 	phi_suffix = ".phi";
 	others_suffix = ".others";
 	twords_suffix = ".twords";
+	tassign_vis_suffix = ".tassign_vis";
 
 	numTopics = 50;
 	numSentiLabs = 3;
@@ -171,6 +172,9 @@ int JST_model::excute_model(Model_Para* model_para) {
             delete pdataset;
             return 1;
 		}
+        // Add non sentiment word prior.
+		this->senLex.load_non_senti_word_prior(&pdataset->word2id_train);
+
 		if (this->senLex.get_wordid2senLabelDis(&pdataset->word2id_train))
             return 1;
 	}
@@ -412,6 +416,9 @@ int JST_model::save_model(string model_name) {
 	if (save_model_tassign(dir + model_name + tassign_suffix))
 		return 1;
 
+	if (save_model_tassign_vis(dir + model_name + tassign_vis_suffix))
+		return 1;
+
 	if (save_model_twords(dir + model_name + twords_suffix))
 		return 1;
 
@@ -427,6 +434,7 @@ int JST_model::save_model(string model_name) {
 	if (save_model_others(dir + model_name + others_suffix))
 		return 1;
 
+
 	return 0;
 }
 
@@ -440,14 +448,41 @@ int JST_model::save_model_tassign(string filename) {
 	for (int m = 0; m < pdataset->numDocs; m++) {
 		fprintf(fout, "%s ", pdataset->docs[m]->docID.c_str());
 		for (int n = 0; n < pdataset->docs[m]->length; n++) {
-            //cout<<pdataset->pdocs[m]->words[n]<<endl;
-	        fprintf(fout, "%d:%d:%d ", pdataset->docs[m]->words[n], l[m][n], z[m][n]); //  wordID:sentiLab:topic
+            int word_id = pdataset->docs[m]->words[n];
+            //string word_str = pdataset->get_str_from_id(word_id);
+	        fprintf(fout, "%d:%d:%d ", word_id, l[m][n], z[m][n]); //  wordID:sentiLab:topic
 	    }
 	    fprintf(fout, "\n");
     }
     fclose(fout);
 	return 0;
 }
+
+int JST_model::save_model_tassign_vis(string filename) {
+    FILE * fout = fopen(filename.c_str(), "w");
+    if (!fout) {
+	    logFile->write_to_log("Cannot save file " + filename + "!\n","error");
+	    return 1;
+    }
+	for (int m = 0; m < pdataset->numDocs; m++) {
+		fprintf(fout, "%s ", pdataset->docs[m]->docID.c_str());
+		for (int n = 0; n < pdataset->docs[m]->length; n++) {
+            int word_id = pdataset->docs[m]->words[n];
+            string word_str = pdataset->get_str_from_id(word_id);
+	        //fprintf(fout, "word_%s:senti_%d:topic_%d ", word_str.c_str(), l[m][n], z[m][n]); //  wordID:sentiLab:topic
+	        string label_str = "";
+	        if (l[m][n] == 0) label_str = "neu";
+	        else if (l[m][n] == 1) label_str = "pos";
+	        else if (l[m][n] == 2) label_str = "neg";
+
+	        fprintf(fout, "%s:%s:t_%d ", word_str.c_str(), label_str.c_str(), z[m][n]); //  wordID:sentiLab:topic
+	    }
+	    fprintf(fout, "\n");
+    }
+    fclose(fout);
+	return 0;
+}
+
 
 
 int JST_model::save_model_twords(string filename)
@@ -464,8 +499,9 @@ int JST_model::save_model_twords(string filename)
 
     mapid2word::iterator it;
 
-    for (int l = 0; l < numSentiLabs; l++) {
-        for (int k = 0; k < numTopics; k++) {
+    /*
+    for (int k = 0; k < numTopics; k++) {
+            for (int l = 0; l < numSentiLabs; l++) {
 	        vector<pair<int, double> > words_probs;
 	        pair<int, double> word_prob;
 	        for (int w = 0; w < vocabSize; w++) {
@@ -476,14 +512,46 @@ int JST_model::save_model_twords(string filename)
 
 		    std::sort(words_probs.begin(), words_probs.end(), sort_pred());
 
-	        fprintf(fout, "Label%d_Topic%d\n", l, k);
+	        fprintf(fout, "senti%d_topic%d\n", l, k);
 	        for (int i = 0; i < twords; i++) {
 		        it = id2word.find(words_probs[i].first);
 	            if (it != id2word.end())
 			        fprintf(fout, "%s   %15f\n", (it->second).c_str(), words_probs[i].second);
 	        }
 	    }
-    }
+    }*/
+
+
+     for (int k = 0; k < numTopics; k++) {
+        fprintf(fout, "Topic %dth:\n", k);
+        for (int l = 0; l < numSentiLabs; l++) {
+	        vector<pair<int, double> > words_probs;
+	        pair<int, double> word_prob;
+	        for (int w = 0; w < vocabSize; w++) {
+		        word_prob.first = w;
+	            word_prob.second = phi_lzw[l][k][w];
+	            words_probs.push_back(word_prob);
+	        }
+
+		    std::sort(words_probs.begin(), words_probs.end(), sort_pred());
+
+		    if (l == 0)
+                fprintf(fout, "Label %d : neutral\n",l);
+		    else if (l == 1)
+                fprintf(fout, "Label %d : positive\n",l);
+		    else if (l == 2)
+                fprintf(fout, "Label %d : negative\n",l);
+
+	        //fprintf(fout, "Label %dth\n", l);
+	        for (int i = 0; i < twords; i++) {
+		        it = id2word.find(words_probs[i].first);
+	            if (it != id2word.end())
+			        fprintf(fout, "%s   %15f\n", (it->second).c_str(), words_probs[i].second);
+	        }
+	    } // for topic
+    } // for label
+
+
 
     fclose(fout);
     return 0;
@@ -523,7 +591,7 @@ int JST_model::save_model_theta_dlz(string filename) {
         fprintf(fout, "%s ", pdataset->docs[m]->docID.c_str());
 	    for (int l = 0; l < numSentiLabs; l++) {
 	        for (int z = 0; z < numTopics; z++) {
-		        fprintf(fout, "label_%d:topic_%d:%f ", l,z,theta_dlz[m][l][z]);
+		        fprintf(fout, "senti_%d:topic_%d:%f ", l,z,theta_dlz[m][l][z]);
 	        }
 		 }
 		 fprintf(fout, "\n");
@@ -544,7 +612,7 @@ int JST_model::save_model_phi_lzw(string filename) {
 
 	for (int l = 0; l < numSentiLabs; l++) {
 	    for (int z = 0; z < numTopics; z++) {
-		    fprintf(fout, "Label:%d_Topic:%d ", l, z);
+		    fprintf(fout, "senti:%d_topic:%d ", l, z);
      	    for (int r = 0; r < vocabSize; r++) {
 			    fprintf(fout, "%d:%f ", r,phi_lzw[l][z][r]);
      	    }

@@ -46,6 +46,7 @@ JST_inference::JST_inference()
     phi_suffix = ".newphi";
     others_suffix = ".newothers";
     twords_suffix = ".newtwords";
+    tassign_vis_suffix = ".newtassign_vis";
 	save_model_name = "";
 	dir = "";
 	data_file = "";
@@ -257,6 +258,8 @@ int JST_inference::save_model(string model_name) {
 
 	if (save_model_newtassign(dir + save_model_name + tassign_suffix))
         return 1;
+    if (save_model_newtassign_vis(dir + save_model_name + tassign_vis_suffix))
+        return 1;
 	//else cout<<"save_model_newtassign finished......\n";
 
 	if (save_model_newtwords(dir + save_model_name + twords_suffix))
@@ -273,6 +276,7 @@ int JST_inference::save_model(string model_name) {
 
 	if (save_model_newphi_lzw(dir + save_model_name + phi_suffix))
 		return 1;
+
     //else cout<<"save_model_newphi_lzw finished......\n";
 	//if (save_model_newothers(dir + save_model_name + others_suffix))
 	//	return 1;
@@ -298,8 +302,6 @@ int JST_inference::save_model_newpi_dl(string filename) {
 		fprintf(fout, "\n");
     }
 
-
-
     fclose(fout);
 	return 0;
 }
@@ -324,8 +326,6 @@ int JST_inference::save_model_newtheta_dlz(string filename) {
 		 }
 		 fprintf(fout, "\n");
     }
-
-
 
     fclose(fout);
 	return 0;
@@ -372,9 +372,9 @@ int JST_inference::save_model_newtwords(string filename) {
 	    twords = ptestdata->vocabSize;
     }
 
-    for (int l = 0; l < numSentiLabs; l++) {
-        fprintf(fout, "Label %dth\n", l);
-        for (int k = 0; k < numTopics; k++) {
+    for (int k = 0; k < numTopics; k++) {
+        fprintf(fout, "Topic %dth:\n", k);
+        for (int l = 0; l < numSentiLabs; l++) {
 	        vector<pair<int, double> > words_probs;
 	        pair<int, double> word_prob;
 	        for (int w = 0; w < ptestdata->vocabSize; w++) {
@@ -385,7 +385,7 @@ int JST_inference::save_model_newtwords(string filename) {
 
 		    std::sort(words_probs.begin(), words_probs.end(), sort_pred());
 
-	        fprintf(fout, "Topic %dth:\n", k);
+	        fprintf(fout, "Label %dth\n", l);
 	        for (int i = 0; i < twords; i++) {
 				_it = ptestdata->_id2id.find(words_probs[i].first);
 				if (_it == ptestdata->_id2id.end()) {
@@ -424,6 +424,27 @@ int JST_inference::save_model_newtassign(string filename) {
 	return 0;
 }
 
+int JST_inference::save_model_newtassign_vis(string filename) {
+
+	FILE * fout = fopen(filename.c_str(), "w");
+    if (!fout) {
+	    logFile->write_to_log("Cannot save file " + filename + "!\n","error");
+	    return 1;
+    }
+
+	for (int m = 0; m < ptestdata->numDocs; m++) {
+		fprintf(fout, "%s ", ptestdata->docs[m]->docID.c_str());
+		for (int n = 0; n < ptestdata->docs[m]->length; n++) {
+             int word_id = ptestdata->docs[m]->words[n];
+             string word_str = ptestdata->get_str_from_id(word_id);
+	         fprintf(fout, "%s:s_%d:t_%d ", word_str.c_str(), new_l[m][n], new_z[m][n]); //  wordID:sentiLab:topic
+         }
+	    fprintf(fout, "\n");
+    }
+
+    fclose(fout);
+	return 0;
+}
 
 
 
@@ -899,6 +920,8 @@ int JST_inference::init_inf() {
 
 	if (this->senti_lex_file != "") {
         if (this->senLex.read_senti_lexicon(this->senti_lex_file)){
+            // Add non sentiment word prior.
+            this->senLex.load_non_senti_word_prior(&this->ptrndata->word2id_train);
             this->senLex.get_wordid2senLabelDis(&this->ptrndata->word2id_train);
         }
 	}

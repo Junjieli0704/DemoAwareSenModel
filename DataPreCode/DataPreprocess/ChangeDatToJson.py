@@ -127,3 +127,4 @@ if __name__ == '__main__':
     change_dat_to_json.load_comment_json_file()
     change_dat_to_json.generate_all_dat_to_json(out_json_file)
     change_dat_to_json.split_dat_accord_type('../../../ExpData/MovieData/JsonDat/JsonData/')
+

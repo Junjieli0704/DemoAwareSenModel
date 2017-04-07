@@ -123,3 +123,127 @@
 	<iostream>
 	"strtokenizer.h"
 
+1471228528 source:d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\jst\commandparser.cpp
+	"CommandParser.h"
+
+1465960056 d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\jst\commandparser.h
+	<string>
+	<iostream>
+	<stdlib.h>
+	"constants.h"
+
+1466565362 d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\jst\constants.h
+	<string>
+
+1489649081 source:d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\jst\dataset.cpp
+	<stdio.h>
+	<stdlib.h>
+	"constants.h"
+	"strtokenizer.h"
+	"dataset.h"
+
+1466412607 d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\jst\strtokenizer.h
+	<string>
+	<vector>
+
+1489649174 d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\jst\dataset.h
+	<string>
+	<vector>
+	<map>
+	<fstream>
+	"map_type.h"
+
+1463643933 d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\jst\map_type.h
+	<map>
+	<iostream>
+	<vector>
+
+1490066165 source:d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\jst\jst_inference.cpp
+	"JST_inference.h"
+
+1489649793 d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\jst\jst_inference.h
+	<sys/stat.h>
+	<math.h>
+	<iostream>
+	<fstream>
+	"constants.h"
+	"dataset.h"
+	"utils.h"
+	"strtokenizer.h"
+	"sentiLex.h"
+	"log.h"
+
+1465984287 d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\jst\utils.h
+	"dataset.h"
+	"constants.h"
+	<string>
+	<algorithm>
+
+1490065334 d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\jst\sentilex.h
+	"map_type.h"
+	"constants.h"
+	<fstream>
+	"strtokenizer.h"
+	<stdlib.h>
+
+1465439437 d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\jst\log.h
+	<iostream>
+	<fstream>
+	<sstream>
+	<string>
+
+1471228674 source:d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\jst\main.cpp
+	<iostream>
+	"utils.h"
+	"math.h"
+	"log.h"
+	"CommandParser.h"
+	"constants.h"
+	"JST_model.h"
+	"JST_inference.h"
+
+1489649462 d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\jst\jst_model.h
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<sys/stat.h>
+	<math.h>
+	<fstream>
+	<sstream>
+	<iostream>
+	<vector>
+	"dataset.h"
+	"map_type.h"
+	"utils.h"
+	"strtokenizer.h"
+	"constants.h"
+	"sentiLex.h"
+	"log.h"
+
+1490066165 source:d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\jst\sentilex.cpp
+	"sentiLex.h"
+
+1471228725 source:d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\jst\strtokenizer.cpp
+	<string>
+	<vector>
+	<iostream>
+	"strtokenizer.h"
+
+1465959574 source:d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\jst\utils.cpp
+	<stdio.h>
+	<string>
+	<map>
+	<iostream>
+	<sstream>
+	"strtokenizer.h"
+	"utils.h"
+	"dataset.h"
+	<sys/types.h>
+	<sys/stat.h>
+	<direct.h>
+	<io.h>
+	<unistd.h>
+
+1490064535 source:d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\jst\jst_model.cpp
+	"JST_model.h"
+

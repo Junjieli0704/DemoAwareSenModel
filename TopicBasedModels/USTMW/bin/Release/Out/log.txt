@@ -1,0 +1,94 @@
+USTM_FT_W::init_para begin......
+USTM_FT_W::init_para end......
+init_model_parameters begin.....
+init_model_parameters end.....
+************** Model_Para for USTM_FT_W Training***************
+model_type      --> USTM_FT_W
+model_task      --> est
+save_model_name --> model
+dir             --> Out/
+data_file       --> test.txt
+data_demo_file  --> test_demo.txt
+senti_lex_file  --> sentiment_word_list_LDA.txt
+alpha           --> 0.05
+beta            --> 0.05
+gamma           --> 0.05
+num_topics      --> 20
+num_sentis      --> 3
+niters          --> 20
+wordmapfile     --> wordmap.txt
+demomapfile     --> demomap.txt
+*********************************************************
+
+
+************** Data_Para ********************************
+numDocs         --> 21851
+vocabSize       --> 16073
+demoSize        --> 11
+corpusSize      --> 611478
+averDocLen      --> 27
+*********************************************************
+
+
+Iteration 0 --> perplexity: 2255.95
+Sampling 20 iterations!
+Iteration 1 --> perplexity: 1692.88
+Iteration 2 --> perplexity: 1447.12
+Iteration 3 --> perplexity: 1326.15
+Iteration 4 --> perplexity: 1256.22
+Iteration 5 --> perplexity: 1209.86
+Iteration 6 --> perplexity: 1175.23
+Iteration 7 --> perplexity: 1146.45
+Iteration 8 --> perplexity: 1123.34
+Iteration 9 --> perplexity: 1104.12
+Iteration 10 --> perplexity: 1087.72
+Iteration 11 --> perplexity: 1070.29
+Iteration 12 --> perplexity: 1056.85
+Iteration 13 --> perplexity: 1044.65
+Iteration 14 --> perplexity: 1032.85
+Iteration 15 --> perplexity: 1020.81
+Iteration 16 --> perplexity: 1010.09
+Iteration 17 --> perplexity: 999.736
+Iteration 18 --> perplexity: 991.743
+Iteration 19 --> perplexity: 982.628
+Iteration 20 --> perplexity: 974.225
+Gibbs sampling completed!
+Saving the final model!
+USTM_FT_W::save_model() begin......
+USTM_FT_W::save_model() end......
+USTM_FT_W::init_para begin......
+USTM_FT_W::init_para end......
+init_model_parameters begin.....
+init_model_parameters end.....
+************** Model_Para for USTM_FT_W Training***************
+model_type      --> USTM_FT_W
+model_task      --> est
+save_model_name --> model
+dir             --> Out/
+data_file       --> test.txt
+data_demo_file  --> test_demo.txt
+senti_lex_file  --> sentiment_word_list_LDA.txt
+alpha           --> 0.05
+beta            --> 0.05
+gamma           --> 0.05
+num_topics      --> 20
+num_sentis      --> 3
+niters          --> 20
+wordmapfile     --> wordmap.txt
+demomapfile     --> demomap.txt
+*********************************************************
+
+
+************** Data_Para ********************************
+numDocs         --> 21851
+vocabSize       --> 16073
+demoSize        --> 11
+corpusSize      --> 611478
+averDocLen      --> 27
+*********************************************************
+
+
+Iteration 0 --> perplexity: 2256.61
+Sampling 20 iterations!
+Iteration 1 --> perplexity: 1692.68
+Iteration 2 --> perplexity: 1446.55
