@@ -759,28 +759,38 @@ double JST_model::compute_perplexity(){
 
 int JST_model::estimate() {
 
+    int ** senti_sample_ana;
+    senti_sample_ana = new int*[3];
+    for(int j=0;j<3;j++){
+        senti_sample_ana[j]=new int[3];
+    }
+
 	int sentiLab, topic;
 	mapname2labs::iterator it;
 
     logFile->write_to_log("Iteration 0 --> perplexity: " + logFile->convert_other_to_str(compute_perplexity())+ "\n");
 	logFile->write_to_log("Sampling " + logFile->convert_other_to_str(niters) + " iterations!\n");
 	for (int liter = 1; liter <= niters; liter++) {
+        for (int i = 0; i < 3; i++)
+        for (int j = 0; j < 3; j++){
+            senti_sample_ana[i][j] = 0;
+        }
         //if (liter % 50 == 0)
         string iter_str = logFile->convert_other_to_str(liter);
         string perplex_str = logFile->convert_other_to_str(compute_perplexity());
         logFile->write_to_log("Iteration " + iter_str + " --> perplexity: " + perplex_str + "\n");
-
-        //printf("Iteration %d --> perplexity ...\n", liter);
-        //else
-        //printf("Iteration %d --> ...\n", liter);
-
 		for (int m = 0; m < numDocs; m++) {
 		    for (int n = 0; n < pdataset->docs[m]->length; n++) {
 				sampling(m, n, sentiLab, topic);
 				l[m][n] = sentiLab;
 				z[m][n] = topic;
+                int w_id = pdataset->docs[m]->words[n];
+                senti_sample_ana[this->senLex.get_word_senlabel(w_id)][sentiLab]++;
 			}
 		}
+		for (int i = 0; i < 3; i++)
+        for (int j = 0; j < 3; j++)
+            cout<<"senti_sample_ana["<<i<<"]["<<j<<"] = "<<senti_sample_ana[i][j]<<endl;
 	}
 
 	logFile->write_to_log("Gibbs sampling completed!\n");

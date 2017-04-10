@@ -1,0 +1,1029 @@
+info:	************** Model_Para for JST Training***************
+info:	model_type      --> JST
+info:	model_task      --> est
+info:	save_model_name --> model
+info:	dir             --> ../../../ExpData/MovieData/LDAData/LDA_Style_Dat/Comedy_Doc_5_0.3_True/JST_nt_30/
+info:	data_file       --> ../../../ExpData/MovieData/LDAData/LDA_Style_Dat/Comedy_Doc_5_0.3_True/Comedy_Doc_5_0.3_True.txt
+info:	senti_lex_file  --> ../../../ExpData/SentiWordDat/ReviseSentiWord/revise_sentiment_word_list_LDA.txt
+info:	alpha           --> 0.05
+info:	beta            --> 0.05
+info:	gamma           --> 0.05
+info:	numTopics       --> 30
+info:	numSentiLabs    --> 3
+info:	niters          --> 100
+info:	wordmapfile     --> wordmap.txt
+info:	*********************************************************
+
+
+info:	************** Data_Para ********************************
+info:	numDocs         --> 9277
+info:	vocabSize       --> 8329
+info:	corpusSize      --> 252257
+info:	averDocLen      --> 27
+info:	*********************************************************
+
+
+info:	Iteration 0 --> perplexity: 1229.8
+info:	Sampling 100 iterations!
+info:	Iteration 1 --> perplexity: 1229.8
+senti_sample_ana[0][0] = 208278
+senti_sample_ana[0][1] = 435
+senti_sample_ana[0][2] = 319
+senti_sample_ana[1][0] = 544
+senti_sample_ana[1][1] = 29749
+senti_sample_ana[1][2] = 439
+senti_sample_ana[2][0] = 715
+senti_sample_ana[2][1] = 526
+senti_sample_ana[2][2] = 11252
+info:	Iteration 2 --> perplexity: 1122.8
+senti_sample_ana[0][0] = 207648
+senti_sample_ana[0][1] = 751
+senti_sample_ana[0][2] = 633
+senti_sample_ana[1][0] = 939
+senti_sample_ana[1][1] = 29005
+senti_sample_ana[1][2] = 788
+senti_sample_ana[2][0] = 1161
+senti_sample_ana[2][1] = 989
+senti_sample_ana[2][2] = 10343
+info:	Iteration 3 --> perplexity: 1051.81
+senti_sample_ana[0][0] = 207000
+senti_sample_ana[0][1] = 1113
+senti_sample_ana[0][2] = 919
+senti_sample_ana[1][0] = 1222
+senti_sample_ana[1][1] = 28378
+senti_sample_ana[1][2] = 1132
+senti_sample_ana[2][0] = 1498
+senti_sample_ana[2][1] = 1411
+senti_sample_ana[2][2] = 9584
+info:	Iteration 4 --> perplexity: 1001.2
+senti_sample_ana[0][0] = 206552
+senti_sample_ana[0][1] = 1416
+senti_sample_ana[0][2] = 1064
+senti_sample_ana[1][0] = 1667
+senti_sample_ana[1][1] = 27526
+senti_sample_ana[1][2] = 1539
+senti_sample_ana[2][0] = 1689
+senti_sample_ana[2][1] = 1625
+senti_sample_ana[2][2] = 9179
+info:	Iteration 5 --> perplexity: 963.138
+senti_sample_ana[0][0] = 205984
+senti_sample_ana[0][1] = 1761
+senti_sample_ana[0][2] = 1287
+senti_sample_ana[1][0] = 2100
+senti_sample_ana[1][1] = 26835
+senti_sample_ana[1][2] = 1797
+senti_sample_ana[2][0] = 1898
+senti_sample_ana[2][1] = 1834
+senti_sample_ana[2][2] = 8761
+info:	Iteration 6 --> perplexity: 931.905
+senti_sample_ana[0][0] = 205585
+senti_sample_ana[0][1] = 1973
+senti_sample_ana[0][2] = 1474
+senti_sample_ana[1][0] = 2448
+senti_sample_ana[1][1] = 26287
+senti_sample_ana[1][2] = 1997
+senti_sample_ana[2][0] = 1980
+senti_sample_ana[2][1] = 2045
+senti_sample_ana[2][2] = 8468
+info:	Iteration 7 --> perplexity: 905.022
+senti_sample_ana[0][0] = 205307
+senti_sample_ana[0][1] = 2151
+senti_sample_ana[0][2] = 1574
+senti_sample_ana[1][0] = 2879
+senti_sample_ana[1][1] = 25615
+senti_sample_ana[1][2] = 2238
+senti_sample_ana[2][0] = 2089
+senti_sample_ana[2][1] = 2192
+senti_sample_ana[2][2] = 8212
+info:	Iteration 8 --> perplexity: 882.483
+senti_sample_ana[0][0] = 204950
+senti_sample_ana[0][1] = 2430
+senti_sample_ana[0][2] = 1652
+senti_sample_ana[1][0] = 3321
+senti_sample_ana[1][1] = 25018
+senti_sample_ana[1][2] = 2393
+senti_sample_ana[2][0] = 2217
+senti_sample_ana[2][1] = 2289
+senti_sample_ana[2][2] = 7987
+info:	Iteration 9 --> perplexity: 860.78
+senti_sample_ana[0][0] = 204705
+senti_sample_ana[0][1] = 2586
+senti_sample_ana[0][2] = 1741
+senti_sample_ana[1][0] = 3720
+senti_sample_ana[1][1] = 24517
+senti_sample_ana[1][2] = 2495
+senti_sample_ana[2][0] = 2432
+senti_sample_ana[2][1] = 2359
+senti_sample_ana[2][2] = 7702
+info:	Iteration 10 --> perplexity: 842.837
+senti_sample_ana[0][0] = 204330
+senti_sample_ana[0][1] = 2860
+senti_sample_ana[0][2] = 1842
+senti_sample_ana[1][0] = 4119
+senti_sample_ana[1][1] = 24043
+senti_sample_ana[1][2] = 2570
+senti_sample_ana[2][0] = 2504
+senti_sample_ana[2][1] = 2370
+senti_sample_ana[2][2] = 7619
+info:	Iteration 11 --> perplexity: 825.181
+senti_sample_ana[0][0] = 204027
+senti_sample_ana[0][1] = 3034
+senti_sample_ana[0][2] = 1971
+senti_sample_ana[1][0] = 4575
+senti_sample_ana[1][1] = 23572
+senti_sample_ana[1][2] = 2585
+senti_sample_ana[2][0] = 2584
+senti_sample_ana[2][1] = 2418
+senti_sample_ana[2][2] = 7491
+info:	Iteration 12 --> perplexity: 809.685
+senti_sample_ana[0][0] = 203830
+senti_sample_ana[0][1] = 3202
+senti_sample_ana[0][2] = 2000
+senti_sample_ana[1][0] = 5090
+senti_sample_ana[1][1] = 23002
+senti_sample_ana[1][2] = 2640
+senti_sample_ana[2][0] = 2715
+senti_sample_ana[2][1] = 2436
+senti_sample_ana[2][2] = 7342
+info:	Iteration 13 --> perplexity: 795.259
+senti_sample_ana[0][0] = 203607
+senti_sample_ana[0][1] = 3367
+senti_sample_ana[0][2] = 2058
+senti_sample_ana[1][0] = 5517
+senti_sample_ana[1][1] = 22568
+senti_sample_ana[1][2] = 2647
+senti_sample_ana[2][0] = 2848
+senti_sample_ana[2][1] = 2437
+senti_sample_ana[2][2] = 7208
+info:	Iteration 14 --> perplexity: 783.135
+senti_sample_ana[0][0] = 203614
+senti_sample_ana[0][1] = 3301
+senti_sample_ana[0][2] = 2117
+senti_sample_ana[1][0] = 5718
+senti_sample_ana[1][1] = 22338
+senti_sample_ana[1][2] = 2676
+senti_sample_ana[2][0] = 2963
+senti_sample_ana[2][1] = 2389
+senti_sample_ana[2][2] = 7141
+info:	Iteration 15 --> perplexity: 771.25
+senti_sample_ana[0][0] = 203427
+senti_sample_ana[0][1] = 3345
+senti_sample_ana[0][2] = 2260
+senti_sample_ana[1][0] = 6172
+senti_sample_ana[1][1] = 21881
+senti_sample_ana[1][2] = 2679
+senti_sample_ana[2][0] = 3122
+senti_sample_ana[2][1] = 2352
+senti_sample_ana[2][2] = 7019
+info:	Iteration 16 --> perplexity: 758.849
+senti_sample_ana[0][0] = 203173
+senti_sample_ana[0][1] = 3554
+senti_sample_ana[0][2] = 2305
+senti_sample_ana[1][0] = 6546
+senti_sample_ana[1][1] = 21439
+senti_sample_ana[1][2] = 2747
+senti_sample_ana[2][0] = 3326
+senti_sample_ana[2][1] = 2231
+senti_sample_ana[2][2] = 6936
+info:	Iteration 17 --> perplexity: 748.736
+senti_sample_ana[0][0] = 203074
+senti_sample_ana[0][1] = 3635
+senti_sample_ana[0][2] = 2323
+senti_sample_ana[1][0] = 6949
+senti_sample_ana[1][1] = 21002
+senti_sample_ana[1][2] = 2781
+senti_sample_ana[2][0] = 3431
+senti_sample_ana[2][1] = 2244
+senti_sample_ana[2][2] = 6818
+info:	Iteration 18 --> perplexity: 739.737
+senti_sample_ana[0][0] = 203076
+senti_sample_ana[0][1] = 3630
+senti_sample_ana[0][2] = 2326
+senti_sample_ana[1][0] = 7286
+senti_sample_ana[1][1] = 20663
+senti_sample_ana[1][2] = 2783
+senti_sample_ana[2][0] = 3559
+senti_sample_ana[2][1] = 2234
+senti_sample_ana[2][2] = 6700
+info:	Iteration 19 --> perplexity: 732.269
+senti_sample_ana[0][0] = 203023
+senti_sample_ana[0][1] = 3722
+senti_sample_ana[0][2] = 2287
+senti_sample_ana[1][0] = 7450
+senti_sample_ana[1][1] = 20506
+senti_sample_ana[1][2] = 2776
+senti_sample_ana[2][0] = 3634
+senti_sample_ana[2][1] = 2199
+senti_sample_ana[2][2] = 6660
+info:	Iteration 20 --> perplexity: 724.156
+senti_sample_ana[0][0] = 202957
+senti_sample_ana[0][1] = 3697
+senti_sample_ana[0][2] = 2378
+senti_sample_ana[1][0] = 7882
+senti_sample_ana[1][1] = 20107
+senti_sample_ana[1][2] = 2743
+senti_sample_ana[2][0] = 3775
+senti_sample_ana[2][1] = 2110
+senti_sample_ana[2][2] = 6608
+info:	Iteration 21 --> perplexity: 716.202
+senti_sample_ana[0][0] = 202846
+senti_sample_ana[0][1] = 3780
+senti_sample_ana[0][2] = 2406
+senti_sample_ana[1][0] = 8169
+senti_sample_ana[1][1] = 19807
+senti_sample_ana[1][2] = 2756
+senti_sample_ana[2][0] = 3897
+senti_sample_ana[2][1] = 2075
+senti_sample_ana[2][2] = 6521
+info:	Iteration 22 --> perplexity: 708.721
+senti_sample_ana[0][0] = 202877
+senti_sample_ana[0][1] = 3734
+senti_sample_ana[0][2] = 2421
+senti_sample_ana[1][0] = 8691
+senti_sample_ana[1][1] = 19413
+senti_sample_ana[1][2] = 2628
+senti_sample_ana[2][0] = 3991
+senti_sample_ana[2][1] = 1986
+senti_sample_ana[2][2] = 6516
+info:	Iteration 23 --> perplexity: 703.194
+senti_sample_ana[0][0] = 202905
+senti_sample_ana[0][1] = 3693
+senti_sample_ana[0][2] = 2434
+senti_sample_ana[1][0] = 9106
+senti_sample_ana[1][1] = 19027
+senti_sample_ana[1][2] = 2599
+senti_sample_ana[2][0] = 4025
+senti_sample_ana[2][1] = 1972
+senti_sample_ana[2][2] = 6496
+info:	Iteration 24 --> perplexity: 698.619
+senti_sample_ana[0][0] = 202741
+senti_sample_ana[0][1] = 3770
+senti_sample_ana[0][2] = 2521
+senti_sample_ana[1][0] = 9331
+senti_sample_ana[1][1] = 18822
+senti_sample_ana[1][2] = 2579
+senti_sample_ana[2][0] = 4203
+senti_sample_ana[2][1] = 1935
+senti_sample_ana[2][2] = 6355
+info:	Iteration 25 --> perplexity: 693.511
+senti_sample_ana[0][0] = 202738
+senti_sample_ana[0][1] = 3687
+senti_sample_ana[0][2] = 2607
+senti_sample_ana[1][0] = 9764
+senti_sample_ana[1][1] = 18419
+senti_sample_ana[1][2] = 2549
+senti_sample_ana[2][0] = 4298
+senti_sample_ana[2][1] = 1930
+senti_sample_ana[2][2] = 6265
+info:	Iteration 26 --> perplexity: 688.168
+senti_sample_ana[0][0] = 202633
+senti_sample_ana[0][1] = 3757
+senti_sample_ana[0][2] = 2642
+senti_sample_ana[1][0] = 10246
+senti_sample_ana[1][1] = 17940
+senti_sample_ana[1][2] = 2546
+senti_sample_ana[2][0] = 4371
+senti_sample_ana[2][1] = 1920
+senti_sample_ana[2][2] = 6202
+info:	Iteration 27 --> perplexity: 683.245
+senti_sample_ana[0][0] = 202675
+senti_sample_ana[0][1] = 3782
+senti_sample_ana[0][2] = 2575
+senti_sample_ana[1][0] = 10668
+senti_sample_ana[1][1] = 17590
+senti_sample_ana[1][2] = 2474
+senti_sample_ana[2][0] = 4423
+senti_sample_ana[2][1] = 1937
+senti_sample_ana[2][2] = 6133
+info:	Iteration 28 --> perplexity: 680.133
+senti_sample_ana[0][0] = 202633
+senti_sample_ana[0][1] = 3825
+senti_sample_ana[0][2] = 2574
+senti_sample_ana[1][0] = 11195
+senti_sample_ana[1][1] = 17114
+senti_sample_ana[1][2] = 2423
+senti_sample_ana[2][0] = 4482
+senti_sample_ana[2][1] = 1917
+senti_sample_ana[2][2] = 6094
+info:	Iteration 29 --> perplexity: 677.196
+senti_sample_ana[0][0] = 202712
+senti_sample_ana[0][1] = 3760
+senti_sample_ana[0][2] = 2560
+senti_sample_ana[1][0] = 11456
+senti_sample_ana[1][1] = 16862
+senti_sample_ana[1][2] = 2414
+senti_sample_ana[2][0] = 4584
+senti_sample_ana[2][1] = 1894
+senti_sample_ana[2][2] = 6015
+info:	Iteration 30 --> perplexity: 673.312
+senti_sample_ana[0][0] = 202639
+senti_sample_ana[0][1] = 3827
+senti_sample_ana[0][2] = 2566
+senti_sample_ana[1][0] = 11691
+senti_sample_ana[1][1] = 16647
+senti_sample_ana[1][2] = 2394
+senti_sample_ana[2][0] = 4660
+senti_sample_ana[2][1] = 1857
+senti_sample_ana[2][2] = 5976
+info:	Iteration 31 --> perplexity: 669.96
+senti_sample_ana[0][0] = 202604
+senti_sample_ana[0][1] = 3809
+senti_sample_ana[0][2] = 2619
+senti_sample_ana[1][0] = 12000
+senti_sample_ana[1][1] = 16371
+senti_sample_ana[1][2] = 2361
+senti_sample_ana[2][0] = 4659
+senti_sample_ana[2][1] = 1867
+senti_sample_ana[2][2] = 5967
+info:	Iteration 32 --> perplexity: 667.718
+senti_sample_ana[0][0] = 202573
+senti_sample_ana[0][1] = 3775
+senti_sample_ana[0][2] = 2684
+senti_sample_ana[1][0] = 12202
+senti_sample_ana[1][1] = 16204
+senti_sample_ana[1][2] = 2326
+senti_sample_ana[2][0] = 4773
+senti_sample_ana[2][1] = 1837
+senti_sample_ana[2][2] = 5883
+info:	Iteration 33 --> perplexity: 665.551
+senti_sample_ana[0][0] = 202671
+senti_sample_ana[0][1] = 3686
+senti_sample_ana[0][2] = 2675
+senti_sample_ana[1][0] = 12656
+senti_sample_ana[1][1] = 15809
+senti_sample_ana[1][2] = 2267
+senti_sample_ana[2][0] = 4853
+senti_sample_ana[2][1] = 1765
+senti_sample_ana[2][2] = 5875
+info:	Iteration 34 --> perplexity: 662.849
+senti_sample_ana[0][0] = 202651
+senti_sample_ana[0][1] = 3640
+senti_sample_ana[0][2] = 2741
+senti_sample_ana[1][0] = 12914
+senti_sample_ana[1][1] = 15574
+senti_sample_ana[1][2] = 2244
+senti_sample_ana[2][0] = 4929
+senti_sample_ana[2][1] = 1740
+senti_sample_ana[2][2] = 5824
+info:	Iteration 35 --> perplexity: 660.512
+senti_sample_ana[0][0] = 202485
+senti_sample_ana[0][1] = 3779
+senti_sample_ana[0][2] = 2768
+senti_sample_ana[1][0] = 13247
+senti_sample_ana[1][1] = 15287
+senti_sample_ana[1][2] = 2198
+senti_sample_ana[2][0] = 4933
+senti_sample_ana[2][1] = 1738
+senti_sample_ana[2][2] = 5822
+info:	Iteration 36 --> perplexity: 658.334
+senti_sample_ana[0][0] = 202637
+senti_sample_ana[0][1] = 3576
+senti_sample_ana[0][2] = 2819
+senti_sample_ana[1][0] = 13533
+senti_sample_ana[1][1] = 14998
+senti_sample_ana[1][2] = 2201
+senti_sample_ana[2][0] = 5077
+senti_sample_ana[2][1] = 1675
+senti_sample_ana[2][2] = 5741
+info:	Iteration 37 --> perplexity: 654.864
+senti_sample_ana[0][0] = 202646
+senti_sample_ana[0][1] = 3601
+senti_sample_ana[0][2] = 2785
+senti_sample_ana[1][0] = 13759
+senti_sample_ana[1][1] = 14825
+senti_sample_ana[1][2] = 2148
+senti_sample_ana[2][0] = 5078
+senti_sample_ana[2][1] = 1666
+senti_sample_ana[2][2] = 5749
+info:	Iteration 38 --> perplexity: 652.502
+senti_sample_ana[0][0] = 202663
+senti_sample_ana[0][1] = 3607
+senti_sample_ana[0][2] = 2762
+senti_sample_ana[1][0] = 13876
+senti_sample_ana[1][1] = 14733
+senti_sample_ana[1][2] = 2123
+senti_sample_ana[2][0] = 5128
+senti_sample_ana[2][1] = 1615
+senti_sample_ana[2][2] = 5750
+info:	Iteration 39 --> perplexity: 650.914
+senti_sample_ana[0][0] = 202633
+senti_sample_ana[0][1] = 3656
+senti_sample_ana[0][2] = 2743
+senti_sample_ana[1][0] = 13957
+senti_sample_ana[1][1] = 14697
+senti_sample_ana[1][2] = 2078
+senti_sample_ana[2][0] = 5216
+senti_sample_ana[2][1] = 1581
+senti_sample_ana[2][2] = 5696
+info:	Iteration 40 --> perplexity: 648.556
+senti_sample_ana[0][0] = 202605
+senti_sample_ana[0][1] = 3660
+senti_sample_ana[0][2] = 2767
+senti_sample_ana[1][0] = 14230
+senti_sample_ana[1][1] = 14389
+senti_sample_ana[1][2] = 2113
+senti_sample_ana[2][0] = 5272
+senti_sample_ana[2][1] = 1591
+senti_sample_ana[2][2] = 5630
+info:	Iteration 41 --> perplexity: 646.247
+senti_sample_ana[0][0] = 202538
+senti_sample_ana[0][1] = 3657
+senti_sample_ana[0][2] = 2837
+senti_sample_ana[1][0] = 14359
+senti_sample_ana[1][1] = 14278
+senti_sample_ana[1][2] = 2095
+senti_sample_ana[2][0] = 5217
+senti_sample_ana[2][1] = 1605
+senti_sample_ana[2][2] = 5671
+info:	Iteration 42 --> perplexity: 644.389
+senti_sample_ana[0][0] = 202524
+senti_sample_ana[0][1] = 3703
+senti_sample_ana[0][2] = 2805
+senti_sample_ana[1][0] = 14715
+senti_sample_ana[1][1] = 13964
+senti_sample_ana[1][2] = 2053
+senti_sample_ana[2][0] = 5305
+senti_sample_ana[2][1] = 1561
+senti_sample_ana[2][2] = 5627
+info:	Iteration 43 --> perplexity: 643.754
+senti_sample_ana[0][0] = 202633
+senti_sample_ana[0][1] = 3657
+senti_sample_ana[0][2] = 2742
+senti_sample_ana[1][0] = 14909
+senti_sample_ana[1][1] = 13772
+senti_sample_ana[1][2] = 2051
+senti_sample_ana[2][0] = 5486
+senti_sample_ana[2][1] = 1485
+senti_sample_ana[2][2] = 5522
+info:	Iteration 44 --> perplexity: 642.872
+senti_sample_ana[0][0] = 202606
+senti_sample_ana[0][1] = 3645
+senti_sample_ana[0][2] = 2781
+senti_sample_ana[1][0] = 15023
+senti_sample_ana[1][1] = 13686
+senti_sample_ana[1][2] = 2023
+senti_sample_ana[2][0] = 5466
+senti_sample_ana[2][1] = 1484
+senti_sample_ana[2][2] = 5543
+info:	Iteration 45 --> perplexity: 640.732
+senti_sample_ana[0][0] = 202710
+senti_sample_ana[0][1] = 3570
+senti_sample_ana[0][2] = 2752
+senti_sample_ana[1][0] = 15191
+senti_sample_ana[1][1] = 13539
+senti_sample_ana[1][2] = 2002
+senti_sample_ana[2][0] = 5509
+senti_sample_ana[2][1] = 1469
+senti_sample_ana[2][2] = 5515
+info:	Iteration 46 --> perplexity: 639.498
+senti_sample_ana[0][0] = 202706
+senti_sample_ana[0][1] = 3642
+senti_sample_ana[0][2] = 2684
+senti_sample_ana[1][0] = 15485
+senti_sample_ana[1][1] = 13268
+senti_sample_ana[1][2] = 1979
+senti_sample_ana[2][0] = 5508
+senti_sample_ana[2][1] = 1439
+senti_sample_ana[2][2] = 5546
+info:	Iteration 47 --> perplexity: 637.619
+senti_sample_ana[0][0] = 202609
+senti_sample_ana[0][1] = 3756
+senti_sample_ana[0][2] = 2667
+senti_sample_ana[1][0] = 15652
+senti_sample_ana[1][1] = 13132
+senti_sample_ana[1][2] = 1948
+senti_sample_ana[2][0] = 5555
+senti_sample_ana[2][1] = 1404
+senti_sample_ana[2][2] = 5534
+info:	Iteration 48 --> perplexity: 636.099
+senti_sample_ana[0][0] = 202636
+senti_sample_ana[0][1] = 3753
+senti_sample_ana[0][2] = 2643
+senti_sample_ana[1][0] = 15836
+senti_sample_ana[1][1] = 13010
+senti_sample_ana[1][2] = 1886
+senti_sample_ana[2][0] = 5689
+senti_sample_ana[2][1] = 1399
+senti_sample_ana[2][2] = 5405
+info:	Iteration 49 --> perplexity: 635.282
+senti_sample_ana[0][0] = 202634
+senti_sample_ana[0][1] = 3826
+senti_sample_ana[0][2] = 2572
+senti_sample_ana[1][0] = 16072
+senti_sample_ana[1][1] = 12770
+senti_sample_ana[1][2] = 1890
+senti_sample_ana[2][0] = 5779
+senti_sample_ana[2][1] = 1367
+senti_sample_ana[2][2] = 5347
+info:	Iteration 50 --> perplexity: 634.186
+senti_sample_ana[0][0] = 202672
+senti_sample_ana[0][1] = 3823
+senti_sample_ana[0][2] = 2537
+senti_sample_ana[1][0] = 16336
+senti_sample_ana[1][1] = 12562
+senti_sample_ana[1][2] = 1834
+senti_sample_ana[2][0] = 5772
+senti_sample_ana[2][1] = 1377
+senti_sample_ana[2][2] = 5344
+info:	Iteration 51 --> perplexity: 634.431
+senti_sample_ana[0][0] = 202740
+senti_sample_ana[0][1] = 3720
+senti_sample_ana[0][2] = 2572
+senti_sample_ana[1][0] = 16527
+senti_sample_ana[1][1] = 12382
+senti_sample_ana[1][2] = 1823
+senti_sample_ana[2][0] = 5850
+senti_sample_ana[2][1] = 1363
+senti_sample_ana[2][2] = 5280
+info:	Iteration 52 --> perplexity: 633.243
+senti_sample_ana[0][0] = 202738
+senti_sample_ana[0][1] = 3684
+senti_sample_ana[0][2] = 2610
+senti_sample_ana[1][0] = 16676
+senti_sample_ana[1][1] = 12248
+senti_sample_ana[1][2] = 1808
+senti_sample_ana[2][0] = 5814
+senti_sample_ana[2][1] = 1304
+senti_sample_ana[2][2] = 5375
+info:	Iteration 53 --> perplexity: 632.035
+senti_sample_ana[0][0] = 202718
+senti_sample_ana[0][1] = 3665
+senti_sample_ana[0][2] = 2649
+senti_sample_ana[1][0] = 16870
+senti_sample_ana[1][1] = 12019
+senti_sample_ana[1][2] = 1843
+senti_sample_ana[2][0] = 5832
+senti_sample_ana[2][1] = 1328
+senti_sample_ana[2][2] = 5333
+info:	Iteration 54 --> perplexity: 630.834
+senti_sample_ana[0][0] = 202719
+senti_sample_ana[0][1] = 3677
+senti_sample_ana[0][2] = 2636
+senti_sample_ana[1][0] = 16947
+senti_sample_ana[1][1] = 11983
+senti_sample_ana[1][2] = 1802
+senti_sample_ana[2][0] = 5897
+senti_sample_ana[2][1] = 1302
+senti_sample_ana[2][2] = 5294
+info:	Iteration 55 --> perplexity: 628.92
+senti_sample_ana[0][0] = 202843
+senti_sample_ana[0][1] = 3603
+senti_sample_ana[0][2] = 2586
+senti_sample_ana[1][0] = 16975
+senti_sample_ana[1][1] = 11957
+senti_sample_ana[1][2] = 1800
+senti_sample_ana[2][0] = 5990
+senti_sample_ana[2][1] = 1277
+senti_sample_ana[2][2] = 5226
+info:	Iteration 56 --> perplexity: 628.575
+senti_sample_ana[0][0] = 202886
+senti_sample_ana[0][1] = 3549
+senti_sample_ana[0][2] = 2597
+senti_sample_ana[1][0] = 17080
+senti_sample_ana[1][1] = 11824
+senti_sample_ana[1][2] = 1828
+senti_sample_ana[2][0] = 6036
+senti_sample_ana[2][1] = 1231
+senti_sample_ana[2][2] = 5226
+info:	Iteration 57 --> perplexity: 627.868
+senti_sample_ana[0][0] = 202918
+senti_sample_ana[0][1] = 3501
+senti_sample_ana[0][2] = 2613
+senti_sample_ana[1][0] = 17290
+senti_sample_ana[1][1] = 11673
+senti_sample_ana[1][2] = 1769
+senti_sample_ana[2][0] = 6077
+senti_sample_ana[2][1] = 1217
+senti_sample_ana[2][2] = 5199
+info:	Iteration 58 --> perplexity: 627.686
+senti_sample_ana[0][0] = 202908
+senti_sample_ana[0][1] = 3438
+senti_sample_ana[0][2] = 2686
+senti_sample_ana[1][0] = 17475
+senti_sample_ana[1][1] = 11508
+senti_sample_ana[1][2] = 1749
+senti_sample_ana[2][0] = 6142
+senti_sample_ana[2][1] = 1202
+senti_sample_ana[2][2] = 5149
+info:	Iteration 59 --> perplexity: 627.808
+senti_sample_ana[0][0] = 202838
+senti_sample_ana[0][1] = 3466
+senti_sample_ana[0][2] = 2728
+senti_sample_ana[1][0] = 17723
+senti_sample_ana[1][1] = 11279
+senti_sample_ana[1][2] = 1730
+senti_sample_ana[2][0] = 6199
+senti_sample_ana[2][1] = 1193
+senti_sample_ana[2][2] = 5101
+info:	Iteration 60 --> perplexity: 626.945
+senti_sample_ana[0][0] = 202872
+senti_sample_ana[0][1] = 3494
+senti_sample_ana[0][2] = 2666
+senti_sample_ana[1][0] = 17903
+senti_sample_ana[1][1] = 11118
+senti_sample_ana[1][2] = 1711
+senti_sample_ana[2][0] = 6213
+senti_sample_ana[2][1] = 1166
+senti_sample_ana[2][2] = 5114
+info:	Iteration 61 --> perplexity: 625.605
+senti_sample_ana[0][0] = 203013
+senti_sample_ana[0][1] = 3390
+senti_sample_ana[0][2] = 2629
+senti_sample_ana[1][0] = 18094
+senti_sample_ana[1][1] = 10977
+senti_sample_ana[1][2] = 1661
+senti_sample_ana[2][0] = 6296
+senti_sample_ana[2][1] = 1124
+senti_sample_ana[2][2] = 5073
+info:	Iteration 62 --> perplexity: 625.447
+senti_sample_ana[0][0] = 202971
+senti_sample_ana[0][1] = 3409
+senti_sample_ana[0][2] = 2652
+senti_sample_ana[1][0] = 18234
+senti_sample_ana[1][1] = 10862
+senti_sample_ana[1][2] = 1636
+senti_sample_ana[2][0] = 6283
+senti_sample_ana[2][1] = 1127
+senti_sample_ana[2][2] = 5083
+info:	Iteration 63 --> perplexity: 623.933
+senti_sample_ana[0][0] = 203019
+senti_sample_ana[0][1] = 3388
+senti_sample_ana[0][2] = 2625
+senti_sample_ana[1][0] = 18394
+senti_sample_ana[1][1] = 10704
+senti_sample_ana[1][2] = 1634
+senti_sample_ana[2][0] = 6328
+senti_sample_ana[2][1] = 1109
+senti_sample_ana[2][2] = 5056
+info:	Iteration 64 --> perplexity: 623.591
+senti_sample_ana[0][0] = 202926
+senti_sample_ana[0][1] = 3382
+senti_sample_ana[0][2] = 2724
+senti_sample_ana[1][0] = 18444
+senti_sample_ana[1][1] = 10628
+senti_sample_ana[1][2] = 1660
+senti_sample_ana[2][0] = 6394
+senti_sample_ana[2][1] = 1063
+senti_sample_ana[2][2] = 5036
+info:	Iteration 65 --> perplexity: 623.377
+senti_sample_ana[0][0] = 202912
+senti_sample_ana[0][1] = 3429
+senti_sample_ana[0][2] = 2691
+senti_sample_ana[1][0] = 18642
+senti_sample_ana[1][1] = 10454
+senti_sample_ana[1][2] = 1636
+senti_sample_ana[2][0] = 6405
+senti_sample_ana[2][1] = 1084
+senti_sample_ana[2][2] = 5004
+info:	Iteration 66 --> perplexity: 622.653
+senti_sample_ana[0][0] = 202853
+senti_sample_ana[0][1] = 3525
+senti_sample_ana[0][2] = 2654
+senti_sample_ana[1][0] = 18897
+senti_sample_ana[1][1] = 10263
+senti_sample_ana[1][2] = 1572
+senti_sample_ana[2][0] = 6382
+senti_sample_ana[2][1] = 1085
+senti_sample_ana[2][2] = 5026
+info:	Iteration 67 --> perplexity: 621.548
+senti_sample_ana[0][0] = 202866
+senti_sample_ana[0][1] = 3498
+senti_sample_ana[0][2] = 2668
+senti_sample_ana[1][0] = 18983
+senti_sample_ana[1][1] = 10182
+senti_sample_ana[1][2] = 1567
+senti_sample_ana[2][0] = 6398
+senti_sample_ana[2][1] = 1061
+senti_sample_ana[2][2] = 5034
+info:	Iteration 68 --> perplexity: 621.217
+senti_sample_ana[0][0] = 202944
+senti_sample_ana[0][1] = 3441
+senti_sample_ana[0][2] = 2647
+senti_sample_ana[1][0] = 19065
+senti_sample_ana[1][1] = 10148
+senti_sample_ana[1][2] = 1519
+senti_sample_ana[2][0] = 6439
+senti_sample_ana[2][1] = 1081
+senti_sample_ana[2][2] = 4973
+info:	Iteration 69 --> perplexity: 621.339
+senti_sample_ana[0][0] = 203015
+senti_sample_ana[0][1] = 3369
+senti_sample_ana[0][2] = 2648
+senti_sample_ana[1][0] = 19100
+senti_sample_ana[1][1] = 10126
+senti_sample_ana[1][2] = 1506
+senti_sample_ana[2][0] = 6511
+senti_sample_ana[2][1] = 1068
+senti_sample_ana[2][2] = 4914
+info:	Iteration 70 --> perplexity: 620.919
+senti_sample_ana[0][0] = 202884
+senti_sample_ana[0][1] = 3518
+senti_sample_ana[0][2] = 2630
+senti_sample_ana[1][0] = 19390
+senti_sample_ana[1][1] = 9875
+senti_sample_ana[1][2] = 1467
+senti_sample_ana[2][0] = 6486
+senti_sample_ana[2][1] = 1057
+senti_sample_ana[2][2] = 4950
+info:	Iteration 71 --> perplexity: 620.01
+senti_sample_ana[0][0] = 202793
+senti_sample_ana[0][1] = 3547
+senti_sample_ana[0][2] = 2692
+senti_sample_ana[1][0] = 19438
+senti_sample_ana[1][1] = 9859
+senti_sample_ana[1][2] = 1435
+senti_sample_ana[2][0] = 6452
+senti_sample_ana[2][1] = 1053
+senti_sample_ana[2][2] = 4988
+info:	Iteration 72 --> perplexity: 619.657
+senti_sample_ana[0][0] = 202956
+senti_sample_ana[0][1] = 3425
+senti_sample_ana[0][2] = 2651
+senti_sample_ana[1][0] = 19532
+senti_sample_ana[1][1] = 9708
+senti_sample_ana[1][2] = 1492
+senti_sample_ana[2][0] = 6543
+senti_sample_ana[2][1] = 1008
+senti_sample_ana[2][2] = 4942
+info:	Iteration 73 --> perplexity: 618.979
+senti_sample_ana[0][0] = 203006
+senti_sample_ana[0][1] = 3408
+senti_sample_ana[0][2] = 2618
+senti_sample_ana[1][0] = 19664
+senti_sample_ana[1][1] = 9585
+senti_sample_ana[1][2] = 1483
+senti_sample_ana[2][0] = 6548
+senti_sample_ana[2][1] = 974
+senti_sample_ana[2][2] = 4971
+info:	Iteration 74 --> perplexity: 618.765
+senti_sample_ana[0][0] = 203121
+senti_sample_ana[0][1] = 3355
+senti_sample_ana[0][2] = 2556
+senti_sample_ana[1][0] = 19819
+senti_sample_ana[1][1] = 9452
+senti_sample_ana[1][2] = 1461
+senti_sample_ana[2][0] = 6608
+senti_sample_ana[2][1] = 985
+senti_sample_ana[2][2] = 4900
+info:	Iteration 75 --> perplexity: 619.233
+senti_sample_ana[0][0] = 203195
+senti_sample_ana[0][1] = 3248
+senti_sample_ana[0][2] = 2589
+senti_sample_ana[1][0] = 19896
+senti_sample_ana[1][1] = 9411
+senti_sample_ana[1][2] = 1425
+senti_sample_ana[2][0] = 6668
+senti_sample_ana[2][1] = 952
+senti_sample_ana[2][2] = 4873
+info:	Iteration 76 --> perplexity: 618.576
+senti_sample_ana[0][0] = 203098
+senti_sample_ana[0][1] = 3330
+senti_sample_ana[0][2] = 2604
+senti_sample_ana[1][0] = 19933
+senti_sample_ana[1][1] = 9371
+senti_sample_ana[1][2] = 1428
+senti_sample_ana[2][0] = 6721
+senti_sample_ana[2][1] = 957
+senti_sample_ana[2][2] = 4815
+info:	Iteration 77 --> perplexity: 617.616
+senti_sample_ana[0][0] = 203146
+senti_sample_ana[0][1] = 3290
+senti_sample_ana[0][2] = 2596
+senti_sample_ana[1][0] = 19990
+senti_sample_ana[1][1] = 9329
+senti_sample_ana[1][2] = 1413
+senti_sample_ana[2][0] = 6687
+senti_sample_ana[2][1] = 951
+senti_sample_ana[2][2] = 4855
+info:	Iteration 78 --> perplexity: 617.319
+senti_sample_ana[0][0] = 203148
+senti_sample_ana[0][1] = 3291
+senti_sample_ana[0][2] = 2593
+senti_sample_ana[1][0] = 20082
+senti_sample_ana[1][1] = 9202
+senti_sample_ana[1][2] = 1448
+senti_sample_ana[2][0] = 6713
+senti_sample_ana[2][1] = 921
+senti_sample_ana[2][2] = 4859
+info:	Iteration 79 --> perplexity: 616.277
+senti_sample_ana[0][0] = 203174
+senti_sample_ana[0][1] = 3207
+senti_sample_ana[0][2] = 2651
+senti_sample_ana[1][0] = 20160
+senti_sample_ana[1][1] = 9111
+senti_sample_ana[1][2] = 1461
+senti_sample_ana[2][0] = 6733
+senti_sample_ana[2][1] = 947
+senti_sample_ana[2][2] = 4813
+info:	Iteration 80 --> perplexity: 615.282
+senti_sample_ana[0][0] = 203086
+senti_sample_ana[0][1] = 3285
+senti_sample_ana[0][2] = 2661
+senti_sample_ana[1][0] = 20358
+senti_sample_ana[1][1] = 9004
+senti_sample_ana[1][2] = 1370
+senti_sample_ana[2][0] = 6792
+senti_sample_ana[2][1] = 935
+senti_sample_ana[2][2] = 4766
+info:	Iteration 81 --> perplexity: 614.259
+senti_sample_ana[0][0] = 203177
+senti_sample_ana[0][1] = 3234
+senti_sample_ana[0][2] = 2621
+senti_sample_ana[1][0] = 20400
+senti_sample_ana[1][1] = 8947
+senti_sample_ana[1][2] = 1385
+senti_sample_ana[2][0] = 6763
+senti_sample_ana[2][1] = 921
+senti_sample_ana[2][2] = 4809
+info:	Iteration 82 --> perplexity: 614.629
+senti_sample_ana[0][0] = 203150
+senti_sample_ana[0][1] = 3290
+senti_sample_ana[0][2] = 2592
+senti_sample_ana[1][0] = 20605
+senti_sample_ana[1][1] = 8798
+senti_sample_ana[1][2] = 1329
+senti_sample_ana[2][0] = 6816
+senti_sample_ana[2][1] = 923
+senti_sample_ana[2][2] = 4754
+info:	Iteration 83 --> perplexity: 614.484
+senti_sample_ana[0][0] = 203104
+senti_sample_ana[0][1] = 3253
+senti_sample_ana[0][2] = 2675
+senti_sample_ana[1][0] = 20774
+senti_sample_ana[1][1] = 8625
+senti_sample_ana[1][2] = 1333
+senti_sample_ana[2][0] = 6881
+senti_sample_ana[2][1] = 908
+senti_sample_ana[2][2] = 4704
+info:	Iteration 84 --> perplexity: 615.007
+senti_sample_ana[0][0] = 203204
+senti_sample_ana[0][1] = 3195
+senti_sample_ana[0][2] = 2633
+senti_sample_ana[1][0] = 20872
+senti_sample_ana[1][1] = 8525
+senti_sample_ana[1][2] = 1335
+senti_sample_ana[2][0] = 6912
+senti_sample_ana[2][1] = 890
+senti_sample_ana[2][2] = 4691
+info:	Iteration 85 --> perplexity: 614.464
+senti_sample_ana[0][0] = 203083
+senti_sample_ana[0][1] = 3265
+senti_sample_ana[0][2] = 2684
+senti_sample_ana[1][0] = 20945
+senti_sample_ana[1][1] = 8472
+senti_sample_ana[1][2] = 1315
+senti_sample_ana[2][0] = 6991
+senti_sample_ana[2][1] = 881
+senti_sample_ana[2][2] = 4621
+info:	Iteration 86 --> perplexity: 614.666
+senti_sample_ana[0][0] = 203094
+senti_sample_ana[0][1] = 3268
+senti_sample_ana[0][2] = 2670
+senti_sample_ana[1][0] = 21043
+senti_sample_ana[1][1] = 8423
+senti_sample_ana[1][2] = 1266
+senti_sample_ana[2][0] = 6963
+senti_sample_ana[2][1] = 896
+senti_sample_ana[2][2] = 4634
+info:	Iteration 87 --> perplexity: 613.427
+senti_sample_ana[0][0] = 203281
+senti_sample_ana[0][1] = 3144
+senti_sample_ana[0][2] = 2607
+senti_sample_ana[1][0] = 21068
+senti_sample_ana[1][1] = 8393
+senti_sample_ana[1][2] = 1271
+senti_sample_ana[2][0] = 6996
+senti_sample_ana[2][1] = 886
+senti_sample_ana[2][2] = 4611
+info:	Iteration 88 --> perplexity: 613.177
+senti_sample_ana[0][0] = 203217
+senti_sample_ana[0][1] = 3203
+senti_sample_ana[0][2] = 2612
+senti_sample_ana[1][0] = 21091
+senti_sample_ana[1][1] = 8339
+senti_sample_ana[1][2] = 1302
+senti_sample_ana[2][0] = 7011
+senti_sample_ana[2][1] = 870
+senti_sample_ana[2][2] = 4612
+info:	Iteration 89 --> perplexity: 612.497
+senti_sample_ana[0][0] = 203171
+senti_sample_ana[0][1] = 3196
+senti_sample_ana[0][2] = 2665
+senti_sample_ana[1][0] = 21173
+senti_sample_ana[1][1] = 8292
+senti_sample_ana[1][2] = 1267
+senti_sample_ana[2][0] = 7002
+senti_sample_ana[2][1] = 887
+senti_sample_ana[2][2] = 4604
+info:	Iteration 90 --> perplexity: 612.787
+senti_sample_ana[0][0] = 203208
+senti_sample_ana[0][1] = 3161
+senti_sample_ana[0][2] = 2663
+senti_sample_ana[1][0] = 21273
+senti_sample_ana[1][1] = 8182
+senti_sample_ana[1][2] = 1277
+senti_sample_ana[2][0] = 6969
+senti_sample_ana[2][1] = 865
+senti_sample_ana[2][2] = 4659
+info:	Iteration 91 --> perplexity: 612.389
+senti_sample_ana[0][0] = 203180
+senti_sample_ana[0][1] = 3151
+senti_sample_ana[0][2] = 2701
+senti_sample_ana[1][0] = 21159
+senti_sample_ana[1][1] = 8286
+senti_sample_ana[1][2] = 1287
+senti_sample_ana[2][0] = 7002
+senti_sample_ana[2][1] = 852
+senti_sample_ana[2][2] = 4639
+info:	Iteration 92 --> perplexity: 611.464
+senti_sample_ana[0][0] = 203298
+senti_sample_ana[0][1] = 3062
+senti_sample_ana[0][2] = 2672
+senti_sample_ana[1][0] = 21276
+senti_sample_ana[1][1] = 8175
+senti_sample_ana[1][2] = 1281
+senti_sample_ana[2][0] = 7093
+senti_sample_ana[2][1] = 858
+senti_sample_ana[2][2] = 4542
+info:	Iteration 93 --> perplexity: 611.728
+senti_sample_ana[0][0] = 203371
+senti_sample_ana[0][1] = 3071
+senti_sample_ana[0][2] = 2590
+senti_sample_ana[1][0] = 21383
+senti_sample_ana[1][1] = 8122
+senti_sample_ana[1][2] = 1227
+senti_sample_ana[2][0] = 7075
+senti_sample_ana[2][1] = 836
+senti_sample_ana[2][2] = 4582
+info:	Iteration 94 --> perplexity: 611.245
+senti_sample_ana[0][0] = 203274
+senti_sample_ana[0][1] = 3117
+senti_sample_ana[0][2] = 2641
+senti_sample_ana[1][0] = 21506
+senti_sample_ana[1][1] = 8004
+senti_sample_ana[1][2] = 1222
+senti_sample_ana[2][0] = 7120
+senti_sample_ana[2][1] = 802
+senti_sample_ana[2][2] = 4571
+info:	Iteration 95 --> perplexity: 611.008
+senti_sample_ana[0][0] = 203377
+senti_sample_ana[0][1] = 3033
+senti_sample_ana[0][2] = 2622
+senti_sample_ana[1][0] = 21655
+senti_sample_ana[1][1] = 7896
+senti_sample_ana[1][2] = 1181
+senti_sample_ana[2][0] = 7149
+senti_sample_ana[2][1] = 797
+senti_sample_ana[2][2] = 4547
+info:	Iteration 96 --> perplexity: 611.042
+senti_sample_ana[0][0] = 203345
+senti_sample_ana[0][1] = 3053
+senti_sample_ana[0][2] = 2634
+senti_sample_ana[1][0] = 21817
+senti_sample_ana[1][1] = 7677
+senti_sample_ana[1][2] = 1238
+senti_sample_ana[2][0] = 7206
+senti_sample_ana[2][1] = 791
+senti_sample_ana[2][2] = 4496
+info:	Iteration 97 --> perplexity: 610.689
+senti_sample_ana[0][0] = 203318
+senti_sample_ana[0][1] = 3073
+senti_sample_ana[0][2] = 2641
+senti_sample_ana[1][0] = 21838
+senti_sample_ana[1][1] = 7647
+senti_sample_ana[1][2] = 1247
+senti_sample_ana[2][0] = 7255
+senti_sample_ana[2][1] = 799
+senti_sample_ana[2][2] = 4439
+info:	Iteration 98 --> perplexity: 610.51
+senti_sample_ana[0][0] = 203416
+senti_sample_ana[0][1] = 3031
+senti_sample_ana[0][2] = 2585
+senti_sample_ana[1][0] = 21926
+senti_sample_ana[1][1] = 7566
+senti_sample_ana[1][2] = 1240
+senti_sample_ana[2][0] = 7286
+senti_sample_ana[2][1] = 775
+senti_sample_ana[2][2] = 4432
+info:	Iteration 99 --> perplexity: 610.212
+senti_sample_ana[0][0] = 203375
+senti_sample_ana[0][1] = 2984
+senti_sample_ana[0][2] = 2673
+senti_sample_ana[1][0] = 21963
+senti_sample_ana[1][1] = 7555
+senti_sample_ana[1][2] = 1214
+senti_sample_ana[2][0] = 7317
+senti_sample_ana[2][1] = 770
+senti_sample_ana[2][2] = 4406
+info:	Iteration 100 --> perplexity: 610.059
+senti_sample_ana[0][0] = 203454
+senti_sample_ana[0][1] = 2956
+senti_sample_ana[0][2] = 2622
+senti_sample_ana[1][0] = 22039
+senti_sample_ana[1][1] = 7466
+senti_sample_ana[1][2] = 1227
+senti_sample_ana[2][0] = 7305
+senti_sample_ana[2][1] = 787
+senti_sample_ana[2][2] = 4401
+info:	Gibbs sampling completed!
+info:	Saving the final model!
