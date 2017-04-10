@@ -43,7 +43,7 @@ class GenerateClassicLDABasedDat:
                 line_con = line_con.strip()
                 word_list = line_con.split('\t')
                 if len(word_list) == 2:
-                    word = word_list[0]
+                    word = word_list[0].strip()
                     score = int(word_list[1])
                     if self.senti_word_dict.has_key(word):
                         print word.decode('utf-8')

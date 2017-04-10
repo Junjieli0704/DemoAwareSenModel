@@ -161,7 +161,7 @@
 	"log.h"
 	"CommandParser.h"
 
-1466478354 d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\ustmw\ustm_ft_w.h
+1491807966 d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\ustmw\ustm_ft_w.h
 	<stdio.h>
 	<stdlib.h>
 	<time.h>
@@ -185,14 +185,14 @@
 	<string>
 	<algorithm>
 
-1463194340 d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\ustmw\sentilex.h
+1491812503 d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\ustmw\sentilex.h
 	"map_type.h"
 	"constants.h"
 	<fstream>
 	"strtokenizer.h"
 	<stdlib.h>
 
-1463194353 source:d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\ustmw\sentilex.cpp
+1491811039 source:d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\ustmw\sentilex.cpp
 	"sentiLex.h"
 
 1466412607 source:d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\ustmw\strtokenizer.cpp
@@ -201,7 +201,7 @@
 	"iostream"
 	"strtokenizer.h"
 
-1491550129 source:d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\ustmw\ustm_ft_w.cpp
+1491809995 source:d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\ustmw\ustm_ft_w.cpp
 	"USTM_FT_W.h"
 
 1465959574 source:d:\github\paperprojects\demoawaresenmodel\papercodes\topicbasedmodels\ustmw\utils.cpp

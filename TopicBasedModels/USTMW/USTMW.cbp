@@ -39,7 +39,6 @@
 		<Unit filename="constants.h" />
 		<Unit filename="dataset.cpp" />
 		<Unit filename="dataset.h" />
-		<Unit filename="document.h" />
 		<Unit filename="log.cpp" />
 		<Unit filename="log.h" />
 		<Unit filename="main.cpp" />

@@ -50,20 +50,42 @@ class sentiLex
 
         int read_senti_lexicon(string senti_lex_file);
 
+        int load_non_senti_word_prior(mapword2id* word2id);
+
         int get_wordid2senLabelDis(mapword2id* word2id);
 
         int get_word_senlabel(int wordid){
-
             mapwordid2prior::iterator wordid2senti_iter;
-
             wordid2senti_iter = wordid2senLabelDis.find(wordid);
-
             if (wordid2senti_iter != wordid2senLabelDis.end())
                 return wordid2senti_iter->second.id;
             else
                 return -1;
+        }
+
+        int count_word_sentilabel(mapword2id* word2id){
+
+            int pos_num = 0;
+            int neg_num = 0;
+            int neu_num = 0;
+
+            mapword2id::iterator word2id_iter;
+
+            for(word2id_iter = word2id->begin(); word2id_iter!=word2id->end();++word2id_iter){
+                int senti_label = get_word_senlabel(word2id_iter->second);
+                if (senti_label == 0) neu_num++;
+                else if (senti_label == 1) pos_num++;
+                else if (senti_label == 2) neg_num++;
+            }
+
+            cout<<"pos_num: "<<pos_num<<endl;
+            cout<<"neg_num: "<<neg_num<<endl;
+            cout<<"neu_num: "<<neu_num<<endl;
 
         }
+
+
+
 
 
 

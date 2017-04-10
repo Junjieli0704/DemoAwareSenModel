@@ -196,7 +196,7 @@ if __name__ == '__main__':
     demo_file = '../../../ExpData/MovieData/LDAData/LDA_Style_Dat/Comedy_Doc_5_0.3_True/Comedy_demo.txt'
     senti_word_file = '../../../ExpData/SentiWordDat/ReviseSentiWord/revise_sentiment_word_list_LDA.txt'
 
-    run_ustm_w(demo_file=demo_file,data_file=data_file,senti_word_file=senti_word_file,model_status='est',num_topics='30',num_iters='5')
+    run_ustm_w(demo_file=demo_file,data_file=data_file,senti_word_file=senti_word_file,model_status='est',num_topics='30',num_iters='50')
     #run_lda(data_file=data_file,model_status='est',num_topics='30',num_iters='100')
     #run_jst(data_file=data_file,senti_word_file=senti_word_file,model_status='est',num_topics='30',num_iters='100')
 

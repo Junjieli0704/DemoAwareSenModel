@@ -12,6 +12,7 @@ USTM_FT_W::USTM_FT_W(){
 	twords_suffix = ".twords";
     psi_suffix = ".psi";
 	eta_suffix = ".eta";
+	tassign_vis_suffix = ".tassign.vis";
 
 	num_topics = 50;
 	num_sentis = 3;
@@ -616,11 +617,15 @@ int USTM_FT_W::inf_sampling(int m, int w, int& sentiLab, int& topic, int &tag) {
 
 int USTM_FT_W::sampling(int m, int w, int& sentiLab, int& topic, int &tag) {
 
+
+
+
 	sentiLab = s_dooow[m][w];
     topic    = z_dooow[m][w];
     tag      = t_dooow[m][w];
 
     int w_id = ptrndata->docs[m]->words[w];
+
 
     double u;
 
@@ -653,14 +658,16 @@ int USTM_FT_W::sampling(int m, int w, int& sentiLab, int& topic, int &tag) {
             }
         }
     }
+
     /*
-    for (int t = 0; t < num_demos; t++)
-    for (int l = 0; l < num_sentis; l++)
-    for (int k = 0; k < num_topics; k++)
-        cout<<"p_ojkso["<<t<<"]["<<k<<"]["<<l<<"]:  "<<p_ojkso[t][k][l]<<endl;*/
-
-
-
+    if (this->senLex.get_word_senlabel(w_id) != 0){
+        for (int t = 0; t < num_demos; t++)
+        for (int k = 0; k < num_topics; k++)
+        for (int l = 0; l < num_sentis; l++){
+            if (p_ojkso[t][k][l] == 0) continue;
+            cout<<"p_ojkso["<<t<<"]["<<k<<"]["<<l<<"]:  "<<p_ojkso[t][k][l]<<endl;
+        }
+    }*/
 
 
     for (int t = 0; t < num_demos; t++){
@@ -694,11 +701,15 @@ int USTM_FT_W::sampling(int m, int w, int& sentiLab, int& topic, int &tag) {
 	if (topic == num_topics) topic = num_topics - 1;
 	if (tag == num_demos) tag = ptrndemodata->docs[m]->words[0];
 
-	//cout<<"sentiLab: "<<sentiLab<<endl;
+
+
+
+
 	//cout<<"topic: "<<topic<<endl;
 	//cout<<"tag: "<<tag<<endl;
+
     if (ptrndemodata->docs[m]->is_contain_word(tag) == 0)
-            cout<<"Bad Sampling Tag.......\n";
+        cout<<"Bad Sampling Tag.......\n";
 
 
 
@@ -919,6 +930,13 @@ double USTM_FT_W::compute_perplexity(){
 
 int USTM_FT_W::estimate() {
 
+    int ** senti_sample_ana;
+    senti_sample_ana = new int*[3];
+    for(int j=0;j<3;j++){
+        senti_sample_ana[j]=new int[3];
+    }
+
+
 	int sentiLab, topic, tag;
 
     log_file->write_to_log("Iteration 0 --> perplexity: " + log_file->convert_other_to_str(compute_perplexity())+ "\n");
@@ -926,6 +944,10 @@ int USTM_FT_W::estimate() {
 
 	//printf("Sampling %d iterations!\n", niters);
 	for (int liter = 1; liter <= niters; liter++) {
+        for (int i = 0; i < 3; i++)
+        for (int j = 0; j < 3; j++){
+            senti_sample_ana[i][j] = 0;
+        }
         //printf("Iteration %d --> ...\n", liter);
 		for (int m = 0; m < num_docs; m++) {
 		    for (int w = 0; w < ptrndata->docs[m]->length; w++) {
@@ -933,12 +955,20 @@ int USTM_FT_W::estimate() {
 				s_dooow[m][w] = sentiLab;
                 z_dooow[m][w] = topic;
                 t_dooow[m][w] = tag;
+                int w_id = ptrndata->docs[m]->words[w];
+                senti_sample_ana[this->senLex.get_word_senlabel(w_id)][sentiLab]++;
             }
 		}
+        for (int i = 0; i < 3; i++)
+        for (int j = 0; j < 3; j++)
+            cout<<"senti_sample_ana["<<i<<"]["<<j<<"] = "<<senti_sample_ana[i][j]<<endl;
         string iter_str = log_file->convert_other_to_str(liter);
         string perplex_str = log_file->convert_other_to_str(compute_perplexity());
         log_file->write_to_log("Iteration " + iter_str + " --> perplexity: " + perplex_str + "\n");
 	}
+
+
+
 
 	log_file->write_to_log("Gibbs sampling completed!\n");
 	log_file->write_to_log("Saving the final model!\n");
@@ -1001,6 +1031,7 @@ int USTM_FT_W::save_model(string model_name) {
         twords_suffix = ".new.twords";
         psi_suffix = ".new.psi";
         eta_suffix = ".new.eta";
+        tassign_vis_suffix = ".new.tassign.vis";
     }
 
 
@@ -1008,6 +1039,9 @@ int USTM_FT_W::save_model(string model_name) {
     log_file->write_to_log("USTM_FT_W::save_model() begin......\n");
 
 	if (save_model_tassign(dir + model_name + tassign_suffix))
+		return 1;
+
+	if (save_model_tassign_vis(dir + model_name + tassign_vis_suffix))
 		return 1;
 
     /*
@@ -1049,16 +1083,73 @@ int USTM_FT_W::save_model_tassign(string filename) {
     if (this->model_status == MODEL_STATUS_INF)
         ptempdat = ptestdata;
 
-    for (int m = 0; m < num_docs; m++) {
+    dataset* ptempdemodat;
+    if (this->model_status == MODEL_STATUS_EST)
+        ptempdemodat = this->ptrndemodata;
+    if (this->model_status == MODEL_STATUS_INF)
+        ptempdemodat = this->ptestdemodata;
+
+    for (int m = 0; m < ptempdat->numDocs; m++) {
         fprintf(fout, "%s ", ptempdat->docs[m]->docID.c_str());
-        for (int n = 0; n < ptempdat->docs[m]->length; n++)
-            fprintf(fout, "%d:%d:%d:%d ", ptrndata->docs[m]->words[n], t_dooow[m][n],z_dooow[m][n], s_dooow[m][n]); //  wordID:tag:topic:senti
+        for (int n = 0; n < ptempdat->docs[m]->length; n++){
+            int word_id = ptempdat->docs[m]->words[n];
+            string word_str = ptempdat->get_str_from_id(word_id);
+            int tag_id = t_dooow[m][n];
+            string tag_str = ptempdemodat->get_str_from_id(tag_id);
+            fprintf(fout, "%s:%s:%d:%d ", word_str.c_str(), tag_str.c_str(),z_dooow[m][n], s_dooow[m][n]); //  wordID:tag:topic:senti
+        }
+        fprintf(fout, "\n");
+    }
+
+
+
+    fclose(fout);
+	return 0;
+}
+
+int USTM_FT_W::save_model_tassign_vis(string filename) {
+    FILE * fout = fopen(filename.c_str(), "w");
+    if (!fout) {
+	    log_file->write_to_log("Cannot save file " + filename + "!\n","error");
+	    return 1;
+    }
+
+    dataset* ptempdat;
+    if (this->model_status == MODEL_STATUS_EST)
+        ptempdat = ptrndata;
+    if (this->model_status == MODEL_STATUS_INF)
+        ptempdat = ptestdata;
+
+
+    dataset* ptempdemodat;
+    if (this->model_status == MODEL_STATUS_EST)
+        ptempdemodat = this->ptrndemodata;
+    if (this->model_status == MODEL_STATUS_INF)
+        ptempdemodat = this->ptestdemodata;
+
+
+
+    for (int m = 0; m < ptempdat->numDocs; m++) {
+        fprintf(fout, "%s ", ptempdat->docs[m]->docID.c_str());
+        for (int n = 0; n < ptempdat->docs[m]->length; n++){
+            int word_id = ptempdat->docs[m]->words[n];
+            string word_str = ptempdat->get_str_from_id(word_id);
+            int tag_id = t_dooow[m][n];
+            string tag_str = ptempdemodat->get_str_from_id(tag_id);
+            string label_str = "";
+            if (s_dooow[m][n] == 0) label_str = "neu";
+            else if (s_dooow[m][n] == 1) label_str = "pos";
+            else if (s_dooow[m][n] == 2) label_str = "neg";
+            fprintf(fout, "%s:%s:%d:%s ", word_str.c_str(), tag_str.c_str(),z_dooow[m][n], label_str.c_str()); //  wordID:tag:topic:senti
+        }
         fprintf(fout, "\n");
     }
 
     fclose(fout);
 	return 0;
 }
+
+
 
 
 int USTM_FT_W::save_model_twords(string filename)
@@ -1254,8 +1345,14 @@ int USTM_FT_W::excute_model_train(Model_Para* model_para)
             delete ptrndata;
             return 1;
 		}
+
+        // Add non sentiment word prior.
+		this->senLex.load_non_senti_word_prior(&ptrndata->word2id);
+
         if (this->senLex.get_wordid2senLabelDis(&ptrndata->word2id))
             return 1;
+
+        //this->senLex.count_word_sentilabel(&ptrndata->word2id);
 	}
 
 	if (twords > 0)
@@ -1417,7 +1514,6 @@ int USTM_FT_W::load_model(string model_name) {
             cout<<"n_ojksw_train[t][z][s][w]: "<<n_ojksw_train[t][z][s][w]<<endl;
             n_ojkso_train[t][z][s]    += 1;
             cout<<"n_ojkso_train[t][z][s]: "<<n_ojkso_train[t][z][s]<<endl;*/
-
         }
     }
 
@@ -1461,6 +1557,10 @@ int USTM_FT_W::excute_model_test(Model_Para* model_para)
             delete ptrndata;
             return 1;
 		}
+
+        // Add non sentiment word prior.
+		this->senLex.load_non_senti_word_prior(&ptestdata->word2id);
+
         if (this->senLex.get_wordid2senLabelDis(&ptestdata->word2id_train))
             return 1;
 	}

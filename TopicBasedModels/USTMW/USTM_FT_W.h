@@ -66,6 +66,7 @@ private:
 	string demomapfile;
 
 	string tassign_suffix;
+	string tassign_vis_suffix;
 	string pi_suffix;
 	string theta_suffix;
 	string phi_suffix;
@@ -157,6 +158,7 @@ private:
 	double compute_perplexity();
 	int save_model(string model_name);
     int save_model_tassign(string filename);
+    int save_model_tassign_vis(string filename);
     int save_model_twords(string filename);
     int save_model_psi_djooo(string filename);
     int save_model_theta_djkoo(string filename);
